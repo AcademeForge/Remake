@@ -2107,15 +2107,28 @@
        SECTION 2: SPLASH SCREEN
        ─────────────────────────────────────────────────────────── */
 
-    function afHideSplash() {
-      const splash = document.getElementById('afSplash');
-      if (!splash) return;
-      setTimeout(() => {
-        splash.classList.add('hidden');
-        // Remove from DOM after transition
-        setTimeout(() => splash.remove(), 600);
-      }, 1800);
-    }
+   function afHideSplash() {
+  const splash = document.getElementById('afSplash');
+  if (!splash) return;
+
+  // Splash already shown in this tab?
+  if (sessionStorage.getItem('afSplashShown')) {
+    splash.remove();
+    return;
+  }
+
+  // Mark splash as shown
+  sessionStorage.setItem('afSplashShown', 'true');
+
+  setTimeout(() => {
+    splash.classList.add('hidden');
+
+    setTimeout(() => {
+      splash.remove();
+    }, 600);
+
+  }, 1800);
+}
 
     /* ─────────────────────────────────────────────────────────────
        SECTION 3: BOTTOM NAV VIEW SWITCHING
