@@ -1,0 +1,2039 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#4f46e5" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Student Account — AcademeForge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<!-- ============================================================
+     COMPLETE CSS — /account/index.html
+     Connected to AcademeForge design system (same CSS variables
+     as index.html). Full light + dark theme support.
+     ============================================================ -->
+<style>
+
+/* ─── CSS CUSTOM PROPERTIES (mirrors index.html exactly) ───── */
+:root {
+  --af-primary:        #4f46e5;
+  --af-primary-dark:   #3730a3;
+  --af-primary-light:  #818cf8;
+  --af-accent:         #06b6d4;
+  --af-accent2:        #f59e0b;
+  --af-danger:         #ef4444;
+  --af-success:        #22c55e;
+  --af-warn:           #f59e0b;
+
+  --bg-base:           #f0f2ff;
+  --bg-shell:          #ffffff;
+  --bg-card:           rgba(255,255,255,0.72);
+  --bg-card-solid:     #ffffff;
+  --bg-nav:            rgba(255,255,255,0.88);
+  --bg-header:         rgba(255,255,255,0.92);
+  --bg-overlay:        rgba(0,0,0,0.45);
+  --bg-input:          #f4f5fb;
+  --bg-group:          rgba(79,70,229,0.06);
+  --bg-group-hover:    rgba(79,70,229,0.10);
+
+  --text-primary:      #0f0e2a;
+  --text-secondary:    #4b5563;
+  --text-muted:        #9ca3af;
+  --text-on-primary:   #ffffff;
+  --text-link:         #4f46e5;
+
+  --border-subtle:     rgba(79,70,229,0.12);
+  --border-card:       rgba(79,70,229,0.15);
+  --border-input:      #d1d5db;
+  --border-focus:      #4f46e5;
+
+  --shadow-card:       0 4px 24px rgba(79,70,229,0.10), 0 1px 4px rgba(0,0,0,0.06);
+  --shadow-btn:        0 4px 16px rgba(79,70,229,0.28);
+  --shadow-elevated:   0 12px 40px rgba(79,70,229,0.18);
+  --shadow-input-focus:0 0 0 3px rgba(79,70,229,0.18);
+
+  --glass-blur:        18px;
+  --glass-sat:         180%;
+
+  --r-sm:    8px;
+  --r-md:    14px;
+  --r-lg:    20px;
+  --r-xl:    28px;
+  --r-2xl:   36px;
+  --r-full:  9999px;
+
+  --gap-xs:  6px;
+  --gap-sm:  10px;
+  --gap-md:  16px;
+  --gap-lg:  24px;
+  --gap-xl:  32px;
+
+  --font-display: 'Sora', sans-serif;
+  --font-body:    'Nunito', sans-serif;
+
+  --ease-spring: cubic-bezier(0.34,1.56,0.64,1);
+  --ease-out:    cubic-bezier(0.22,1,0.36,1);
+  --dur-fast:    160ms;
+  --dur-med:     280ms;
+  --dur-slow:    440ms;
+
+  --nav-h:    66px;
+  --header-h: 60px;
+  --shell-max: 430px;
+}
+
+[data-theme="dark"] {
+  --bg-base:           #0c0b1d;
+  --bg-shell:          #120f2a;
+  --bg-card:           rgba(30,27,60,0.80);
+  --bg-card-solid:     #1e1b3c;
+  --bg-nav:            rgba(18,15,42,0.95);
+  --bg-header:         rgba(18,15,42,0.96);
+  --bg-overlay:        rgba(0,0,0,0.65);
+  --bg-input:          #1e1b3c;
+  --bg-group:          rgba(129,140,248,0.08);
+  --bg-group-hover:    rgba(129,140,248,0.14);
+
+  --text-primary:      #f0eeff;
+  --text-secondary:    #a5a3c2;
+  --text-muted:        #6b6a8a;
+  --text-on-primary:   #ffffff;
+  --text-link:         #818cf8;
+
+  --border-subtle:     rgba(129,140,248,0.12);
+  --border-card:       rgba(129,140,248,0.18);
+  --border-input:      rgba(129,140,248,0.22);
+  --border-focus:      #818cf8;
+
+  --shadow-card:       0 4px 24px rgba(0,0,0,0.32), 0 1px 4px rgba(0,0,0,0.20);
+  --shadow-btn:        0 4px 16px rgba(79,70,229,0.40);
+  --shadow-elevated:   0 12px 40px rgba(0,0,0,0.50);
+  --shadow-input-focus:0 0 0 3px rgba(129,140,248,0.22);
+}
+
+/* ─── RESET ──────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg-base);
+  color: var(--text-primary);
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow-x: hidden;
+  transition: background var(--dur-med) var(--ease-out),
+              color var(--dur-med) var(--ease-out);
+}
+button { font-family: var(--font-body); cursor: pointer; border: none; background: none; color: inherit; }
+a      { text-decoration: none; color: inherit; }
+img    { display: block; max-width: 100%; }
+
+/* ─── APP SHELL ──────────────────────────────────────────────── */
+.af-shell {
+  width: 100%;
+  max-width: var(--shell-max);
+  min-height: 100dvh;
+  background: var(--bg-shell);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+  transition: background var(--dur-med) var(--ease-out);
+}
+
+@media (min-width: 700px) {
+  body { padding: 32px 0 48px; }
+  .af-shell {
+    border-radius: 40px;
+    min-height: calc(100dvh - 80px);
+    max-height: 900px;
+    overflow-y: auto;
+    box-shadow:
+      0 0 0 1px var(--border-card),
+      0 32px 80px rgba(0,0,0,0.22),
+      0 8px 24px rgba(79,70,229,0.15);
+  }
+}
+
+/* ─── HEADER ─────────────────────────────────────────────────── */
+.af-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--header-h);
+  background: var(--bg-header);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--gap-md);
+  gap: var(--gap-sm);
+  transition: background var(--dur-med) var(--ease-out);
+}
+
+.af-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--r-full);
+  background: var(--bg-group);
+  border: 1px solid var(--border-subtle);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background var(--dur-fast), transform var(--dur-fast) var(--ease-spring);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.af-back-btn:hover  { background: var(--bg-group-hover); }
+.af-back-btn:active { transform: scale(0.95); }
+
+.af-header-title {
+  flex: 1;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text-primary);
+  padding-right: 80px; /* visual centering offset for back btn */
+}
+
+/* ─── PAGE SCROLL AREA ───────────────────────────────────────── */
+.af-page {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 40px;
+}
+
+.af-page::-webkit-scrollbar { width: 3px; }
+.af-page::-webkit-scrollbar-thumb { background: var(--border-card); border-radius: 99px; }
+.af-page::-webkit-scrollbar-track { background: transparent; }
+
+/* ─── GLASS UTILITY ──────────────────────────────────────────── */
+.glass {
+  background: var(--bg-card);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+  border: 1px solid var(--border-card);
+}
+
+/* ─── ACCOUNT PAGE LAYOUT ────────────────────────────────────── */
+.ac-page {
+  padding: var(--gap-md) var(--gap-md) var(--gap-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+  animation: acPageIn 0.4s var(--ease-out) both;
+}
+
+@keyframes acPageIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── HERO BANNER ────────────────────────────────────────────── */
+.ac-hero {
+  border-radius: var(--r-xl);
+  padding: 28px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  background: linear-gradient(145deg, var(--af-primary) 0%, #312e81 60%, #1e1b4b 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.ac-hero::before {
+  content: '';
+  position: absolute;
+  inset: -60px;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(129,140,248,0.25) 0%, transparent 55%),
+    radial-gradient(circle at 80% 70%, rgba(6,182,212,0.20) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+.ac-hero-icon {
+  font-size: 40px;
+  width: 72px;
+  height: 72px;
+  border-radius: var(--r-lg);
+  background: rgba(255,255,255,0.15);
+  border: 2px solid rgba(255,255,255,0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  animation: heroIconPop 0.6s var(--ease-spring) both;
+}
+
+@keyframes heroIconPop {
+  from { opacity:0; transform: scale(0.5); }
+  to   { opacity:1; transform: scale(1); }
+}
+
+.ac-hero-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+  color: #ffffff;
+  position: relative;
+  z-index: 1;
+}
+
+.ac-hero-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.55;
+  position: relative;
+  z-index: 1;
+  max-width: 280px;
+}
+
+/* ─── TAB SWITCHER ───────────────────────────────────────────── */
+.ac-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  padding: 4px;
+  border-radius: var(--r-lg);
+  background: var(--bg-group);
+  border: 1px solid var(--border-subtle);
+}
+
+.ac-tab {
+  padding: 10px 0;
+  border-radius: calc(var(--r-lg) - 4px);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--dur-med) var(--ease-spring);
+  background: transparent;
+  border: none;
+  font-family: var(--font-body);
+}
+
+.ac-tab.active {
+  background: var(--bg-card-solid);
+  color: var(--af-primary);
+  box-shadow: 0 2px 12px rgba(79,70,229,0.14);
+}
+
+/* ─── FORM CARD ──────────────────────────────────────────────── */
+.ac-card {
+  border-radius: var(--r-xl);
+  padding: 24px 20px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  transition: box-shadow var(--dur-med);
+}
+
+/* Box visibility */
+.ac-box { display: flex; flex-direction: column; gap: 14px; }
+.ac-box[hidden], .ac-box.hidden { display: none !important; }
+
+/* ─── FORM FIELD ─────────────────────────────────────────────── */
+.ac-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ac-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.ac-input {
+  width: 100%;
+  padding: 13px 16px;
+  border-radius: var(--r-md);
+  background: var(--bg-input);
+  border: 1.5px solid var(--border-input);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
+  outline: none;
+  transition:
+    border-color var(--dur-fast),
+    background var(--dur-fast),
+    box-shadow var(--dur-fast);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.ac-input::placeholder { color: var(--text-muted); font-weight: 400; }
+
+.ac-input:focus {
+  border-color: var(--border-focus);
+  background: var(--bg-card-solid);
+  box-shadow: var(--shadow-input-focus);
+}
+
+.ac-input:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Password wrapper (for show/hide toggle) */
+.ac-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.ac-input-wrap .ac-input { padding-right: 46px; }
+
+.ac-eye-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--text-muted);
+  padding: 4px;
+  transition: color var(--dur-fast);
+  line-height: 1;
+}
+.ac-eye-btn:hover { color: var(--text-secondary); }
+
+/* ─── OTP INPUT SPECIAL STYLE ────────────────────────────────── */
+.ac-otp-input {
+  text-align: center;
+  letter-spacing: 0.35em;
+  font-size: 22px;
+  font-weight: 800;
+  font-family: var(--font-display);
+}
+
+/* ─── OTP AREA (slides in) ───────────────────────────────────── */
+.ac-otp-area {
+  border-radius: var(--r-lg);
+  padding: 18px;
+  background: linear-gradient(135deg, rgba(79,70,229,0.06), rgba(6,182,212,0.04));
+  border: 1px solid var(--border-card);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: slideDown 0.35s var(--ease-out) both;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.ac-otp-kicker {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--af-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.ac-otp-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ─── PRIMARY BUTTON ─────────────────────────────────────────── */
+.ac-btn-primary {
+  width: 100%;
+  padding: 14px;
+  border-radius: var(--r-lg);
+  background: linear-gradient(135deg, var(--af-primary), var(--af-primary-dark));
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-btn);
+  transition:
+    opacity var(--dur-fast),
+    transform var(--dur-fast) var(--ease-spring),
+    box-shadow var(--dur-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.ac-btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0);
+  transition: background var(--dur-fast);
+}
+.ac-btn-primary:hover::before { background: rgba(255,255,255,0.08); }
+.ac-btn-primary:hover { box-shadow: 0 6px 20px rgba(79,70,229,0.36); }
+.ac-btn-primary:active { transform: scale(0.97); }
+
+.ac-btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Loading spinner inside button */
+.ac-btn-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2.5px solid rgba(255,255,255,0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: none;
+}
+.ac-btn-primary.loading .ac-btn-spinner { display: block; }
+.ac-btn-primary.loading .ac-btn-text    { opacity: 0.7; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ─── SECONDARY BUTTON ───────────────────────────────────────── */
+.ac-btn-secondary {
+  width: 100%;
+  padding: 13px;
+  border-radius: var(--r-lg);
+  background: var(--bg-group);
+  border: 1.5px solid var(--border-card);
+  color: var(--af-primary);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--dur-fast), transform var(--dur-fast) var(--ease-spring);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.ac-btn-secondary:hover  { background: var(--bg-group-hover); }
+.ac-btn-secondary:active { transform: scale(0.97); }
+
+/* ─── LINK BUTTON ────────────────────────────────────────────── */
+.ac-link-btn {
+  background: none;
+  border: none;
+  color: var(--text-link);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 4px 0;
+  text-align: center;
+  width: 100%;
+  transition: opacity var(--dur-fast);
+}
+.ac-link-btn:hover  { opacity: 0.75; }
+.ac-link-btn:active { opacity: 0.6; }
+
+/* ─── MESSAGE / STATUS BOX ───────────────────────────────────── */
+.ac-message {
+  min-height: 0;
+  border-radius: var(--r-md);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+  padding: 0;
+  transition: all var(--dur-med) var(--ease-out);
+  overflow: hidden;
+}
+
+.ac-message:not(:empty) {
+  padding: 12px 14px;
+}
+
+.ac-message.ok {
+  background: rgba(34,197,94,0.10);
+  border: 1px solid rgba(34,197,94,0.25);
+  color: #15803d;
+}
+
+[data-theme="dark"] .ac-message.ok {
+  background: rgba(34,197,94,0.12);
+  border-color: rgba(34,197,94,0.25);
+  color: #4ade80;
+}
+
+.ac-message.err {
+  background: rgba(239,68,68,0.09);
+  border: 1px solid rgba(239,68,68,0.22);
+  color: #b91c1c;
+}
+
+[data-theme="dark"] .ac-message.err {
+  background: rgba(239,68,68,0.12);
+  border-color: rgba(239,68,68,0.25);
+  color: #f87171;
+}
+
+.ac-message.info {
+  background: rgba(79,70,229,0.08);
+  border: 1px solid rgba(79,70,229,0.18);
+  color: var(--af-primary);
+}
+
+[data-theme="dark"] .ac-message.info {
+  background: rgba(129,140,248,0.10);
+  border-color: rgba(129,140,248,0.22);
+  color: var(--af-primary-light);
+}
+
+/* ─── HELP NOTE ──────────────────────────────────────────────── */
+.ac-help {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.55;
+  text-align: center;
+  padding: 4px 0;
+}
+
+.ac-help b { color: var(--text-secondary); }
+
+/* ─── DIVIDER ─────────────────────────────────────────────────── */
+.ac-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+.ac-divider::before, .ac-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-subtle);
+}
+
+/* ─── POLICY / NOTE BOX ──────────────────────────────────────── */
+.ac-note-box {
+  border-radius: var(--r-md);
+  padding: 14px 16px;
+  background: rgba(79,70,229,0.05);
+  border: 1px solid var(--border-subtle);
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.ac-note-box b { color: var(--text-primary); }
+
+/* ─── DASHBOARD (shown after login) ─────────────────────────── */
+.ac-dashboard {
+  border-radius: var(--r-xl);
+  padding: 24px 20px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+  animation: acPageIn 0.4s var(--ease-out) both;
+}
+
+.ac-dashboard.hidden { display: none; }
+
+/* Profile hero row */
+.ac-profile-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.ac-profile-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--r-lg);
+  background: linear-gradient(135deg, var(--af-primary), var(--af-accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  color: white;
+  flex-shrink: 0;
+}
+
+.ac-profile-text { flex: 1; min-width: 0; }
+
+.ac-profile-name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ac-profile-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Detail rows */
+.ac-detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-radius: var(--r-md);
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+}
+
+.ac-detail-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  gap: 12px;
+}
+
+.ac-detail-row:last-child { border-bottom: none; }
+
+.ac-detail-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+
+.ac-detail-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: right;
+  word-break: break-all;
+}
+
+/* Enrolled batches */
+.ac-batch-section-title {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: -4px;
+}
+
+.ac-batch-empty {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 20px 0;
+}
+
+.ac-batch-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--r-full);
+  background: var(--bg-group);
+  border: 1px solid var(--border-card);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 4px 4px 0 0;
+}
+
+/* Logout button */
+.ac-logout-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px;
+  border-radius: var(--r-lg);
+  background: rgba(239,68,68,0.08);
+  border: 1.5px solid rgba(239,68,68,0.22);
+  color: var(--af-danger);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--dur-fast), transform var(--dur-fast) var(--ease-spring);
+}
+.ac-logout-btn:hover  { background: rgba(239,68,68,0.14); }
+.ac-logout-btn:active { transform: scale(0.97); }
+
+/* ─── TOAST ──────────────────────────────────────────────────── */
+#acToast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  z-index: 9000;
+  background: var(--text-primary);
+  color: var(--bg-shell);
+  padding: 10px 22px;
+  border-radius: var(--r-full);
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+  white-space: nowrap;
+  max-width: 90vw;
+  text-align: center;
+}
+#acToast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ─── REDUCED MOTION ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+</style>
+</head>
+
+<!-- ============================================================
+     COMPLETE HTML — /account/index.html
+     ============================================================ -->
+<body>
+<div class="af-shell" id="afShell">
+
+  <!-- HEADER -->
+  <header class="af-header">
+    <button class="af-back-btn" onclick="window.location.href='/'" type="button" aria-label="Back to home">
+      ← Back
+    </button>
+    <div class="af-header-title">Student Account</div>
+  </header>
+
+  <!-- SCROLL AREA -->
+  <div class="af-page">
+    <div class="ac-page" id="acPage">
+
+      <!-- ── AUTH SECTION (shown when not logged in) ────────── -->
+      <div id="acAuthSection">
+
+        <!-- Hero banner -->
+        <div class="ac-hero">
+          <div class="ac-hero-icon" aria-hidden="true">🎓</div>
+          <h1 class="ac-hero-title">Student ID Access</h1>
+          <p class="ac-hero-sub">
+            Login with your Student ID to access courses, batches, and community features.
+          </p>
+        </div>
+
+        <!-- Tab switcher: Login / Create ID -->
+        <div class="ac-tabs" role="tablist" aria-label="Account mode">
+          <button
+            class="ac-tab active"
+            id="tabLogin"
+            role="tab"
+            aria-selected="true"
+            aria-controls="boxLogin"
+            onclick="acSwitchMode('login')"
+            type="button"
+          >
+            Login
+          </button>
+          <button
+            class="ac-tab"
+            id="tabCreate"
+            role="tab"
+            aria-selected="false"
+            aria-controls="boxCreate"
+            onclick="acSwitchMode('create')"
+            type="button"
+          >
+            Create ID
+          </button>
+        </div>
+
+        <!-- Form card -->
+        <div class="ac-card glass">
+
+          <!-- ── LOGIN BOX ──────────────────────────────────── -->
+          <div class="ac-box" id="boxLogin" role="tabpanel" aria-labelledby="tabLogin">
+
+            <div class="ac-field">
+              <label class="ac-label" for="loginPhone">Student ID / Phone Number</label>
+              <input
+                id="loginPhone"
+                class="ac-input"
+                type="tel"
+                inputmode="tel"
+                autocomplete="tel"
+                placeholder="Enter your phone number"
+                maxlength="15"
+              />
+            </div>
+
+            <div class="ac-field">
+              <label class="ac-label" for="loginPassword">Password</label>
+              <div class="ac-input-wrap">
+                <input
+                  id="loginPassword"
+                  class="ac-input"
+                  type="password"
+                  autocomplete="current-password"
+                  placeholder="Enter your password"
+                  maxlength="60"
+                />
+                <button
+                  class="ac-eye-btn"
+                  type="button"
+                  onclick="acTogglePassword('loginPassword', this)"
+                  aria-label="Show password"
+                >
+                  👁️
+                </button>
+              </div>
+            </div>
+
+            <button
+              class="ac-btn-primary"
+              id="loginBtn"
+              type="button"
+              onclick="loginStudentaf()"
+            >
+              <div class="ac-btn-spinner"></div>
+              <span class="ac-btn-text">Login</span>
+            </button>
+
+            <button
+              class="ac-link-btn"
+              type="button"
+              onclick="acSwitchMode('forgot')"
+            >
+              Forgot Password?
+            </button>
+
+          </div><!-- /boxLogin -->
+
+          <!-- ── CREATE ID BOX ──────────────────────────────── -->
+          <div class="ac-box hidden" id="boxCreate" role="tabpanel" aria-labelledby="tabCreate">
+
+            <div class="ac-field">
+              <label class="ac-label" for="createName">Full Name</label>
+              <input
+                id="createName"
+                class="ac-input"
+                type="text"
+                inputmode="text"
+                autocomplete="name"
+                placeholder="Enter your full name"
+                maxlength="80"
+              />
+            </div>
+
+            <div class="ac-field">
+              <label class="ac-label" for="createPhone">Phone Number</label>
+              <input
+                id="createPhone"
+                class="ac-input"
+                type="tel"
+                inputmode="tel"
+                autocomplete="tel"
+                placeholder="Enter phone number (becomes your Student ID)"
+                maxlength="15"
+              />
+            </div>
+
+            <div class="ac-field">
+              <label class="ac-label" for="createEmail">Email Address</label>
+              <input
+                id="createEmail"
+                class="ac-input"
+                type="email"
+                inputmode="email"
+                autocomplete="email"
+                placeholder="Enter email address"
+                maxlength="120"
+              />
+            </div>
+
+            <div class="ac-field">
+              <label class="ac-label" for="createPassword">Create Password</label>
+              <div class="ac-input-wrap">
+                <input
+                  id="createPassword"
+                  class="ac-input"
+                  type="password"
+                  autocomplete="new-password"
+                  placeholder="Create a password (min. 4 chars)"
+                  maxlength="60"
+                />
+                <button
+                  class="ac-eye-btn"
+                  type="button"
+                  onclick="acTogglePassword('createPassword', this)"
+                  aria-label="Show password"
+                >
+                  👁️
+                </button>
+              </div>
+            </div>
+
+            <button
+              class="ac-btn-primary"
+              id="sendOtpBtn"
+              type="button"
+              onclick="sendCreateOtpaf()"
+            >
+              <div class="ac-btn-spinner"></div>
+              <span class="ac-btn-text">Send Email OTP</span>
+            </button>
+
+            <!-- OTP area (hidden until OTP is sent) -->
+            <div id="createOtpArea" class="ac-otp-area hidden">
+              <div class="ac-otp-kicker">📧 Email OTP</div>
+              <p class="ac-otp-desc" id="createOtpDesc">
+                Enter the 6-digit OTP sent to your email address.
+              </p>
+              <div class="ac-field">
+                <label class="ac-label" for="createOtp">Enter OTP</label>
+                <input
+                  id="createOtp"
+                  class="ac-input ac-otp-input"
+                  type="text"
+                  inputmode="numeric"
+                  pattern="[0-9]*"
+                  maxlength="6"
+                  placeholder="— — — — — —"
+                  autocomplete="one-time-code"
+                />
+              </div>
+              <button
+                class="ac-btn-secondary"
+                id="verifyOtpBtn"
+                type="button"
+                onclick="verifyCreateOtpAndCreateIdaf()"
+              >
+                <div class="ac-btn-spinner" style="border-color:rgba(79,70,229,0.35);border-top-color:var(--af-primary);"></div>
+                <span class="ac-btn-text">✓ Verify OTP &amp; Create ID</span>
+              </button>
+            </div>
+
+            <p class="ac-help">Your phone number will be used as your Student ID.</p>
+
+          </div><!-- /boxCreate -->
+
+          <!-- ── FORGOT PASSWORD BOX ──────────────────────────── -->
+          <div class="ac-box hidden" id="boxForgot">
+
+            <div class="ac-field">
+              <label class="ac-label" for="forgotLogin">Student ID / Phone / Email</label>
+              <input
+                id="forgotLogin"
+                class="ac-input"
+                type="text"
+                inputmode="text"
+                placeholder="Enter your Student ID, phone, or email"
+                maxlength="120"
+              />
+            </div>
+
+            <button
+              class="ac-btn-primary"
+              id="findAccountBtn"
+              type="button"
+              onclick="findStudentForResetaf()"
+            >
+              <div class="ac-btn-spinner"></div>
+              <span class="ac-btn-text">Send Email OTP</span>
+            </button>
+
+            <!-- Forgot OTP area -->
+            <div id="forgotOtpArea" class="ac-otp-area hidden">
+              <div class="ac-otp-kicker">📧 Verify Email OTP</div>
+              <p class="ac-otp-desc">
+                Enter the OTP sent to your registered email address.
+              </p>
+              <div class="ac-field">
+                <label class="ac-label" for="forgotOtp">Enter OTP</label>
+                <input
+                  id="forgotOtp"
+                  class="ac-input ac-otp-input"
+                  type="text"
+                  inputmode="numeric"
+                  pattern="[0-9]*"
+                  maxlength="6"
+                  placeholder="— — — — — —"
+                  autocomplete="one-time-code"
+                />
+              </div>
+              <button
+                class="ac-btn-secondary"
+                id="verifyForgotBtn"
+                type="button"
+                onclick="verifyForgotOtpaf()"
+              >
+                <div class="ac-btn-spinner" style="border-color:rgba(79,70,229,0.35);border-top-color:var(--af-primary);"></div>
+                <span class="ac-btn-text">Verify OTP</span>
+              </button>
+            </div>
+
+            <!-- Reset password area -->
+            <div id="resetPasswordArea" class="ac-otp-area hidden">
+              <div class="ac-otp-kicker">🔐 New Password</div>
+              <p class="ac-otp-desc">Email verified! Create your new password.</p>
+              <div class="ac-field">
+                <label class="ac-label" for="newPassword">New Password</label>
+                <div class="ac-input-wrap">
+                  <input
+                    id="newPassword"
+                    class="ac-input"
+                    type="password"
+                    autocomplete="new-password"
+                    placeholder="Create new password (min. 4 chars)"
+                    maxlength="60"
+                  />
+                  <button
+                    class="ac-eye-btn"
+                    type="button"
+                    onclick="acTogglePassword('newPassword', this)"
+                    aria-label="Show password"
+                  >
+                    👁️
+                  </button>
+                </div>
+              </div>
+              <button
+                class="ac-btn-secondary"
+                id="resetPwdBtn"
+                type="button"
+                onclick="resetStudentPasswordaf()"
+              >
+                <div class="ac-btn-spinner" style="border-color:rgba(79,70,229,0.35);border-top-color:var(--af-primary);"></div>
+                <span class="ac-btn-text">Reset Password</span>
+              </button>
+            </div>
+
+            <button
+              class="ac-link-btn"
+              type="button"
+              onclick="acSwitchMode('login')"
+            >
+              ← Back to Login
+            </button>
+
+            <p class="ac-help">
+              We'll verify your registered email before allowing password reset.
+            </p>
+
+          </div><!-- /boxForgot -->
+
+          <!-- STATUS MESSAGE -->
+          <div
+            id="studentMessageaf"
+            class="ac-message"
+            role="status"
+            aria-live="polite"
+          ></div>
+
+          <!-- Note box -->
+          <div class="ac-note-box">
+            If you face any issue while creating your Student ID, email us at
+            <b>academeforge@gmail.com</b> with your name and WhatsApp number.
+          </div>
+
+        </div><!-- /ac-card -->
+
+      </div><!-- /acAuthSection -->
+
+      <!-- ── DASHBOARD (shown after login) ──────────────────── -->
+      <div class="ac-dashboard glass hidden" id="acDashboard">
+
+        <!-- Profile hero -->
+        <div class="ac-profile-row">
+          <div class="ac-profile-avatar" id="dashAvatar" aria-hidden="true">S</div>
+          <div class="ac-profile-text">
+            <div class="ac-profile-name" id="dashName">Student</div>
+            <div class="ac-profile-sub" id="dashSub">AcademeForge Student</div>
+          </div>
+        </div>
+
+        <div class="ac-divider">Your Details</div>
+
+        <!-- Info rows -->
+        <div class="ac-detail-list">
+          <div class="ac-detail-row">
+            <span class="ac-detail-label">Name</span>
+            <span class="ac-detail-value" id="dashInfoName">—</span>
+          </div>
+          <div class="ac-detail-row">
+            <span class="ac-detail-label">Student ID</span>
+            <span class="ac-detail-value" id="dashInfoId">—</span>
+          </div>
+          <div class="ac-detail-row">
+            <span class="ac-detail-label">Phone</span>
+            <span class="ac-detail-value" id="dashInfoPhone">—</span>
+          </div>
+          <div class="ac-detail-row">
+            <span class="ac-detail-label">Email</span>
+            <span class="ac-detail-value" id="dashInfoEmail">—</span>
+          </div>
+        </div>
+
+        <div class="ac-divider">Enrolled Batches</div>
+
+        <div id="dashBatches">
+          <p class="ac-batch-empty">No enrolled batches found.</p>
+        </div>
+
+        <!-- Logout -->
+        <button
+          class="ac-logout-btn"
+          type="button"
+          onclick="acLogout()"
+          aria-label="Logout"
+        >
+          ↩ Logout
+        </button>
+
+      </div><!-- /acDashboard -->
+
+    </div><!-- /ac-page -->
+  </div><!-- /af-page -->
+
+</div><!-- /af-shell -->
+
+<!-- Toast -->
+<div id="acToast" role="status" aria-live="polite"></div>
+
+<!-- ============================================================
+     COMPLETE JAVASCRIPT — /account/index.html
+     Includes ALL auth logic from the original JS file,
+     remapped to the new HTML element IDs.
+     ============================================================ -->
+<script>
+
+/* ─────────────────────────────────────────────────────────────
+   SECTION 1: THEME — sync with index.html's localStorage key
+   ─────────────────────────────────────────────────────────── */
+
+(function applyTheme() {
+  const isDark = localStorage.getItem('af_dark_mode') === '1';
+  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+})();
+
+/* ─────────────────────────────────────────────────────────────
+   SECTION 2: SUPABASE / BACKEND REFERENCE
+   The Supabase client (studentDb) is expected to be loaded
+   from a shared config script. If it doesn't exist yet,
+   functions gracefully fail with a clear error.
+   ─────────────────────────────────────────────────────────── */
+
+function getStudentBackendaf() {
+  if (typeof studentDb !== 'undefined') return studentDb;
+  return null;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SECTION 3: UTILITIES
+   ─────────────────────────────────────────────────────────── */
+
+function cleanPhoneaf(value) {
+  return String(value || '').trim().replace(/\D/g, '');
+}
+
+function getAFDeviceId() {
+  let id = localStorage.getItem('af_device_id_local');
+  if (!id) {
+    id = 'dev_' + Date.now() + '_' + Math.random().toString(36).slice(2, 9);
+    localStorage.setItem('af_device_id_local', id);
+  }
+  return id;
+}
+
+function getAFDeviceName() {
+  const ua = navigator.userAgent;
+  if (/android/i.test(ua)) return 'Android';
+  if (/iphone|ipad/i.test(ua)) return 'iOS';
+  if (/macintosh/i.test(ua)) return 'Mac';
+  if (/windows/i.test(ua)) return 'Windows';
+  return 'Browser';
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SECTION 4: TOAST
+   ─────────────────────────────────────────────────────────── */
+
+let _acToastTimer = null;
+
+function acShowToast(msg, ms = 2800) {
+  const t = document.getElementById('acToast');
+  if (!t) return;
+  t.textContent = msg;
+  t.classList.add('show');
+  if (_acToastTimer) clearTimeout(_acToastTimer);
+  _acToastTimer = setTimeout(() => t.classList.remove('show'), ms);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SECTION 5: MESSAGE BOX
+   ─────────────────────────────────────────────────────────── */
+
+function showStudentMessageaf(type, text) {
+  const box = document.getElementById('studentMessageaf');
+  if (!box) return;
+  box.className = 'ac-message' + (type ? ' ' + type : '');
+  box.textContent = text || '';
+  // Scroll message into view smoothly
+  if (text) {
+    setTimeout(() => box.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 80);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SECTION 6: BUTTON LOADING STATE
+   ─────────────────────────────────────────────────────────── */
+
+function acSetBtnLoading(btnId, loading) {
+  const btn = document.getElementById(btnId);
+  if (!btn) return;
+  if (loading) {
+    btn.classList.add('loading');
+    btn.disabled = true;
+  } else {
+    btn.classList.remove('loading');
+    btn.disabled = false;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SECTION 7: PASSWORD VISIBILITY TOGGLE
+   ─────────────────────────────────────────────────────────── */
+
+function acTogglePassword(inputId, btn) {
+  const input = document.getElementById(inputId);
+  if (!input) return;
+  const isHidden = input.type === 'password';
+  input.type = isHidden ? 'text' : 'password';
+  btn.textContent = isHidden ? '🙈' : '👁️';
+  btn.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SECTION 8: MODE SWITCHING (Login / Create / Forgot)
+   ─────────────────────────────────────────────────────────── */
+
+// State variables (mirrors original SPA JS)
+let afPendingCreateStudent = null;
+let afResetStudent         = null;
+let afForgotOtpVerified    = false;
+
+function acSwitchMode(mode) {
+  // Clear message
+  showStudentMessageaf('', '');
+
+  // Reset state
+  afPendingCreateStudent = null;
+  afResetStudent         = null;
+  afForgotOtpVerified    = false;
+
+  // Hide all OTP areas
+  acHideEl('createOtpArea');
+  acHideEl('forgotOtpArea');
+  acHideEl('resetPasswordArea');
+
+  // Hide all boxes
+  acHideEl('boxLogin');
+  acHideEl('boxCreate');
+  acHideEl('boxForgot');
+
+  // Deactivate tabs
+  const tabLogin  = document.getElementById('tabLogin');
+  const tabCreate = document.getElementById('tabCreate');
+  if (tabLogin)  { tabLogin.classList.remove('active');  tabLogin.setAttribute('aria-selected', 'false'); }
+  if (tabCreate) { tabCreate.classList.remove('active'); tabCreate.setAttribute('aria-selected', 'false'); }
+
+  // Show correct box + activate tab
+  if (mode === 'login') {
+    acShowEl('boxLogin');
+    if (tabLogin) { tabLogin.classList.add('active'); tabLogin.setAttribute('aria-selected', 'true'); }
+  } else if (mode === 'create') {
+    acShowEl('boxCreate');
+    if (tabCreate) { tabCreate.classList.add('active'); tabCreate.setAttribute('aria-selected', 'true'); }
+  } else if (mode === 'forgot') {
+    acShowEl('boxForgot');
+    // No tab active for forgot — it's a sub-state
+  }
+}
+
+// Renamed IDs from the original HTML → new HTML
+// Original:  studentLoginBoxaf, studentCreateBoxaf, studentForgotBoxaf
+// New:       boxLogin, boxCreate, boxForgot
+// Also remap the OTP areas:
+// Original:  createOtpAreaaf, forgotOtpAreaaf, resetPasswordAreaaf
+// New:       createOtpArea, forgotOtpArea, resetPasswordArea
+// Input IDs are updated below in each function.
+
+function acShowEl(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.remove('hidden');
+}
+
+function acHideEl(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.add('hidden');
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SECTION 9: EDGE FUNCTION CALLER
+   ─────────────────────────────────────────────────────────── */
+
+async function afStudentEdgeCall(functionName, payload) {
+  const backend = getStudentBackendaf();
+
+  if (!navigator.onLine) {
+    return { ok: false, message: 'No internet connection.' };
+  }
+
+  if (!backend) {
+    return { ok: false, message: 'Server connection failed. Please check your configuration.' };
+  }
+
+  try {
+    const { data, error } = await backend.functions.invoke(functionName, {
+      body: payload || {}
+    });
+
+    if (error) {
+      console.error('AF Edge function error:', functionName, error);
+      return { ok: false, message: 'Server error. Please try again.' };
+    }
+
+    if (!data) {
+      return { ok: false, message: 'No response from server. Please try again.' };
+    }
+
+    return data;
+
+  } catch (err) {
+    console.error('AF Edge function catch:', functionName, err);
+    return { ok: false, message: 'Connection error. Please try again.' };
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SECTION 10: OTP HELPERS
+   ─────────────────────────────────────────────────────────── */
+
+async function sendCustomEmailOtpaf(email, mobile, purpose) {
+  return await afStudentEdgeCall('student-send-otp-af', {
+    email:   email,
+    mobile:  mobile || '',
+    purpose: purpose || 'create'
+  });
+}
+
+async function verifyCustomEmailOtpaf(email, otp, purpose) {
+  return await afStudentEdgeCall('student-verify-otp-af', {
+    email:   email,
+    otp:     otp,
+    purpose: purpose || 'create'
+  });
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SECTION 11: LOGIN
+   ─────────────────────────────────────────────────────────── */
+
+async function loginStudentaf() {
+  const loginIdInput  = document.getElementById('loginPhone');
+  const passwordInput = document.getElementById('loginPassword');
+
+  const loginId      = loginIdInput  ? loginIdInput.value.trim()  : '';
+  const cleanLoginId = cleanPhoneaf(loginId);
+  const password     = passwordInput ? passwordInput.value.trim() : '';
+
+  if (!loginId) {
+    showStudentMessageaf('err', 'Enter your Student ID or phone number.');
+    return;
+  }
+
+  if (!password) {
+    showStudentMessageaf('err', 'Enter your password.');
+    return;
+  }
+
+  acSetBtnLoading('loginBtn', true);
+  showStudentMessageaf('info', 'Checking your login...');
+
+  try {
+    const result = await afStudentEdgeCall('student-login-af', {
+      login_id:       loginId,
+      clean_login_id: cleanLoginId,
+      password:       password,
+      device_id:      getAFDeviceId(),
+      device_name:    getAFDeviceName()
+    });
+
+    if (!result || !result.ok) {
+      showStudentMessageaf('err', result?.message || 'Login failed. Please check your credentials.');
+      acSetBtnLoading('loginBtn', false);
+      return;
+    }
+
+    if (!result.student) {
+      showStudentMessageaf('err', 'Login failed. Student data not received.');
+      acSetBtnLoading('loginBtn', false);
+      return;
+    }
+
+    const finalSessionToken = result.session_token || result.login_token || '';
+    const finalDeviceId     = result.device_id     || getAFDeviceId();
+
+    if (!finalSessionToken) {
+      showStudentMessageaf('err', 'Login failed. Session token not received.');
+      acSetBtnLoading('loginBtn', false);
+      return;
+    }
+
+    saveStudentSessionaf(result.student, finalSessionToken, finalDeviceId);
+    localStorage.setItem('af_last_login_at', new Date().toISOString());
+
+    showStudentMessageaf('ok', 'Login successful! Loading your dashboard...');
+    acSetBtnLoading('loginBtn', false);
+
+    setTimeout(() => acShowDashboard(result.student), 500);
+
+  } catch (err) {
+    console.error('Login catch:', err);
+    showStudentMessageaf('err', 'Login failed: ' + err.message);
+    acSetBtnLoading('loginBtn', false);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SECTION 12: CREATE ID — SEND OTP
+   ─────────────────────────────────────────────────────────── */
+
+async function sendCreateOtpaf() {
+  const nameInput     = document.getElementById('createName');
+  const phoneInput    = document.getElementById('createPhone');
+  const emailInput    = document.getElementById('createEmail');
+  const passwordInput = document.getElementById('createPassword');
+
+  const name     = nameInput     ? nameInput.value.trim()                      : '';
+  const mobile   = phoneInput    ? cleanPhoneaf(phoneInput.value)              : '';
+  const email    = emailInput    ? emailInput.value.trim().toLowerCase()        : '';
+  const password = passwordInput ? passwordInput.value.trim()                  : '';
+
+  if (!name || name.length < 3) {
+    showStudentMessageaf('err', 'Enter your full name (at least 3 characters).');
+    return;
+  }
+  if (!mobile || mobile.length < 10) {
+    showStudentMessageaf('err', 'Enter a valid phone number (at least 10 digits).');
+    return;
+  }
+  if (!email || !email.includes('@')) {
+    showStudentMessageaf('err', 'Enter a valid email address.');
+    return;
+  }
+  if (!password || password.length < 4) {
+    showStudentMessageaf('err', 'Create a password with at least 4 characters.');
+    return;
+  }
+
+  acSetBtnLoading('sendOtpBtn', true);
+  showStudentMessageaf('info', 'Checking if account exists...');
+
+  try {
+    const checkResult = await afStudentEdgeCall('student-check-existing-af', {
+      mobile: mobile,
+      email:  email
+    });
+
+    if (!checkResult || !checkResult.ok) {
+      showStudentMessageaf('err', checkResult?.message || 'Could not verify account details. Try again.');
+      acSetBtnLoading('sendOtpBtn', false);
+      return;
+    }
+
+    if (checkResult.mobile_exists || checkResult.student_id_exists) {
+      showStudentMessageaf('err', 'This phone number is already registered. Try logging in instead.');
+      acSetBtnLoading('sendOtpBtn', false);
+      return;
+    }
+
+    if (checkResult.email_exists) {
+      showStudentMessageaf('err', 'This email is already registered. Try logging in or reset your password.');
+      acSetBtnLoading('sendOtpBtn', false);
+      return;
+    }
+
+    // Store pending student data
+    afPendingCreateStudent = {
+      student_id:     mobile,
+      name:           name,
+      mobile:         mobile,
+      email:          email,
+      password:       password,
+      status:         'active',
+      email_verified: false
+    };
+
+    showStudentMessageaf('info', 'Sending OTP to ' + email + '...');
+
+    const otpResult = await sendCustomEmailOtpaf(email, mobile, 'create');
+
+    if (!otpResult || !otpResult.ok) {
+      showStudentMessageaf('err', 'OTP send failed: ' + (otpResult?.message || 'Server error.'));
+      acSetBtnLoading('sendOtpBtn', false);
+      return;
+    }
+
+    // Update OTP area description with masked email
+    const otpDesc = document.getElementById('createOtpDesc');
+    if (otpDesc) {
+      otpDesc.textContent = 'Enter the 6-digit OTP sent to ' + acMaskEmail(email);
+    }
+
+    acShowEl('createOtpArea');
+    showStudentMessageaf('ok', 'OTP sent! Check your email and enter the code below.');
+    acSetBtnLoading('sendOtpBtn', false);
+
+  } catch (err) {
+    console.error('Send create OTP catch:', err);
+    showStudentMessageaf('err', 'OTP send failed: ' + err.message);
+    acSetBtnLoading('sendOtpBtn', false);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SECTION 13: CREATE ID — VERIFY OTP + INSERT
+   ─────────────────────────────────────────────────────────── */
+
+async function verifyCreateOtpAndCreateIdaf() {
+  const otpInput = document.getElementById('createOtp');
+  const otp      = otpInput ? otpInput.value.trim() : '';
+
+  if (!afPendingCreateStudent) {
+    showStudentMessageaf('err', 'Please fill the form and send OTP first.');
+    return;
+  }
+  if (!otp || otp.length < 4) {
+    showStudentMessageaf('err', 'Enter a valid OTP (4-6 digits).');
+    return;
+  }
+
+  acSetBtnLoading('verifyOtpBtn', true);
+  showStudentMessageaf('info', 'Verifying OTP and creating your Student ID...');
+
+  try {
+    const payload = {
+      ...afPendingCreateStudent,
+      otp:     otp,
+      purpose: 'create'
+    };
+
+    const result = await afStudentEdgeCall('student-create-af', payload);
+
+    if (!result || !result.ok) {
+      showStudentMessageaf('err', result?.message || 'Could not create Student ID. Check your OTP.');
+      acSetBtnLoading('verifyOtpBtn', false);
+      return;
+    }
+
+    if (!result.student) {
+      showStudentMessageaf('err', 'Student ID created but student data not received.');
+      acSetBtnLoading('verifyOtpBtn', false);
+      return;
+    }
+
+    afPendingCreateStudent = null;
+
+    acHideEl('createOtpArea');
+    if (otpInput) otpInput.value = '';
+
+    saveStudentSessionaf(result.student);
+    showStudentMessageaf('ok', 'Student ID created successfully! Welcome to AcademeForge 🎉');
+    acSetBtnLoading('verifyOtpBtn', false);
+
+    setTimeout(() => acShowDashboard(result.student), 600);
+
+  } catch (err) {
+    console.error('Create Student ID catch:', err);
+    showStudentMessageaf('err', 'Create ID failed: ' + err.message);
+    acSetBtnLoading('verifyOtpBtn', false);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SECTION 14: FORGOT PASSWORD — FIND ACCOUNT
+   ─────────────────────────────────────────────────────────── */
+
+async function findStudentForResetaf() {
+  const input      = document.getElementById('forgotLogin');
+  const value      = input ? input.value.trim() : '';
+  const cleanValue = cleanPhoneaf(value);
+
+  if (!value) {
+    showStudentMessageaf('err', 'Enter your Student ID, phone number, or email.');
+    return;
+  }
+
+  acSetBtnLoading('findAccountBtn', true);
+  showStudentMessageaf('info', 'Searching for your account...');
+
+  try {
+    const result = await afStudentEdgeCall('student-find-reset-af', {
+      value:       value,
+      clean_value: cleanValue,
+      email_value: value.toLowerCase()
+    });
+
+    if (!result || !result.ok) {
+      showStudentMessageaf('err', result?.message || 'No account found with these details.');
+      acSetBtnLoading('findAccountBtn', false);
+      return;
+    }
+
+    if (!result.student || !result.student.email) {
+      showStudentMessageaf('err', 'Account found but email is missing. Contact support.');
+      acSetBtnLoading('findAccountBtn', false);
+      return;
+    }
+
+    afResetStudent       = result.student;
+    afForgotOtpVerified  = false;
+
+    showStudentMessageaf('info', 'Sending OTP to ' + acMaskEmail(afResetStudent.email) + '...');
+
+    const otpResult = await sendCustomEmailOtpaf(
+      afResetStudent.email,
+      afResetStudent.mobile || afResetStudent.student_id || '',
+      'reset'
+    );
+
+    if (!otpResult || !otpResult.ok) {
+      showStudentMessageaf('err', 'OTP send failed: ' + (otpResult?.message || 'Server error.'));
+      acSetBtnLoading('findAccountBtn', false);
+      return;
+    }
+
+    acHideEl('resetPasswordArea');
+    acShowEl('forgotOtpArea');
+    showStudentMessageaf('ok', 'OTP sent to your registered email. Enter it below.');
+    acSetBtnLoading('findAccountBtn', false);
+
+  } catch (err) {
+    console.error('Find reset catch:', err);
+    showStudentMessageaf('err', 'Account search failed: ' + err.message);
+    acSetBtnLoading('findAccountBtn', false);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SECTION 15: FORGOT PASSWORD — VERIFY OTP
+   ─────────────────────────────────────────────────────────── */
+
+async function verifyForgotOtpaf() {
+  const otpInput = document.getElementById('forgotOtp');
+  const otp      = otpInput ? otpInput.value.trim() : '';
+
+  if (!afResetStudent) {
+    showStudentMessageaf('err', 'Please find your account first.');
+    return;
+  }
+  if (!otp || otp.length < 4) {
+    showStudentMessageaf('err', 'Enter a valid OTP (4-6 digits).');
+    return;
+  }
+
+  acSetBtnLoading('verifyForgotBtn', true);
+  showStudentMessageaf('info', 'Verifying OTP...');
+
+  try {
+    const verifyResult = await verifyCustomEmailOtpaf(
+      afResetStudent.email,
+      otp,
+      'reset'
+    );
+
+    if (!verifyResult || !verifyResult.ok) {
+      showStudentMessageaf('err', 'Invalid OTP: ' + (verifyResult?.message || 'Verification failed.'));
+      acSetBtnLoading('verifyForgotBtn', false);
+      return;
+    }
+
+    afForgotOtpVerified = true;
+    acShowEl('resetPasswordArea');
+    showStudentMessageaf('ok', 'Email verified! Create your new password below.');
+    acSetBtnLoading('verifyForgotBtn', false);
+
+  } catch (err) {
+    console.error('Forgot OTP verify catch:', err);
+    showStudentMessageaf('err', 'OTP verification failed: ' + err.message);
+    acSetBtnLoading('verifyForgotBtn', false);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SECTION 16: FORGOT PASSWORD — RESET
+   ─────────────────────────────────────────────────────────── */
+
+async function resetStudentPasswordaf() {
+  const newPasswordInput = document.getElementById('newPassword');
+  const newPassword      = newPasswordInput ? newPasswordInput.value.trim() : '';
+
+  if (!afResetStudent) {
+    showStudentMessageaf('err', 'Please find your account first.');
+    return;
+  }
+  if (!afForgotOtpVerified) {
+    showStudentMessageaf('err', 'Please verify your email OTP first.');
+    return;
+  }
+  if (!newPassword || newPassword.length < 4) {
+    showStudentMessageaf('err', 'New password must be at least 4 characters.');
+    return;
+  }
+
+  acSetBtnLoading('resetPwdBtn', true);
+  showStudentMessageaf('info', 'Resetting your password...');
+
+  try {
+    const result = await afStudentEdgeCall('student-reset-password-af', {
+      id:           afResetStudent.id,
+      email:        afResetStudent.email,
+      new_password: newPassword
+    });
+
+    if (!result || !result.ok) {
+      showStudentMessageaf('err', result?.message || 'Password reset failed. Try again.');
+      acSetBtnLoading('resetPwdBtn', false);
+      return;
+    }
+
+    // Clean up
+    afResetStudent      = null;
+    afForgotOtpVerified = false;
+
+    acHideEl('resetPasswordArea');
+    acHideEl('forgotOtpArea');
+
+    const forgotOtpInput  = document.getElementById('forgotOtp');
+    const newPwdInput     = document.getElementById('newPassword');
+    if (forgotOtpInput) forgotOtpInput.value = '';
+    if (newPwdInput)    newPwdInput.value    = '';
+    if (newPasswordInput) newPasswordInput.value = '';
+
+    showStudentMessageaf('ok', 'Password reset successful! Redirecting to login...');
+    acSetBtnLoading('resetPwdBtn', false);
+
+    setTimeout(() => acSwitchMode('login'), 1000);
+
+  } catch (err) {
+    console.error('Reset password catch:', err);
+    showStudentMessageaf('err', 'Password reset failed: ' + err.message);
+    acSetBtnLoading('resetPwdBtn', false);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SECTION 17: SESSION MANAGEMENT
+   ─────────────────────────────────────────────────────────── */
+
+function saveStudentSessionaf(student, sessionToken, deviceId) {
+  localStorage.setItem('af_student_logged_in', 'true');
+  localStorage.setItem('af_session_token',      sessionToken || '');
+  localStorage.setItem('af_device_id',          deviceId     || getAFDeviceId());
+  localStorage.setItem('af_student_uuid',       student.id           || '');
+  localStorage.setItem('af_student_id',         student.student_id   || student.mobile || student.phone || '');
+  localStorage.setItem('af_student_mobile',     student.mobile       || student.phone  || '');
+  localStorage.setItem('af_student_name',       student.name         || 'Student');
+  localStorage.setItem('af_student_email',      student.email        || '');
+  localStorage.setItem('af_student_phone',      student.mobile       || student.phone  || '');
+}
+
+function acIsLoggedIn() {
+  return localStorage.getItem('af_student_logged_in') === 'true'
+    && !!localStorage.getItem('af_student_name');
+}
+
+function acGetStudent() {
+  return {
+    name:       localStorage.getItem('af_student_name')   || 'Student',
+    mobile:     localStorage.getItem('af_student_mobile') || '',
+    email:      localStorage.getItem('af_student_email')  || '',
+    student_id: localStorage.getItem('af_student_id')     || '',
+    phone:      localStorage.getItem('af_student_phone')  || '',
+  };
+}
+
+function acLogout() {
+  const keys = [
+    'af_student_logged_in', 'af_session_token', 'af_device_id',
+    'af_student_uuid',      'af_student_id',    'af_student_mobile',
+    'af_student_name',      'af_student_email', 'af_student_phone',
+  ];
+  keys.forEach(k => localStorage.removeItem(k));
+  acShowToast('👋 You have been logged out.');
+  // Hide dashboard, show auth
+  acHideEl('acDashboard');
+  acShowEl('acAuthSection');
+  acSwitchMode('login');
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SECTION 18: DASHBOARD DISPLAY
+   ─────────────────────────────────────────────────────────── */
+
+function acShowDashboard(student) {
+  // Hide auth section
+  acHideEl('acAuthSection');
+
+  // Populate dashboard fields
+  const name    = student?.name       || localStorage.getItem('af_student_name')   || 'Student';
+  const mobile  = student?.mobile     || student?.phone || localStorage.getItem('af_student_mobile') || '';
+  const email   = student?.email      || localStorage.getItem('af_student_email')  || '';
+  const sid     = student?.student_id || localStorage.getItem('af_student_id')     || mobile;
+
+  // Avatar initial
+  const avatarEl = document.getElementById('dashAvatar');
+  if (avatarEl) avatarEl.textContent = name.charAt(0).toUpperCase() || 'S';
+
+  // Hero text
+  const dashName = document.getElementById('dashName');
+  const dashSub  = document.getElementById('dashSub');
+  if (dashName) dashName.textContent = 'Hi, ' + name.split(' ')[0];
+  if (dashSub)  dashSub.textContent  = 'AcademeForge Student';
+
+  // Detail rows
+  const setVal = (id, val) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val || '—';
+  };
+  setVal('dashInfoName',  name);
+  setVal('dashInfoId',    sid  || '—');
+  setVal('dashInfoPhone', mobile || '—');
+  setVal('dashInfoEmail', email  || '—');
+
+  // Show dashboard
+  acShowEl('acDashboard');
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SECTION 19: HELPER — mask email for display
+   ─────────────────────────────────────────────────────────── */
+
+function acMaskEmail(email) {
+  if (!email || !email.includes('@')) return email;
+  const [local, domain] = email.split('@');
+  const masked = local.charAt(0) + '***' + (local.length > 1 ? local.slice(-1) : '');
+  return masked + '@' + domain;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SECTION 20: PAGE INIT
+   ─────────────────────────────────────────────────────────── */
+
+function acInit() {
+  // If student is already logged in, show dashboard immediately
+  if (acIsLoggedIn()) {
+    acShowDashboard(acGetStudent());
+  } else {
+    // Make sure login tab is default
+    acSwitchMode('login');
+  }
+
+  // Enter key triggers login when in login box
+  const loginPwdInput = document.getElementById('loginPassword');
+  if (loginPwdInput) {
+    loginPwdInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') loginStudentaf();
+    });
+  }
+  const loginIdInput = document.getElementById('loginPhone');
+  if (loginIdInput) {
+    loginIdInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        const pwd = document.getElementById('loginPassword');
+        if (pwd) pwd.focus(); else loginStudentaf();
+      }
+    });
+  }
+
+  // Auto-format OTP inputs: digits only
+  ['createOtp', 'forgotOtp'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('input', function() {
+      this.value = this.value.replace(/\D/g, '').slice(0, 6);
+    });
+  });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', acInit);
+} else {
+  acInit();
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SECTION 21: openCourseSectionAfterLoginaf
+   In the old SPA this opened a course list inside the page.
+   In the multi-page architecture, login redirects back to
+   the home dashboard which reads af_student_name from storage.
+   ─────────────────────────────────────────────────────────── */
+
+function openCourseSectionAfterLoginaf(student) {
+  // Show the dashboard for the logged-in student
+  acShowDashboard(student);
+}
+
+// Expose globals needed by onclick attributes
+window.loginStudentaf              = loginStudentaf;
+window.sendCreateOtpaf             = sendCreateOtpaf;
+window.verifyCreateOtpAndCreateIdaf= verifyCreateOtpAndCreateIdaf;
+window.findStudentForResetaf       = findStudentForResetaf;
+window.verifyForgotOtpaf           = verifyForgotOtpaf;
+window.resetStudentPasswordaf      = resetStudentPasswordaf;
+window.switchStudentModeaf         = acSwitchMode;
+window.acSwitchMode                = acSwitchMode;
+window.acTogglePassword            = acTogglePassword;
+window.acLogout                    = acLogout;
+
+</script>
+</body>
+</html>
