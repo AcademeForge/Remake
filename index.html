@@ -1610,8 +1610,9 @@
     /* ================================================================
        SUPABASE CLIENTS
     ================================================================ */
-    const SUPABASE_URL      = "https://nltmolhlwgsrxadknzzq.supabase.co";
-    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5sdG1vbGhsd2dzcnhhZGtuenpxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg2MDMyMzksImV4cCI6MjA5NDE3OTIzOX0.HEvMlpp6XFbD9MuQhxFwsNpfvzfev3ISkJbA93SvMXc";
+    // Legacy client (kept for backwards compatibility — points at student project)
+    const SUPABASE_URL      = "https://afooyyydhlwngzssgqih.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmb295eXlkaGx3bmd6c3NncWloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg2NDQxMjgsImV4cCI6MjA5NDIyMDEyOH0.KG0XO0oP_2MpewHoIwTtbrKg5FkyOYRUtVzLH1MSJiE";
     const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     const STUDENT_SUPABASE_URL      = "https://afooyyydhlwngzssgqih.supabase.co";
@@ -1704,8 +1705,9 @@
 
       localStorage.setItem("af_last_tab", viewKey);
 
-      // Load batches when switching to batches tab
+      // Lazy-load each tab's content only when user opens it
       if (viewKey === "batches") openBatchSectionaf();
+      if (viewKey === "student") afInitStudentViewIfNeeded();
     }
 
     // Swipe navigation
@@ -1866,6 +1868,7 @@
        GLOBAL LOGOUT
     ================================================================ */
     function afLogout() {
+      afStudentViewInitialized = false;
       ["af_student_name","af_student_mobile","af_student_email","af_student_id",
        "af_student_uuid","af_student_logged_in","af_session_token"].forEach(k => localStorage.removeItem(k));
       afLoadStudentState();
@@ -1906,16 +1909,36 @@
       const toggle = document.getElementById("nightModeToggle");
       if (toggle) toggle.checked = isDark;
 
-      // Auto-login check
+      // Validate existing session (silent) but DO NOT render student UI until user opens Student tab
+      (async () => {
+        if (localStorage.getItem("af_student_logged_in") === "true") {
+          const token = localStorage.getItem("af_session_token") || "";
+          if (token) {
+            const check = await afStudentEdgeCall("student-session-check-af", {
+              session_token: token,
+              device_id: getAFDeviceId(),
+              student_id: localStorage.getItem("af_student_uuid") || ""
+            });
+            if (check && check.ok === false) {
+              ["af_student_logged_in","af_session_token"].forEach(k => localStorage.removeItem(k));
+            }
+          }
+        }
+      })();
+    }
+
+    let afStudentViewInitialized = false;
+    function afInitStudentViewIfNeeded() {
+      if (afStudentViewInitialized) return;
+      afStudentViewInitialized = true;
       if (localStorage.getItem("af_student_logged_in") === "true") {
-        const studentData = {
-          id:         localStorage.getItem("af_student_uuid")    || "",
-          student_id: localStorage.getItem("af_student_id")      || "",
-          mobile:     localStorage.getItem("af_student_mobile")   || "",
-          name:       localStorage.getItem("af_student_name")     || "",
-          email:      localStorage.getItem("af_student_email")    || "",
-        };
-        openCourseSectionAfterLoginaf(studentData);
+        openCourseSectionAfterLoginaf({
+          id:         localStorage.getItem("af_student_uuid")  || "",
+          student_id: localStorage.getItem("af_student_id")    || "",
+          mobile:     localStorage.getItem("af_student_mobile") || "",
+          name:       localStorage.getItem("af_student_name")   || "",
+          email:      localStorage.getItem("af_student_email")  || "",
+        });
       } else {
         switchStudentModeaf("login");
       }
@@ -1931,6 +1954,7 @@
     window.afToggleDarkMode  = afToggleDarkMode;
     window.afLogout          = afLogout;
     window.afShowToast       = afShowToast;
+    window.afInitStudentViewIfNeeded = afInitStudentViewIfNeeded;
 
     /* ================================================================
        STUDENT AUTH HELPERS
@@ -2018,7 +2042,7 @@
 
       showStudentMessageaf("info", "Checking your login...");
 
-      const result = await afStudentEdgeCall("student-login-af", {
+      const result = await afStudentEdgeCall("student-login-read-af", {
         login_id:       loginId,
         clean_login_id: cleanPhoneaf(loginId),
         password,
@@ -2051,13 +2075,7 @@
       if (!email || !email.includes("@")) { showStudentMessageaf("err", "Enter a valid email address."); return; }
       if (!password || password.length < 4) { showStudentMessageaf("err", "Create a password with at least 4 characters."); return; }
 
-      showStudentMessageaf("info", "Checking existing account...");
-
-      const checkResult = await afStudentEdgeCall("student-check-existing-af", { mobile, email });
-      if (!checkResult?.ok) { showStudentMessageaf("err", checkResult?.message || "Could not check existing account."); return; }
-      if (checkResult.mobile_exists || checkResult.student_id_exists) { showStudentMessageaf("err", "This phone number is already registered."); return; }
-      if (checkResult.email_exists)  { showStudentMessageaf("err", "This email is already registered."); return; }
-
+      // Server-side uniqueness is validated by create-student-after-otp-af
       afPendingCreateStudent = { student_id: mobile, name, mobile, email, password, status: "active", email_verified: false };
 
       showStudentMessageaf("info", "Sending OTP to your email...");
@@ -2075,7 +2093,7 @@
       if (!otp || otp.length < 4)  { showStudentMessageaf("err", "Enter valid OTP."); return; }
 
       showStudentMessageaf("info", "Verifying OTP and creating your Student ID...");
-      const result = await afStudentEdgeCall("student-create-af", { ...afPendingCreateStudent, otp, purpose: "create" });
+      const result = await afStudentEdgeCall("create-student-after-otp-af", { ...afPendingCreateStudent, otp, purpose: "create" });
       if (!result?.ok)     { showStudentMessageaf("err", result?.message || "Could not create Student ID."); return; }
       if (!result.student) { showStudentMessageaf("err", "Student ID created but student data not received."); return; }
 
@@ -2099,7 +2117,7 @@
       if (!value) { showStudentMessageaf("err", "Enter your Student ID, phone, or email."); return; }
 
       showStudentMessageaf("info", "Finding your account...");
-      const result = await afStudentEdgeCall("student-find-reset-af", {
+      const result = await afStudentEdgeCall("student-login-info-af", {
         value, clean_value: cleanValue, email_value: value.toLowerCase()
       });
       if (!result?.ok || !result.student?.email) {
@@ -2197,6 +2215,7 @@
        LOGOUT STUDENT
     ================================================================ */
     function logoutStudentaf() {
+      afStudentViewInitialized = false;
       ["af_student_logged_in","af_student_uuid","af_student_id","af_student_mobile",
        "af_student_name","af_student_email","af_session_token"].forEach(k => localStorage.removeItem(k));
 
@@ -2263,7 +2282,7 @@
       const courseBox = document.getElementById("courseCardsaf");
       if (courseBox) courseBox.innerHTML = '<p class="loading-textaf">Loading your courses...</p>';
 
-      const result = await afCourseEdgeCall("student-courses-af", { student_id: studentUuid });
+      const result = await afCourseEdgeCall("student-login-info-af", { student_id: studentUuid });
       if (!result?.ok) { showNoCourseMessageaf(result?.message || "Could not load your courses."); return; }
 
       afEnrolledCourses = Array.isArray(result.courses) ? result.courses : [];
@@ -2724,7 +2743,6 @@
       if (btn) { btn.disabled = true; btn.textContent = "Checking..."; }
 
       try {
-        await checkBatchCourseExistsaf(batch);
         if (btn) btn.textContent = "Opening Payment...";
 
         const options = {
