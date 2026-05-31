@@ -226,87 +226,118 @@
     }
 
     /* ─── SPLASH SCREEN ──────────────────────────────────────────── */
-    #afSplash {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      background: linear-gradient(145deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 18px;
-      transition: opacity 0.5s var(--ease-out), visibility 0.5s;
-    }
+   /* SPLASH SCREEN */
+#afSplash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
 
-    #afSplash.hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,80,0,.25), transparent 35%),
+    radial-gradient(circle at 80% 30%, rgba(255,140,0,.18), transparent 40%),
+    linear-gradient(135deg,#170500 0%,#090300 50%,#000000 100%);
 
-    .splash-logo-ring {
-      width: 96px;
-      height: 96px;
-      border-radius: 28px;
-      background: rgba(255,255,255,0.15);
-      border: 2px solid rgba(255,255,255,0.25);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: splashPop 0.6s var(--ease-spring) both;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
 
-    .splash-logo-ring img {
-      width: 64px;
-      height: 64px;
-      border-radius: 16px;
-      object-fit: cover;
-    }
+  transition:
+    opacity .5s var(--ease-out),
+    visibility .5s;
+}
 
-    .splash-logo-letter {
-      font-family: var(--font-display);
-      font-size: 40px;
-      font-weight: 800;
-      color: white;
-    }
+#afSplash.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
 
-    .splash-title {
-      font-family: var(--font-display);
-      font-size: 28px;
-      font-weight: 800;
-      color: #ffffff;
-      animation: splashFade 0.6s 0.2s var(--ease-out) both;
-    }
+.splash-logo-ring {
+  width: 112px;
+  height: 112px;
 
-    .splash-sub {
-      font-size: 14px;
-      color: rgba(255,255,255,0.65);
-      animation: splashFade 0.6s 0.35s var(--ease-out) both;
-    }
+  border-radius: 28px;
 
-    .splash-loader {
-      width: 48px;
-      height: 3px;
-      background: rgba(255,255,255,0.2);
-      border-radius: 99px;
-      overflow: hidden;
-      margin-top: 16px;
-      animation: splashFade 0.6s 0.5s var(--ease-out) both;
-    }
+  background: rgba(255,255,255,.95);
 
-    .splash-loader-bar {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--af-primary-light), var(--af-accent));
-      border-radius: 99px;
-      animation: splashLoad 1.5s 0.5s var(--ease-out) forwards;
-    }
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    @keyframes splashPop  { from { opacity:0; transform: scale(0.6); } to { opacity:1; transform: scale(1); } }
-    @keyframes splashFade { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: translateY(0); } }
-    @keyframes splashLoad { from { width:0%; } to { width:100%; } }
+  box-shadow:
+    0 0 20px rgba(255,120,0,.65),
+    0 0 50px rgba(255,120,0,.45),
+    0 0 90px rgba(255,120,0,.25);
 
+  animation: splashPop .6s var(--ease-spring) both;
+}
+
+.splash-logo-ring img {
+  width: 88px;
+  height: 88px;
+  object-fit: contain;
+  border-radius: 18px;
+}
+
+.splash-title {
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 900;
+
+  color: #fff2d6;
+
+  text-shadow:
+    0 0 10px rgba(255,180,80,.8),
+    0 0 24px rgba(255,120,0,.7),
+    0 0 40px rgba(255,80,0,.45);
+
+  animation: splashFade .6s .2s var(--ease-out) both;
+}
+
+.splash-sub {
+  font-size: 15px;
+  font-weight: 700;
+
+  color: rgba(255,255,255,.92);
+
+  animation: splashFade .6s .35s var(--ease-out) both;
+}
+
+.splash-loader {
+  width: 120px;
+  height: 5px;
+
+  border-radius: 999px;
+
+  background: rgba(255,255,255,.12);
+
+  overflow: hidden;
+
+  margin-top: 12px;
+}
+
+.splash-loader-bar {
+  height: 100%;
+  width: 0;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #ff8c00,
+      #ffd166,
+      #ff8c00
+    );
+
+  box-shadow:
+    0 0 12px #ff8c00,
+    0 0 24px #ff8c00;
+
+  animation: splashLoad 1.1s ease forwards;
+}
     /* ─── HEADER / TOPBAR ────────────────────────────────────────── */
     .af-topbar {
       position: sticky;
