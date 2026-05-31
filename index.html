@@ -492,20 +492,28 @@
     }
 
     /* Marquee / ticker */
-.af-ticker-track {
-  display: inline-block;
-  animation: ticker 120s linear infinite !important;
-}
-  
-    @keyframes ticker {
-  0% {
-    transform: translateX(0);
-  }
+    .af-ticker {
+      background: linear-gradient(90deg, var(--af-primary), var(--af-primary-dark));
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 8px 0;
+    }
 
-  100% {
-    transform: translateX(-50%);
-  }
-}
+    .af-ticker-track {
+      display: inline-block;
+      animation: ticker 22s linear infinite;
+    }
+
+    .af-ticker-track span { padding: 0 40px; }
+
+    @keyframes ticker {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
     /* Home content */
     .af-home-body {
       padding: var(--gap-md) var(--gap-md) 0;
@@ -1726,7 +1734,7 @@
                 </a>
                 <a
                   class="af-accordion-item"
-                  href="/sudoku-master/"
+                  href="/Remake/sudoku-master/"
                   aria-label="Open Sudoku Master"
                 >
                   <div class="af-accordion-item-icon" aria-hidden="true">🧩</div>
@@ -1970,7 +1978,7 @@
 
           <!-- App version -->
           <div class="af-settings-version">
-            <strong>App Version: 09.01.2024</strong>
+            <strong>App Version: 06.07.19</strong>
             <span>Made with ❤️ in India</span>
           </div>
 
@@ -2329,7 +2337,7 @@
       'latest-test-review':        '/latest-test-review/',
       'account':                   '/account/',
       'revision-notes':            '/revision-notes/',
-      'sudoku-master':             '/sudoku-master/',
+      'sudoku-master':             '/Remake/sudoku-master/',
       'learning-heatmap':          '/learning-heatmap/',
       'certificate-verification':  '/certificate-verification/',
       'notifications':             '/notifications/',
