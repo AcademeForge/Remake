@@ -2294,7 +2294,77 @@
         afSwitchView(lastTab);
       }
     }
+/* ─────────────────────────────────────────────────────────────
+   SWIPE NAVIGATION
+───────────────────────────────────────────────────────────── */
 
+const AF_VIEW_ORDER = [
+  "home",
+  "student",
+  "batches",
+  "community",
+  "settings"
+];
+
+let afTouchStartX = 0;
+let afTouchEndX = 0;
+
+const afPage = document.getElementById("afPage");
+
+if (afPage) {
+
+  afPage.addEventListener(
+    "touchstart",
+    (e) => {
+      afTouchStartX = e.changedTouches[0].clientX;
+    },
+    { passive: true }
+  );
+
+  afPage.addEventListener(
+    "touchend",
+    (e) => {
+      afTouchEndX = e.changedTouches[0].clientX;
+      afHandleSwipe(e);
+    },
+    { passive: true }
+  );
+
+}
+
+function afHandleSwipe(e) {
+  const diff = afTouchStartX - afTouchEndX;
+
+  if (Math.abs(diff) < 70) return;
+
+  // Banner ke andar swipe ignore
+  if (
+    e.target.closest(".af-banner-slider") ||
+    e.target.closest(".af-ticker")
+  ) {
+    return;
+  }
+
+  const currentIndex = AF_VIEW_ORDER.indexOf(afCurrentView);
+
+  if (currentIndex === -1) return;
+
+  // Left Swipe → Next Tab
+  if (
+    diff > 0 &&
+    currentIndex < AF_VIEW_ORDER.length - 1
+  ) {
+    afSwitchView(AF_VIEW_ORDER[currentIndex + 1]);
+  }
+
+  // Right Swipe → Previous Tab
+  if (
+    diff < 0 &&
+    currentIndex > 0
+  ) {
+    afSwitchView(AF_VIEW_ORDER[currentIndex - 1]);
+  }
+}
     /* ─────────────────────────────────────────────────────────────
        SECTION 4: BANNER SLIDER
        ─────────────────────────────────────────────────────────── */
