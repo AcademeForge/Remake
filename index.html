@@ -285,17 +285,34 @@
     0 0 80px rgba(255,149,0,.20);
 }
 
-.splash-logo-ring img {
-  width: 72px;
-  height: 72px;
+.splash-logo-ring {
+  width: 88px;
+  height: 88px;
 
-  object-fit: contain;
+  overflow: hidden;
 
-  transform: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  border-radius: 16px;
+  border-radius: 24px;
+
+  box-shadow:
+    0 0 20px rgba(255,59,48,.65),
+    0 0 40px rgba(248,199,92,.45),
+    0 0 80px rgba(255,149,0,.20);
 }
 
+.splash-logo-ring img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transform: scale(2.8);
+
+  border-radius: 0;
+}
 /* Title */
 
 .splash-title {
