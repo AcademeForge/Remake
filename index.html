@@ -382,7 +382,7 @@
     0 0 12px rgba(255,59,48,.8),
     0 0 24px rgba(248,199,92,.5);
 
-  animation: splashLoad 1.1s ease forwards;
+ animation: splashLoad 1.2s cubic-bezier(.22,.61,.36,1) forwards;
 }
     /* ─── HEADER / TOPBAR ────────────────────────────────────────── */
     .af-topbar {
@@ -2197,14 +2197,14 @@
   // Mark splash as shown
   sessionStorage.setItem('afSplashShown', 'true');
 
+ setTimeout(() => {
+  splash.classList.add('hidden');
+
   setTimeout(() => {
-    splash.classList.add('hidden');
+    splash.remove();
+  }, 400);
 
-    setTimeout(() => {
-      splash.remove();
-    }, 600);
-
-  }, 1800);
+}, 1200);
 }
 
     /* ─────────────────────────────────────────────────────────────
