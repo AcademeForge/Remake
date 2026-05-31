@@ -492,27 +492,31 @@
     }
 
     /* Marquee / ticker */
-    .af-ticker {
-      background: linear-gradient(90deg, var(--af-primary), var(--af-primary-dark));
-      color: white;
-      font-size: 12px;
-      font-weight: 600;
-      overflow: hidden;
-      white-space: nowrap;
-      padding: 8px 0;
-    }
+  .af-ticker {
+  overflow: hidden;
+  white-space: nowrap;
+}
 
-    .af-ticker-track {
-      display: inline-block;
-      animation: ticker 45s linear infinite;
-    }
+.af-ticker-track {
+  display: inline-flex;
+  white-space: nowrap;
+  will-change: transform;
+  animation: ticker 90s linear infinite;
+}
 
-    .af-ticker-track span { padding: 0 40px; }
+.af-ticker-track span {
+  padding: 0 40px;
+}
 
-    @keyframes ticker {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
+@keyframes ticker {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
 
     /* Home content */
     .af-home-body {
