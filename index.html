@@ -4356,6 +4356,24 @@
 [data-theme="dark"] .af-nexus-back-btn-v2 {
   box-shadow: 0 4px 12px rgba(36,99,235,0.35);
 }
+    /* ── MY NEXUS SECTION HEAD FIX ──────────────────────── */
+#nxMyView .af-nexus-section-head-v2 {
+  display: flex;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-wrap: nowrap !important;
+}
+
+#nxMyView .af-nexus-section-head-v2 > div {
+  min-width: 0;
+}
+
+#nxMyView .af-nexus-section-head-v2 h3 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
   </style>
 </head>
 
