@@ -4308,6 +4308,33 @@
     padding: 0 10px;
   }
 }
+    .af-nexus-userbar-v2{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.af-nexus-write-post-btn-v2{
+  border:none;
+  cursor:pointer;
+  padding:10px 16px;
+  border-radius:12px;
+  font-size:13px;
+  font-weight:700;
+  background:#4f46e5;
+  color:#fff;
+  white-space:nowrap;
+  transition:.2s ease;
+}
+
+.af-nexus-write-post-btn-v2:hover{
+  transform:translateY(-1px);
+}
+
+.af-nexus-write-post-btn-v2:active{
+  transform:scale(.98);
+}
   </style>
 </head>
 
@@ -5011,13 +5038,20 @@
           </div>
         </header>
 
-        <div class="af-nexus-userbar-v2">
-          <div class="af-nexus-userbar-info-v2">
-            <span>Posting as</span>
-            <strong id="nxUserName">Student</strong>
-          </div>
-          <small>AcademeForge learner</small>
-        </div>
+       <div class="af-nexus-userbar-v2">
+  <div class="af-nexus-userbar-info-v2">
+    <span>Posting as</span>
+    <strong id="nxUserName">Student</strong>
+  </div>
+
+  <button
+    type="button"
+    class="af-nexus-write-post-btn-v2"
+    onclick="nxOpenComposer()"
+  >
+    ✍️ Write Post
+  </button>
+</div>
 
         <div class="af-nexus-controls-v2">
           <button id="nxBtnRelevant" class="af-nexus-filter-btn-v2 active" type="button" onclick="nxSetMode('relevant')">✦ Most relevant</button>
