@@ -8028,36 +8028,36 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /* ── RENDER POSTS ── */
-  function renderPosts(posts, targetId) {
-    const box = $id(targetId);
-    if (!box) return;
-    if (!posts || !posts.length) {
-      box.innerHTML = '<div class="af-nexus-empty-v2">No posts yet. Be the first to share!</div>';
-      return;
-    }
-    const myKey = studentKey();
-    box.innerHTML = posts.map(p => {
-      const isMine = String(p.student_key || '') === String(myKey || '');
-      const postPreview = esc((p.content || '').slice(0, 60)).replace(/'/g, '&#39;');
-      return `<div class="af-nexus-post-card-v2" data-post-id="${p.id}">
-        <div class="af-nexus-post-top-v2">
-          <div class="af-nexus-author-v2">
-            <div class="af-nexus-avatar-v2">${esc(initials(p.student_name))}</div>
-            <div>
-              <strong>${esc(p.student_name || 'Student')}</strong>
-              <small>${esc(timeAgo(p.created_at))}</small>
-            </div>
-          </div>
-          <button class="af-nexus-menu-btn-v2" type="button" onclick="nxOpenMenu('post',${p.id},${isMine})">⋯</button>
-        </div>
-        <p class="af-nexus-post-text-v2">${esc(p.content || '')}</p>
-        <div class="af-nexus-post-actions-v2">
-          <button class="af-nexus-action-btn-v2" type="button" onclick="nxLikePost(${p.id})">❤ ${p.likes_count || 0}</button>
-          <button class="af-nexus-action-btn-v2" type="button" onclick="nxOpenComments(${p.id},'${postPreview}')">💬 ${p.comments_count || 0} comments</button>
-        </div>
-      </div>`;
-    }).join('');
+function renderPosts(posts, targetId) {
+  const box = $id(targetId);
+  if (!box) return;
+  if (!posts || !posts.length) {
+    box.innerHTML = '<div class="af-nexus-empty-v2">No posts yet. Be the first to share!</div>';
+    return;
   }
+  const myKey = studentKey();
+  box.innerHTML = posts.map(p => {
+    const isMine = String(p.student_key || '') === String(myKey || '');
+    const postPreview = esc((p.content || '').replace(/[\n\r]/g, ' ').slice(0, 60)).replace(/'/g, '&#39;');
+    return `<div class="af-nexus-post-card-v2" data-post-id="${p.id}">
+      <div class="af-nexus-post-top-v2">
+        <div class="af-nexus-author-v2">
+          <div class="af-nexus-avatar-v2">${esc(initials(p.student_name))}</div>
+          <div>
+            <strong>${esc(p.student_name || 'Student')}</strong>
+            <small>${esc(timeAgo(p.created_at))}</small>
+          </div>
+        </div>
+        <button class="af-nexus-menu-btn-v2" type="button" onclick="nxOpenMenu('post',${p.id},${isMine})">⋯</button>
+      </div>
+      <p class="af-nexus-post-text-v2">${esc(p.content || '')}</p>
+      <div class="af-nexus-post-actions-v2">
+        <button class="af-nexus-action-btn-v2" type="button" onclick="nxLikePost(${p.id})">❤ ${p.likes_count || 0}</button>
+        <button class="af-nexus-action-btn-v2" type="button" onclick="nxOpenComments(${p.id},'${postPreview}')">💬 ${p.comments_count || 0} comments</button>
+      </div>
+    </div>`;
+  }).join('');
+}
 
   /* ── FEED MODE ── */
   function nxSetMode(mode) {
