@@ -3160,710 +3160,1093 @@
   color: #fca5a5;
 }
 /* =========================================================
-   AF NEXUS COMMUNITY V2 - PROFESSIONAL MOBILE CSS
-   Dark mode via [data-theme="dark"] (matches student module)
+   AF NEXUS COMMUNITY V2 — community.css
+   Rewritten architecture. All original class names preserved.
+   
+   Sections:
+   1. Variables
+   2. Reset / Utilities
+   3. Shell & Layout
+   4. Locked Screen
+   5. Header
+   6. User Bar
+   7. Feed Controls
+   8. Section Head
+   9. Posts
+   10. Buttons & Actions
+   11. Floating Write Button
+   12. Modals (shared)
+   13. Composer
+   14. Comments
+   15. Replies
+   16. Action Menu
+   17. Dark Mode
+   18. Responsive
 ========================================================= */
 
-#afNexusLockedV2,
-#afNexusMainV2,
-#afMyNexusViewV2,
-#afNexusComposerOverlayV2,
-#afNexusCommentsOverlayV2,
-#afNexusReplyOverlayV2,
-#afNexusMenuOverlayV2 {
-  box-sizing: border-box !important;
+/* ── 1. VARIABLES ─────────────────────────────────────── */
+:root {
+  /* Surfaces */
+  --nx-bg: #f4f6f9;
+  --nx-surface: #ffffff;
+  --nx-surface-2: #f8fafc;
+  --nx-surface-3: #f1f5f9;
+  --nx-border: rgba(0, 0, 0, 0.07);
+  --nx-border-strong: rgba(0, 0, 0, 0.12);
+
+  /* Text */
+  --nx-text: #0d1117;
+  --nx-text-2: #3d4a5c;
+  --nx-text-muted: #8393a7;
+  --nx-text-inv: #ffffff;
+
+  /* Brand */
+  --nx-blue: #2463eb;
+  --nx-blue-dark: #1a4cc5;
+  --nx-indigo: #4f46e5;
+  --nx-red: #e53e3e;
+  --nx-red-dark: #c0392b;
+
+  /* Shadows */
+  --nx-shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  --nx-shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+  --nx-shadow-lg: 0 12px 40px rgba(0,0,0,0.14);
+  --nx-shadow-modal: 0 24px 72px rgba(0,0,0,0.22), 0 4px 16px rgba(0,0,0,0.08);
+
+  /* Radii */
+  --nx-r-xs: 6px;
+  --nx-r-sm: 10px;
+  --nx-r-md: 14px;
+  --nx-r-lg: 18px;
+  --nx-r-xl: 24px;
+
+  /* Spacing */
+  --nx-gap: 12px;
+  --nx-gap-sm: 8px;
+  --nx-gap-xs: 4px;
+  --nx-pad: 16px;
+  --nx-pad-sm: 12px;
+
+  /* Transitions */
+  --nx-ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] {
+  --nx-bg: #0a0e17;
+  --nx-surface: #111827;
+  --nx-surface-2: #141d2e;
+  --nx-surface-3: #1a2540;
+  --nx-border: rgba(255,255,255,0.07);
+  --nx-border-strong: rgba(255,255,255,0.12);
+
+  --nx-text: #f0f4f8;
+  --nx-text-2: #a8b8cc;
+  --nx-text-muted: #566677;
+  --nx-text-inv: #ffffff;
+
+  --nx-shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+  --nx-shadow-md: 0 4px 16px rgba(0,0,0,0.4);
+  --nx-shadow-lg: 0 12px 40px rgba(0,0,0,0.5);
+  --nx-shadow-modal: 0 24px 72px rgba(0,0,0,0.7);
+}
+
+/* ── 2. RESET / UTILITIES ─────────────────────────────── */
+.af-nexus-v2-shell *,
+.af-nexus-v2-shell *::before,
+.af-nexus-v2-shell *::after {
+  box-sizing: border-box;
 }
 
 .af-hidden {
   display: none !important;
 }
 
-/* Main shell */
+/* ── 3. SHELL & LAYOUT ────────────────────────────────── */
 .af-nexus-v2-shell {
-  position: relative !important;
-  width: min(100%, 760px) !important;
-  margin: 0 auto !important;
-  padding: clamp(14px, 3.5vw, 22px) !important;
-  border-radius: 28px !important;
-  overflow: hidden !important;
-  background:
-    radial-gradient(circle at 0% 0%, rgba(59,130,246,0.14), transparent 32%),
-    radial-gradient(circle at 100% 0%, rgba(99,102,241,0.12), transparent 34%),
-    linear-gradient(145deg, rgba(255,255,255,0.94), rgba(248,250,252,0.9)) !important;
-  border: 1px solid rgba(226,232,240,0.9) !important;
-  box-shadow: 0 18px 48px rgba(15,23,42,0.10) !important;
-  color: #0f172a !important;
-  min-height: calc(100dvh - 130px) !important;
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 14px !important;
+  position: relative;
+  width: min(100%, 680px);
+  margin: 0 auto;
+  padding: var(--nx-pad);
+  background: var(--nx-bg);
+  border-radius: var(--nx-r-xl);
+  min-height: calc(100dvh - 120px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--nx-gap);
+  color: var(--nx-text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
 }
 
-/* Locked screen */
+.af-nexus-main-v2 {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nx-gap);
+  flex: 1;
+}
+
+/* ── 4. LOCKED SCREEN ─────────────────────────────────── */
 .af-nexus-locked-v2 {
-  width: 100% !important;
-  min-height: 360px !important;
-  display: grid !important;
-  place-items: center !important;
-  padding: 18px !important;
+  display: grid;
+  place-items: center;
+  min-height: 320px;
+  padding: var(--nx-pad);
 }
 
 .af-nexus-locked-card-v2 {
-  width: min(100%, 420px) !important;
-  border-radius: 28px !important;
-  padding: 22px !important;
-  background: linear-gradient(145deg, #fff1f2 0%, #ffffff 100%) !important;
-  border: 1px solid rgba(254, 202, 202, 0.95) !important;
-  box-shadow: 0 20px 42px rgba(127, 29, 29, 0.12) !important;
-  text-align: center !important;
+  width: min(100%, 380px);
+  background: var(--nx-surface);
+  border: 1px solid var(--nx-border-strong);
+  border-radius: var(--nx-r-xl);
+  padding: 32px 24px;
+  text-align: center;
+  box-shadow: var(--nx-shadow-md);
 }
 
 .af-nexus-lock-icon-v2 {
-  width: 64px !important;
-  height: 64px !important;
-  margin: 0 auto 14px !important;
-  display: grid !important;
-  place-items: center !important;
-  border-radius: 22px !important;
-  font-size: 28px !important;
-  background: linear-gradient(135deg, #ef4444, #991b1b) !important;
-  box-shadow: 0 16px 26px rgba(239, 68, 68, 0.22) !important;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 16px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--nx-r-lg);
+  font-size: 24px;
+  background: linear-gradient(135deg, #fee2e2, #fecaca);
+  border: 1px solid rgba(239,68,68,0.2);
+}
+
+[data-theme="dark"] .af-nexus-lock-icon-v2 {
+  background: rgba(239,68,68,0.15);
+  border-color: rgba(239,68,68,0.25);
 }
 
 .af-nexus-locked-card-v2 h2 {
-  margin: 0 0 8px !important;
-  font-size: clamp(20px, 5vw, 26px) !important;
-  font-weight: 950 !important;
-  letter-spacing: -0.04em !important;
-  color: #7f1d1d !important;
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--nx-red-dark);
+  letter-spacing: -0.02em;
+}
+
+[data-theme="dark"] .af-nexus-locked-card-v2 h2 {
+  color: #fca5a5;
 }
 
 .af-nexus-locked-card-v2 p {
-  margin: 0 auto 18px !important;
-  max-width: 320px !important;
-  font-size: 13px !important;
-  line-height: 1.55 !important;
-  font-weight: 750 !important;
-  color: #991b1b !important;
+  margin: 0 0 20px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--nx-text-2);
 }
 
 .af-nexus-login-btn-v2 {
-  width: 100% !important;
-  min-height: 48px !important;
-  border: 0 !important;
-  border-radius: 18px !important;
-  cursor: pointer !important;
-  color: #ffffff !important;
-  font-size: 14px !important;
-  font-weight: 950 !important;
-  background: linear-gradient(135deg, #dc2626, #7f1d1d) !important;
-  box-shadow: 0 14px 24px rgba(220, 38, 38, 0.22) !important;
-  -webkit-tap-highlight-color: transparent !important;
+  width: 100%;
+  min-height: 46px;
+  border: none;
+  border-radius: var(--nx-r-md);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, var(--nx-red), var(--nx-red-dark));
+  box-shadow: 0 4px 14px rgba(229,62,62,0.3);
+  transition: opacity 0.15s var(--nx-ease), transform 0.15s var(--nx-ease);
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* Header */
+.af-nexus-login-btn-v2:active {
+  opacity: 0.85;
+  transform: scale(0.98);
+}
+
+/* ── 5. HEADER ────────────────────────────────────────── */
 .af-nexus-header-v2 {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  gap: 12px !important;
-  margin-bottom: 14px !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--nx-gap);
+  padding-bottom: var(--nx-gap);
+  border-bottom: 1px solid var(--nx-border);
 }
 
 .af-nexus-title-wrap-v2 {
-  min-width: 0 !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 12px !important;
+  display: flex;
+  align-items: center;
+  gap: var(--nx-gap);
+  min-width: 0;
 }
 
 .af-nexus-logo-v2 {
-  width: 48px !important;
-  height: 48px !important;
-  min-width: 48px !important;
-  border-radius: 18px !important;
-  display: grid !important;
-  place-items: center !important;
-  font-size: 22px !important;
-  background: linear-gradient(135deg, #dbeafe, #eef2ff) !important;
-  box-shadow: inset 0 0 0 1px rgba(59,130,246,0.18), 0 12px 22px rgba(37,99,235,0.10) !important;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: var(--nx-r-md);
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  background: linear-gradient(135deg, #dbeafe, #ede9fe);
+  border: 1px solid rgba(79,70,229,0.12);
+  flex-shrink: 0;
 }
 
-.af-nexus-title-wrap-v2 h2 {
-  margin: 0 !important;
-  font-size: clamp(20px, 5vw, 28px) !important;
-  line-height: 1.05 !important;
-  font-weight: 1000 !important;
-  letter-spacing: -0.055em !important;
-  color: #0f172a !important;
+[data-theme="dark"] .af-nexus-logo-v2 {
+  background: rgba(79,70,229,0.2);
+  border-color: rgba(79,70,229,0.3);
 }
 
-.af-nexus-title-wrap-v2 p {
-  margin: 4px 0 0 !important;
-  max-width: 390px !important;
-  font-size: 11.5px !important;
-  line-height: 1.35 !important;
-  font-weight: 750 !important;
-  color: #64748b !important;
+.af-nexus-title-text-v2 h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--nx-text);
+  line-height: 1;
 }
 
-.af-nexus-my-btn-v2,
+.af-nexus-title-text-v2 p {
+  margin: 3px 0 0;
+  font-size: 12px;
+  color: var(--nx-text-muted);
+  line-height: 1;
+}
+
+.af-nexus-header-actions-v2 {
+  display: flex;
+  align-items: center;
+  gap: var(--nx-gap-sm);
+  flex-shrink: 0;
+}
+
+.af-nexus-my-btn-v2 {
+  border: none;
+  border-radius: var(--nx-r-md);
+  min-height: 38px;
+  padding: 0 14px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--nx-text-inv);
+  background: linear-gradient(135deg, var(--nx-blue), var(--nx-indigo));
+  box-shadow: 0 4px 12px rgba(36,99,235,0.22);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.15s var(--nx-ease), transform 0.15s var(--nx-ease);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.af-nexus-my-btn-v2:active {
+  opacity: 0.85;
+  transform: scale(0.97);
+}
+
 .af-nexus-refresh-btn-v2 {
-  border: 0 !important;
-  outline: none !important;
-  cursor: pointer !important;
-  border-radius: 16px !important;
-  min-height: 40px !important;
-  padding: 0 13px !important;
-  white-space: nowrap !important;
-  font-size: 12px !important;
-  font-weight: 950 !important;
-  color: #ffffff !important;
-  background: linear-gradient(135deg, #2563eb, #4f46e5) !important;
-  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.18) !important;
-  -webkit-tap-highlight-color: transparent !important;
+  border: 1px solid var(--nx-border-strong);
+  border-radius: var(--nx-r-md);
+  min-height: 38px;
+  padding: 0 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--nx-text-2);
+  background: var(--nx-surface);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s var(--nx-ease), transform 0.15s var(--nx-ease);
+  -webkit-tap-highlight-color: transparent;
 }
 
-.af-nexus-refresh-btn-v2 {
-  color: #1e293b !important;
-  background: linear-gradient(135deg, #ffffff, #f1f5f9) !important;
-  border: 1px solid rgba(226,232,240,0.95) !important;
-  box-shadow: 0 10px 20px rgba(15,23,42,0.06) !important;
+.af-nexus-refresh-btn-v2:active {
+  transform: scale(0.95) rotate(90deg);
 }
 
-/* User bar */
+/* ── 6. USER BAR ──────────────────────────────────────── */
 .af-nexus-userbar-v2 {
-  margin-bottom: 14px !important;
-  padding: 13px 14px !important;
-  border-radius: 22px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  gap: 10px !important;
-  background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(248,250,252,0.9)) !important;
-  border: 1px solid rgba(226,232,240,0.92) !important;
-  box-shadow: 0 12px 28px rgba(15,23,42,0.06) !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--nx-gap);
+  padding: 10px var(--nx-pad-sm);
+  background: var(--nx-surface);
+  border: 1px solid var(--nx-border);
+  border-radius: var(--nx-r-lg);
+  box-shadow: var(--nx-shadow-sm);
+}
+
+.af-nexus-userbar-info-v2 {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
 }
 
 .af-nexus-userbar-v2 span {
-  display: block !important;
-  margin-bottom: 3px !important;
-  font-size: 10.5px !important;
-  line-height: 1 !important;
-  font-weight: 850 !important;
-  color: #64748b !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.06em !important;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--nx-text-muted);
 }
 
 .af-nexus-userbar-v2 strong {
-  display: block !important;
-  max-width: 210px !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-  white-space: nowrap !important;
-  font-size: 14px !important;
-  line-height: 1.1 !important;
-  font-weight: 950 !important;
-  color: #0f172a !important;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--nx-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 220px;
 }
 
 .af-nexus-userbar-v2 small {
-  font-size: 11px !important;
-  font-weight: 800 !important;
-  color: #2563eb !important;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--nx-blue);
+  white-space: nowrap;
 }
 
-/* Controls */
+/* ── 7. FEED CONTROLS ─────────────────────────────────── */
 .af-nexus-controls-v2 {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
-  gap: 10px !important;
-  margin-bottom: 16px !important;
-  padding: 5px !important;
-  border-radius: 20px !important;
-  background: rgba(241,245,249,0.92) !important;
-  border: 1px solid rgba(226,232,240,0.9) !important;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 5px;
+  background: var(--nx-surface);
+  border: 1px solid var(--nx-border);
+  border-radius: var(--nx-r-lg);
 }
 
 .af-nexus-filter-btn-v2 {
-  min-height: 42px !important;
-  border: 0 !important;
-  border-radius: 16px !important;
-  cursor: pointer !important;
-  font-size: 12px !important;
-  font-weight: 950 !important;
-  color: #64748b !important;
-  background: transparent !important;
-  -webkit-tap-highlight-color: transparent !important;
+  min-height: 40px;
+  border: none;
+  border-radius: var(--nx-r-md);
+  cursor: pointer;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--nx-text-muted);
+  background: transparent;
+  transition: all 0.18s var(--nx-ease);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .af-nexus-filter-btn-v2.active {
-  color: #ffffff !important;
-  background: linear-gradient(135deg, #0f172a, #334155) !important;
-  box-shadow: 0 10px 18px rgba(15,23,42,0.16) !important;
+  color: var(--nx-text-inv);
+  background: var(--nx-text);
+  box-shadow: var(--nx-shadow-sm);
 }
 
-/* Section head */
+[data-theme="dark"] .af-nexus-filter-btn-v2.active {
+  background: var(--nx-blue);
+}
+
+/* ── 8. SECTION HEAD ──────────────────────────────────── */
 .af-nexus-section-head-v2 {
-  margin-bottom: 12px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  gap: 10px !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--nx-gap);
 }
 
 .af-nexus-section-head-v2 h3 {
-  margin: 0 !important;
-  font-size: 16px !important;
-  line-height: 1.1 !important;
-  font-weight: 950 !important;
-  color: #0f172a !important;
-  letter-spacing: -0.03em !important;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--nx-text);
 }
 
 .af-nexus-section-head-v2 p {
-  margin: 4px 0 0 !important;
-  font-size: 11.5px !important;
-  line-height: 1.3 !important;
-  font-weight: 700 !important;
-  color: #64748b !important;
+  margin: 2px 0 0;
+  font-size: 11.5px;
+  color: var(--nx-text-muted);
 }
 
-/* Posts */
+/* ── 9. POSTS ─────────────────────────────────────────── */
 .af-nexus-posts-list-v2 {
-  display: grid !important;
-  gap: 12px !important;
-  padding-bottom: 76px !important;
+  display: flex;
+  flex-direction: column;
+  gap: var(--nx-gap);
+  padding-bottom: 84px;
 }
 
 .af-nexus-loading-v2,
 .af-nexus-empty-v2 {
-  padding: 18px !important;
-  border-radius: 22px !important;
-  text-align: center !important;
-  font-size: 13px !important;
-  font-weight: 850 !important;
-  color: #64748b !important;
-  background: rgba(255,255,255,0.82) !important;
-  border: 1px dashed rgba(148,163,184,0.55) !important;
+  padding: 32px 16px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--nx-text-muted);
+  background: var(--nx-surface);
+  border: 1px dashed var(--nx-border-strong);
+  border-radius: var(--nx-r-lg);
 }
 
 .af-nexus-post-card-v2 {
-  border-radius: 24px !important;
-  padding: 14px !important;
-  background: linear-gradient(145deg, rgba(255,255,255,0.98), rgba(248,250,252,0.94)) !important;
-  border: 1px solid rgba(226,232,240,0.92) !important;
-  box-shadow: 0 14px 30px rgba(15,23,42,0.07) !important;
+  background: var(--nx-surface);
+  border: 1px solid var(--nx-border);
+  border-radius: var(--nx-r-lg);
+  padding: var(--nx-pad-sm);
+  box-shadow: var(--nx-shadow-sm);
+  transition: box-shadow 0.2s var(--nx-ease);
+}
+
+.af-nexus-post-card-v2:hover {
+  box-shadow: var(--nx-shadow-md);
 }
 
 .af-nexus-post-top-v2 {
-  display: flex !important;
-  align-items: flex-start !important;
-  justify-content: space-between !important;
-  gap: 10px !important;
-  margin-bottom: 10px !important;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--nx-gap);
+  margin-bottom: var(--nx-gap-sm);
 }
 
 .af-nexus-author-v2 {
-  min-width: 0 !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 10px !important;
+  display: flex;
+  align-items: center;
+  gap: var(--nx-gap-sm);
+  min-width: 0;
 }
 
 .af-nexus-avatar-v2 {
-  width: 38px !important;
-  height: 38px !important;
-  min-width: 38px !important;
-  border-radius: 15px !important;
-  display: grid !important;
-  place-items: center !important;
-  font-size: 15px !important;
-  font-weight: 950 !important;
-  color: #ffffff !important;
-  background: linear-gradient(135deg, #2563eb, #7c3aed) !important;
-  box-shadow: 0 10px 18px rgba(37,99,235,0.16) !important;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: var(--nx-r-sm);
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, var(--nx-blue), var(--nx-indigo));
+  flex-shrink: 0;
 }
 
 .af-nexus-author-v2 strong {
-  display: block !important;
-  max-width: 210px !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-  white-space: nowrap !important;
-  font-size: 13.5px !important;
-  line-height: 1.1 !important;
-  font-weight: 950 !important;
-  color: #0f172a !important;
+  display: block;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--nx-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 200px;
 }
 
 .af-nexus-author-v2 small {
-  display: block !important;
-  margin-top: 3px !important;
-  font-size: 10.5px !important;
-  line-height: 1.1 !important;
-  font-weight: 750 !important;
-  color: #94a3b8 !important;
+  display: block;
+  margin-top: 2px;
+  font-size: 11px;
+  color: var(--nx-text-muted);
 }
 
 .af-nexus-menu-btn-v2 {
-  width: 34px !important;
-  height: 34px !important;
-  min-width: 34px !important;
-  border: 0 !important;
-  border-radius: 13px !important;
-  cursor: pointer !important;
-  display: grid !important;
-  place-items: center !important;
-  font-size: 18px !important;
-  font-weight: 950 !important;
-  color: #475569 !important;
-  background: rgba(241,245,249,0.9) !important;
-  -webkit-tap-highlight-color: transparent !important;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border: none;
+  border-radius: var(--nx-r-sm);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  color: var(--nx-text-muted);
+  background: var(--nx-surface-3);
+  transition: background 0.15s var(--nx-ease), color 0.15s var(--nx-ease);
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.af-nexus-menu-btn-v2:hover {
+  background: var(--nx-border-strong);
+  color: var(--nx-text);
 }
 
 .af-nexus-post-text-v2 {
-  margin: 0 0 12px !important;
-  font-size: 13.5px !important;
-  line-height: 1.58 !important;
-  font-weight: 650 !important;
-  color: #1e293b !important;
-  white-space: pre-wrap !important;
-  word-break: break-word !important;
+  margin: 0 0 var(--nx-gap-sm);
+  font-size: 14px;
+  line-height: 1.65;
+  font-weight: 400;
+  color: var(--nx-text-2);
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
 .af-nexus-post-actions-v2 {
-  display: flex !important;
-  align-items: center !important;
-  gap: 8px !important;
-  padding-top: 10px !important;
-  border-top: 1px solid rgba(226,232,240,0.9) !important;
+  display: flex;
+  align-items: center;
+  gap: var(--nx-gap-sm);
+  padding-top: var(--nx-gap-sm);
+  border-top: 1px solid var(--nx-border);
 }
 
+/* ── 10. ACTION BUTTONS ───────────────────────────────── */
 .af-nexus-action-btn-v2 {
-  min-height: 36px !important;
-  border: 0 !important;
-  border-radius: 14px !important;
-  cursor: pointer !important;
-  padding: 0 12px !important;
-  font-size: 12px !important;
-  font-weight: 900 !important;
-  color: #334155 !important;
-  background: rgba(241,245,249,0.92) !important;
-  -webkit-tap-highlight-color: transparent !important;
+  min-height: 32px;
+  border: none;
+  border-radius: var(--nx-r-sm);
+  cursor: pointer;
+  padding: 0 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--nx-text-2);
+  background: var(--nx-surface-3);
+  transition: all 0.15s var(--nx-ease);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.af-nexus-action-btn-v2:hover {
+  background: var(--nx-border-strong);
 }
 
 .af-nexus-action-btn-v2.active {
-  color: #ffffff !important;
-  background: linear-gradient(135deg, #ef4444, #be123c) !important;
-  box-shadow: 0 10px 18px rgba(244,63,94,0.16) !important;
+  color: #fff;
+  background: linear-gradient(135deg, #ef4444, #be123c);
 }
 
-/* Floating write button */
+/* ── 11. FLOATING WRITE BUTTON ────────────────────────── */
 .af-nexus-write-btn-v2 {
-  position: fixed !important;
-  z-index: 9999 !important;
-  width: 58px !important;
-  height: 58px !important;
-  border: 0 !important;
-  border-radius: 22px !important;
-  cursor: pointer !important;
-  display: grid !important;
-  place-items: center !important;
-  font-size: 24px !important;
-  color: #ffffff !important;
-  background: linear-gradient(135deg, #2563eb, #4f46e5) !important;
-  box-shadow: 0 18px 34px rgba(37,99,235,0.30) !important;
-  -webkit-tap-highlight-color: transparent !important;
-  right: max(16px, env(safe-area-inset-right)) !important;
-  bottom: calc(86px + env(safe-area-inset-bottom)) !important;
+  position: fixed;
+  z-index: 9999;
+  width: 56px;
+  height: 56px;
+  border: none;
+  border-radius: var(--nx-r-lg);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--nx-blue), var(--nx-indigo));
+  box-shadow: 0 8px 28px rgba(36,99,235,0.36);
+  right: max(16px, env(safe-area-inset-right));
+  bottom: calc(80px + env(safe-area-inset-bottom));
+  transition: transform 0.18s var(--nx-ease), box-shadow 0.18s var(--nx-ease);
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* Modals */
+.af-nexus-write-btn-v2:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 36px rgba(36,99,235,0.42);
+}
+
+.af-nexus-write-btn-v2:active {
+  transform: scale(0.94);
+}
+
+@media (min-width: 768px) {
+  .af-nexus-write-btn-v2 {
+    right: max(20px, calc((100vw - 680px) / 2 - 76px));
+    bottom: 80px;
+  }
+}
+
+/* ── 12. MODALS (SHARED) ──────────────────────────────── */
 .af-nexus-modal-overlay-v2,
 .af-nexus-menu-overlay-v2 {
-  position: fixed !important;
-  inset: 0 !important;
-  z-index: 10000 !important;
-  display: grid !important;
-  place-items: end center !important;
-  padding: 14px !important;
-  background: rgba(15,23,42,0.44) !important;
-  backdrop-filter: blur(10px) !important;
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(10, 14, 23, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Override: pin modals to bottom on small screens */
+@media (max-width: 600px) {
+  .af-nexus-modal-overlay-v2 {
+    place-items: end center;
+    padding: 0;
+  }
 }
 
 .af-nexus-composer-card-v2,
 .af-nexus-comments-card-v2,
 .af-nexus-reply-card-v2 {
-  width: min(100%, 720px) !important;
-  max-height: min(88dvh, 760px) !important;
-  overflow: auto !important;
-  border-radius: 28px !important;
-  padding: 16px !important;
-  background: linear-gradient(145deg, #ffffff, #f8fafc) !important;
-  border: 1px solid rgba(226,232,240,0.95) !important;
-  box-shadow: 0 24px 70px rgba(15,23,42,0.26) !important;
+  width: min(100%, 600px);
+  max-height: min(88dvh, 720px);
+  overflow: hidden;
+  border-radius: var(--nx-r-xl);
+  background: var(--nx-surface);
+  border: 1px solid var(--nx-border-strong);
+  box-shadow: var(--nx-shadow-modal);
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 600px) {
+  .af-nexus-composer-card-v2,
+  .af-nexus-comments-card-v2,
+  .af-nexus-reply-card-v2 {
+    width: 100%;
+    border-radius: var(--nx-r-xl) var(--nx-r-xl) 0 0;
+    max-height: 90dvh;
+  }
 }
 
 .af-nexus-modal-head-v2 {
-  display: flex !important;
-  align-items: flex-start !important;
-  justify-content: space-between !important;
-  gap: 12px !important;
-  margin-bottom: 12px !important;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--nx-gap);
+  padding: var(--nx-pad);
+  border-bottom: 1px solid var(--nx-border);
+  flex-shrink: 0;
 }
 
 .af-nexus-modal-head-v2 h3 {
-  margin: 0 !important;
-  font-size: 17px !important;
-  line-height: 1.1 !important;
-  font-weight: 950 !important;
-  color: #0f172a !important;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--nx-text);
 }
 
 .af-nexus-modal-head-v2 p {
-  margin: 4px 0 0 !important;
-  font-size: 11.5px !important;
-  font-weight: 750 !important;
-  color: #64748b !important;
+  margin: 3px 0 0;
+  font-size: 12px;
+  color: var(--nx-text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 400px;
 }
 
-.af-nexus-modal-head-v2 button {
-  width: 36px !important;
-  height: 36px !important;
-  border: 0 !important;
-  border-radius: 14px !important;
-  cursor: pointer !important;
-  font-size: 22px !important;
-  font-weight: 900 !important;
-  color: #475569 !important;
-  background: #f1f5f9 !important;
+.af-nexus-modal-close-v2 {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: var(--nx-r-sm);
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+  color: var(--nx-text-muted);
+  background: var(--nx-surface-3);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  transition: background 0.15s var(--nx-ease), color 0.15s var(--nx-ease);
+  -webkit-tap-highlight-color: transparent;
 }
 
+.af-nexus-modal-close-v2:hover {
+  background: var(--nx-border-strong);
+  color: var(--nx-text);
+}
+
+/* Shared textarea */
 #afNexusPostInputV2,
 #afNexusCommentInputV2,
 #afNexusReplyInputV2 {
-  width: 100% !important;
-  resize: none !important;
-  outline: none !important;
-  border-radius: 20px !important;
-  padding: 14px !important;
-  font-size: 14px !important;
-  line-height: 1.55 !important;
-  font-weight: 650 !important;
-  color: #0f172a !important;
-  background: #ffffff !important;
-  border: 1px solid rgba(203,213,225,0.95) !important;
-  box-shadow: inset 0 1px 0 rgba(15,23,42,0.03) !important;
+  display: block;
+  width: 100%;
+  resize: none;
+  outline: none;
+  border-radius: var(--nx-r-md);
+  padding: 12px;
+  font-size: 14px;
+  line-height: 1.6;
+  font-weight: 400;
+  color: var(--nx-text);
+  background: var(--nx-surface-2);
+  border: 1px solid var(--nx-border-strong);
+  font-family: inherit;
+  transition: border-color 0.15s var(--nx-ease), background 0.15s var(--nx-ease);
+}
+
+#afNexusPostInputV2:focus,
+#afNexusCommentInputV2:focus,
+#afNexusReplyInputV2:focus {
+  border-color: var(--nx-blue);
+  background: var(--nx-surface);
 }
 
 #afNexusPostInputV2.af-limit-exceeded-v2,
 #afNexusCommentInputV2.af-limit-exceeded-v2,
 #afNexusReplyInputV2.af-limit-exceeded-v2 {
-  color: #dc2626 !important;
-  border-color: rgba(239,68,68,0.8) !important;
-  background: #fff1f2 !important;
+  border-color: var(--nx-red);
+  background: #fff5f5;
+  color: var(--nx-red-dark);
 }
 
+[data-theme="dark"] #afNexusPostInputV2.af-limit-exceeded-v2,
+[data-theme="dark"] #afNexusCommentInputV2.af-limit-exceeded-v2,
+[data-theme="dark"] #afNexusReplyInputV2.af-limit-exceeded-v2 {
+  background: rgba(229,62,62,0.1);
+}
+
+.af-nexus-word-warning-v2 {
+  margin: 8px 0 0;
+  padding: 8px 12px;
+  border-radius: var(--nx-r-sm);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--nx-red-dark);
+  background: #fff5f5;
+  border: 1px solid rgba(229,62,62,0.2);
+}
+
+[data-theme="dark"] .af-nexus-word-warning-v2 {
+  background: rgba(229,62,62,0.12);
+  color: #fca5a5;
+  border-color: rgba(229,62,62,0.25);
+}
+
+/* Submit / word count shared footer */
 .af-nexus-composer-foot-v2,
 .af-nexus-comment-input-foot-v2 {
-  margin-top: 10px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  gap: 10px !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--nx-gap);
+  margin-top: var(--nx-gap-sm);
 }
 
 .af-nexus-composer-foot-v2 span,
 .af-nexus-comment-input-foot-v2 span {
-  font-size: 11.5px !important;
-  font-weight: 850 !important;
-  color: #64748b !important;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--nx-text-muted);
 }
 
 .af-nexus-composer-foot-v2 button,
 .af-nexus-comment-input-foot-v2 button {
-  min-height: 42px !important;
-  border: 0 !important;
-  border-radius: 16px !important;
-  cursor: pointer !important;
-  padding: 0 18px !important;
-  font-size: 13px !important;
-  font-weight: 950 !important;
-  color: #ffffff !important;
-  background: linear-gradient(135deg, #2563eb, #4f46e5) !important;
-  box-shadow: 0 12px 24px rgba(37,99,235,0.18) !important;
+  min-height: 40px;
+  border: none;
+  border-radius: var(--nx-r-md);
+  cursor: pointer;
+  padding: 0 18px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, var(--nx-blue), var(--nx-indigo));
+  box-shadow: 0 4px 14px rgba(36,99,235,0.22);
+  transition: opacity 0.15s var(--nx-ease), transform 0.15s var(--nx-ease);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.af-nexus-composer-foot-v2 button:hover,
+.af-nexus-comment-input-foot-v2 button:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.af-nexus-composer-foot-v2 button:active,
+.af-nexus-comment-input-foot-v2 button:active {
+  transform: scale(0.97);
 }
 
 .af-nexus-composer-foot-v2 button:disabled,
 .af-nexus-comment-input-foot-v2 button:disabled {
-  opacity: 0.45 !important;
-  cursor: not-allowed !important;
-  box-shadow: none !important;
+  opacity: 0.38;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
 
-.af-nexus-word-warning-v2 {
-  margin: 10px 0 0 !important;
-  padding: 10px 12px !important;
-  border-radius: 14px !important;
-  font-size: 11.5px !important;
-  font-weight: 850 !important;
-  color: #991b1b !important;
-  background: #fee2e2 !important;
-  border: 1px solid rgba(248,113,113,0.55) !important;
+/* ── 13. COMPOSER ─────────────────────────────────────── */
+.af-nexus-composer-card-v2 {
+  padding: 0;
 }
 
-/* Comments */
+.af-nexus-composer-card-v2 .af-nexus-modal-head-v2 ~ * {
+  padding: var(--nx-pad);
+}
+
+.af-nexus-composer-card-v2 > *:not(.af-nexus-modal-head-v2) {
+  padding-left: var(--nx-pad);
+  padding-right: var(--nx-pad);
+}
+
+.af-nexus-composer-card-v2 > *:last-child {
+  padding-bottom: var(--nx-pad);
+}
+
+.af-nexus-composer-card-v2 #afNexusPostInputV2 {
+  margin-top: var(--nx-pad);
+}
+
+/* ── 14. COMMENTS ─────────────────────────────────────── */
+.af-nexus-comments-card-v2 {
+  padding: 0;
+}
+
 .af-nexus-comments-list-v2 {
-  display: grid !important;
-  gap: 10px !important;
-  max-height: 48dvh !important;
-  overflow: auto !important;
-  padding: 2px 2px 12px !important;
-}
-
-.af-nexus-comment-card-v2 {
-  border-radius: 20px !important;
-  padding: 12px !important;
-  background: rgba(248,250,252,0.96) !important;
-  border: 1px solid rgba(226,232,240,0.9) !important;
-}
-
-.af-nexus-comment-card-v2.reply {
-  margin-left: 0 !important;
-  border-left: none !important;
-}
-
-.af-nexus-comment-top-v2 {
-  display: flex !important;
-  justify-content: space-between !important;
-  gap: 8px !important;
-  margin-bottom: 7px !important;
-}
-
-.af-nexus-comment-top-v2 strong {
-  font-size: 12.5px !important;
-  font-weight: 950 !important;
-  color: #0f172a !important;
-}
-
-.af-nexus-comment-top-v2 small {
-  display: block !important;
-  margin-top: 2px !important;
-  font-size: 10px !important;
-  font-weight: 750 !important;
-  color: #94a3b8 !important;
-}
-
-.af-nexus-comment-text-v2 {
-  margin: 0 0 8px !important;
-  font-size: 12.5px !important;
-  line-height: 1.5 !important;
-  font-weight: 650 !important;
-  color: #334155 !important;
-  white-space: pre-wrap !important;
-  word-break: break-word !important;
-}
-
-.af-nexus-comment-actions-v2 {
-  display: flex !important;
-  gap: 8px !important;
-  align-items: center !important;
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--nx-pad-sm) var(--nx-pad);
+  display: flex;
+  flex-direction: column;
+  gap: var(--nx-gap-sm);
+  min-height: 80px;
+  max-height: 52dvh;
 }
 
 .af-nexus-comment-input-box-v2 {
-  margin-top: 12px !important;
-  padding-top: 12px !important;
-  border-top: 1px solid rgba(226,232,240,0.95) !important;
+  padding: var(--nx-pad-sm) var(--nx-pad) var(--nx-pad);
+  border-top: 1px solid var(--nx-border);
+  flex-shrink: 0;
 }
 
-/* Bottom action menu */
+.af-nexus-comment-card-v2 {
+  background: var(--nx-surface);
+  border: 1px solid var(--nx-border);
+  border-radius: var(--nx-r-md);
+  padding: var(--nx-pad-sm);
+}
+
+.af-nexus-comment-top-v2 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--nx-gap-sm);
+  margin-bottom: 6px;
+}
+
+.af-nexus-comment-info-v2 {
+  flex: 1;
+  min-width: 0;
+}
+
+.af-nexus-comment-info-v2 strong {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--nx-text);
+}
+
+.af-nexus-comment-info-v2 small {
+  margin-left: 6px;
+  font-size: 11px;
+  color: var(--nx-text-muted);
+}
+
+.af-nexus-comment-text-v2 {
+  margin: 0 0 8px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--nx-text-2);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.af-nexus-comment-actions-v2 {
+  display: flex;
+  align-items: center;
+  gap: var(--nx-gap-sm);
+}
+
+.af-nexus-comment-actions-v2 .af-nexus-action-btn-v2 {
+  min-height: 28px;
+  padding: 0 8px;
+  font-size: 11.5px;
+  background: transparent;
+  color: var(--nx-text-muted);
+  border: 1px solid var(--nx-border);
+}
+
+.af-nexus-comment-actions-v2 .af-nexus-action-btn-v2:hover {
+  background: var(--nx-surface-3);
+  color: var(--nx-text-2);
+}
+
+/* ── 15. REPLIES ──────────────────────────────────────── */
+.af-nexus-view-replies-v2 {
+  margin-top: 8px;
+  border: none;
+  background: none;
+  padding: 4px 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--nx-blue);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.af-nexus-view-replies-v2:hover {
+  opacity: 0.8;
+}
+
+.af-nexus-replies-wrap-v2 {
+  margin-top: var(--nx-gap-sm);
+  margin-left: 12px;
+  padding-left: 12px;
+  border-left: 2px solid var(--nx-border-strong);
+  display: flex;
+  flex-direction: column;
+  gap: var(--nx-gap-xs);
+}
+
+.af-nexus-reply-row-v2 {
+  padding: 8px 0;
+}
+
+.af-nexus-reply-row-v2 + .af-nexus-reply-row-v2 {
+  border-top: 1px solid var(--nx-border);
+}
+
+/* Reply card inherits comment card styles */
+.af-nexus-reply-card-v2 {
+  padding: 0;
+}
+
+.af-nexus-reply-card-v2 > *:not(.af-nexus-modal-head-v2) {
+  padding-left: var(--nx-pad);
+  padding-right: var(--nx-pad);
+}
+
+.af-nexus-reply-card-v2 > *:last-child {
+  padding-bottom: var(--nx-pad);
+}
+
+.af-nexus-reply-card-v2 #afNexusReplyInputV2 {
+  margin-top: var(--nx-pad);
+}
+
+/* ── 16. ACTION MENU ──────────────────────────────────── */
+.af-nexus-menu-overlay-v2 {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  display: grid;
+  place-items: end center;
+  padding: 16px;
+  background: rgba(10, 14, 23, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
 .af-nexus-menu-card-v2 {
-  width: min(100%, 420px) !important;
-  border-radius: 24px !important;
-  padding: 10px !important;
-  background: #ffffff !important;
-  border: 1px solid rgba(226,232,240,0.95) !important;
-  box-shadow: 0 24px 70px rgba(15,23,42,0.24) !important;
+  width: min(100%, 400px);
+  background: var(--nx-surface);
+  border: 1px solid var(--nx-border-strong);
+  border-radius: var(--nx-r-xl);
+  padding: 8px;
+  box-shadow: var(--nx-shadow-modal);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.af-nexus-menu-label-v2 {
+  padding: 8px 12px 6px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--nx-text-muted);
 }
 
 .af-nexus-menu-card-v2 button {
-  width: 100% !important;
-  min-height: 48px !important;
-  border: 0 !important;
-  border-radius: 16px !important;
-  cursor: pointer !important;
-  margin: 4px 0 !important;
-  font-size: 14px !important;
-  font-weight: 900 !important;
-  color: #0f172a !important;
-  background: #f8fafc !important;
+  width: 100%;
+  min-height: 46px;
+  border: none;
+  border-radius: var(--nx-r-md);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--nx-text-2);
+  background: var(--nx-surface-3);
+  transition: background 0.15s var(--nx-ease), color 0.15s var(--nx-ease);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.af-nexus-menu-card-v2 button:hover {
+  background: var(--nx-border-strong);
 }
 
 #afNexusDeleteActionBtnV2 {
-  color: #991b1b !important;
-  background: #fee2e2 !important;
+  color: var(--nx-red-dark);
+  background: #fff5f5;
 }
 
-/* Mobile tightening */
-@media (max-width: 430px) {
-  .af-nexus-v2-shell {
-    width: 100% !important;
-    padding: 13px !important;
-    border-radius: 24px !important;
-  }
-
-  .af-nexus-header-v2 { align-items: flex-start !important; }
-
-  .af-nexus-logo-v2 {
-    width: 44px !important;
-    height: 44px !important;
-    min-width: 44px !important;
-    border-radius: 16px !important;
-  }
-
-  .af-nexus-title-wrap-v2 p { max-width: 210px !important; }
-
-  .af-nexus-my-btn-v2 {
-    min-height: 38px !important;
-    padding: 0 11px !important;
-    font-size: 11.5px !important;
-  }
-
-  .af-nexus-userbar-v2 {
-    align-items: flex-start !important;
-    flex-direction: column !important;
-  }
-
-  .af-nexus-section-head-v2 { align-items: flex-start !important; }
-
-  .af-nexus-author-v2 strong { max-width: 185px !important; }
-
-  .af-nexus-write-btn-v2 {
-    width: 56px !important;
-    height: 56px !important;
-    border-radius: 21px !important;
-    bottom: calc(82px + env(safe-area-inset-bottom)) !important;
-  }
+[data-theme="dark"] #afNexusDeleteActionBtnV2 {
+  color: #fca5a5;
+  background: rgba(229,62,62,0.1);
 }
 
-/* Write button desktop position */
-@media (min-width: 768px) {
-  .af-nexus-write-btn-v2 {
-    right: max(18px, calc((100vw - 430px) / 2 + 18px)) !important;
-    bottom: 86px !important;
-  }
+#afNexusDeleteActionBtnV2:hover {
+  background: #fee2e2;
 }
 
-/* Overlay visibility forcing */
+[data-theme="dark"] #afNexusDeleteActionBtnV2:hover {
+  background: rgba(229,62,62,0.18);
+}
+
+/* ── 17. DARK MODE ────────────────────────────────────── */
+[data-theme="dark"] .af-nexus-v2-shell {
+  background: var(--nx-bg);
+  color: var(--nx-text);
+}
+
+[data-theme="dark"] .af-nexus-post-card-v2,
+[data-theme="dark"] .af-nexus-userbar-v2,
+[data-theme="dark"] .af-nexus-controls-v2 {
+  background: var(--nx-surface);
+  border-color: var(--nx-border);
+}
+
+[data-theme="dark"] .af-nexus-comment-card-v2 {
+  background: var(--nx-surface-2);
+  border-color: var(--nx-border);
+}
+
+[data-theme="dark"] .af-nexus-menu-btn-v2 {
+  background: var(--nx-surface-3);
+  color: var(--nx-text-muted);
+}
+
+[data-theme="dark"] .af-nexus-action-btn-v2 {
+  background: var(--nx-surface-3);
+  color: var(--nx-text-2);
+}
+
+[data-theme="dark"] .af-nexus-filter-btn-v2 {
+  color: var(--nx-text-muted);
+}
+
+[data-theme="dark"] .af-nexus-loading-v2,
+[data-theme="dark"] .af-nexus-empty-v2 {
+  background: var(--nx-surface);
+  border-color: var(--nx-border-strong);
+  color: var(--nx-text-muted);
+}
+
+[data-theme="dark"] #afNexusPostInputV2,
+[data-theme="dark"] #afNexusCommentInputV2,
+[data-theme="dark"] #afNexusReplyInputV2 {
+  background: var(--nx-surface-2);
+  border-color: var(--nx-border-strong);
+  color: var(--nx-text);
+}
+
+[data-theme="dark"] .af-nexus-composer-card-v2,
+[data-theme="dark"] .af-nexus-comments-card-v2,
+[data-theme="dark"] .af-nexus-reply-card-v2,
+[data-theme="dark"] .af-nexus-menu-card-v2 {
+  background: var(--nx-surface);
+  border-color: var(--nx-border-strong);
+}
+
+[data-theme="dark"] .af-nexus-refresh-btn-v2 {
+  background: var(--nx-surface-2);
+  border-color: var(--nx-border-strong);
+  color: var(--nx-text-2);
+}
+
+[data-theme="dark"] .af-nexus-modal-close-v2 {
+  background: var(--nx-surface-3);
+  color: var(--nx-text-muted);
+}
+
+/* ── 18. OVERLAY FORCED VISIBILITY ───────────────────── */
 #afNexusComposerOverlayV2.af-hidden,
 #afNexusCommentsOverlayV2.af-hidden,
 #afNexusReplyOverlayV2.af-hidden,
 #afNexusMenuOverlayV2.af-hidden {
   display: none !important;
-  opacity: 0 !important;
-  visibility: hidden !important;
   pointer-events: none !important;
 }
 
@@ -3872,12 +4255,9 @@
 #afNexusReplyOverlayV2:not(.af-hidden),
 #afNexusMenuOverlayV2:not(.af-hidden) {
   display: grid !important;
-  opacity: 1 !important;
-  visibility: visible !important;
   pointer-events: auto !important;
 }
 
-/* Lock space fix */
 #afNexusLockedV2.af-hidden {
   display: none !important;
   height: 0 !important;
@@ -3891,244 +4271,42 @@
   pointer-events: none !important;
 }
 
-#afNexusMainV2 {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
+/* ── 19. RESPONSIVE ───────────────────────────────────── */
+@media (max-width: 430px) {
+  .af-nexus-v2-shell {
+    padding: var(--nx-pad-sm);
+    border-radius: var(--nx-r-lg);
+  }
+
+  .af-nexus-title-text-v2 p {
+    display: none;
+  }
+
+  .af-nexus-author-v2 strong {
+    max-width: 160px;
+  }
+
+  .af-nexus-userbar-v2 {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .af-nexus-section-head-v2 {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .af-nexus-section-head-v2 .af-nexus-refresh-btn-v2 {
+    align-self: flex-start;
+  }
 }
 
-    /* =========================================================
-   AF NEXUS COMMENTS FINAL
-========================================================= */
-
-.af-nexus-comments-list-v2{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-  max-height:65vh;
-  overflow-y:auto;
-  padding:4px;
-}
-
-.af-nexus-comment-card-v2{
-  padding:12px;
-  border-radius:14px;
-  border:1px solid rgba(148,163,184,.15);
-  background:#ffffff;
-}
-
-.af-nexus-comment-top-v2{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:8px;
-}
-
-.af-nexus-comment-info-v2{
-  flex:1;
-  min-width:0;
-}
-
-.af-nexus-comment-info-v2 strong{
-  font-size:13px;
-  font-weight:700;
-  color:#0f172a;
-}
-
-.af-nexus-comment-info-v2 small{
-  margin-left:6px;
-  font-size:11px;
-  color:#64748b;
-}
-
-.af-nexus-comment-text-v2{
-  margin:8px 0;
-  font-size:12px;
-  line-height:1.5;
-  color:#334155;
-  word-break:break-word;
-  white-space:pre-wrap;
-}
-
-.af-nexus-comment-actions-v2{
-  display:flex;
-  gap:14px;
-  align-items:center;
-}
-
-.af-nexus-comment-actions-v2 .af-nexus-action-btn-v2{
-  min-height:auto;
-  padding:0;
-  border:none;
-  background:none;
-  font-size:11px;
-  font-weight:700;
-  color:#64748b;
-}
-
-.af-nexus-view-replies-v2{
-  margin-top:6px;
-  border:none;
-  background:none;
-  padding:0;
-  font-size:11px;
-  font-weight:700;
-  color:#64748b;
-  cursor:pointer;
-}
-
-.af-nexus-replies-wrap-v2{
-  margin-top:8px;
-  margin-left:14px;
-  padding-left:12px;
-  border-left:2px solid rgba(148,163,184,.18);
-}
-
-.af-nexus-reply-row-v2{
-  padding:8px 0;
-}
-
-.af-nexus-reply-row-v2 + .af-nexus-reply-row-v2{
-  border-top:1px solid rgba(148,163,184,.12);
-}
-
-.af-nexus-menu-btn-v2{
-  width:30px;
-  height:30px;
-  min-width:30px;
-  border-radius:10px;
-}
-
-/* DARK */
-
-[data-theme="dark"] .af-nexus-comment-card-v2{
-  background:rgba(15,23,42,.75);
-  border-color:rgba(148,163,184,.18);
-}
-
-[data-theme="dark"] .af-nexus-comment-info-v2 strong{
-  color:#f8fafc;
-}
-
-[data-theme="dark"] .af-nexus-comment-info-v2 small{
-  color:#94a3b8;
-}
-
-[data-theme="dark"] .af-nexus-comment-text-v2{
-  color:#e2e8f0;
-}
-
-[data-theme="dark"] .af-nexus-comment-actions-v2 .af-nexus-action-btn-v2,
-[data-theme="dark"] .af-nexus-view-replies-v2{
-  color:#94a3b8;
-}
-/* =========================================================
-   DARK MODE — [data-theme="dark"] (matches student module)
-========================================================= */
-
-[data-theme="dark"] .af-nexus-v2-shell {
-  background:
-    radial-gradient(circle at 0% 0%, rgba(59,130,246,0.18), transparent 32%),
-    radial-gradient(circle at 100% 0%, rgba(99,102,241,0.14), transparent 34%),
-    linear-gradient(145deg, rgba(15,23,42,0.94), rgba(2,6,23,0.92)) !important;
-  border-color: rgba(148,163,184,0.18) !important;
-  color: #f8fafc !important;
-}
-
-[data-theme="dark"] .af-nexus-title-wrap-v2 h2,
-[data-theme="dark"] .af-nexus-section-head-v2 h3,
-[data-theme="dark"] .af-nexus-userbar-v2 strong,
-[data-theme="dark"] .af-nexus-author-v2 strong,
-[data-theme="dark"] .af-nexus-modal-head-v2 h3,
-[data-theme="dark"] .af-nexus-comment-top-v2 strong,
-[data-theme="dark"] .af-nexus-menu-card-v2 button {
-  color: #f8fafc !important;
-}
-
-[data-theme="dark"] .af-nexus-title-wrap-v2 p,
-[data-theme="dark"] .af-nexus-section-head-v2 p,
-[data-theme="dark"] .af-nexus-userbar-v2 span,
-[data-theme="dark"] .af-nexus-modal-head-v2 p,
-[data-theme="dark"] .af-nexus-composer-foot-v2 span,
-[data-theme="dark"] .af-nexus-comment-input-foot-v2 span,
-[data-theme="dark"] .af-nexus-author-v2 small,
-[data-theme="dark"] .af-nexus-comment-top-v2 small {
-  color: #94a3b8 !important;
-}
-
-[data-theme="dark"] .af-nexus-userbar-v2,
-[data-theme="dark"] .af-nexus-post-card-v2,
-[data-theme="dark"] .af-nexus-composer-card-v2,
-[data-theme="dark"] .af-nexus-comments-card-v2,
-[data-theme="dark"] .af-nexus-reply-card-v2,
-[data-theme="dark"] .af-nexus-menu-card-v2 {
-  background: linear-gradient(145deg, rgba(15,23,42,0.98), rgba(30,41,59,0.94)) !important;
-  border-color: rgba(148,163,184,0.18) !important;
-}
-
-[data-theme="dark"] .af-nexus-controls-v2,
-[data-theme="dark"] .af-nexus-menu-btn-v2,
-[data-theme="dark"] .af-nexus-modal-head-v2 button,
-[data-theme="dark"] .af-nexus-action-btn-v2,
-[data-theme="dark"] .af-nexus-menu-card-v2 button {
-  background: rgba(30,41,59,0.92) !important;
-  color: #cbd5e1 !important;
-}
-
-[data-theme="dark"] .af-nexus-filter-btn-v2 { color: #94a3b8 !important; }
-
-[data-theme="dark"] .af-nexus-filter-btn-v2.active {
-  color: #ffffff !important;
-  background: linear-gradient(135deg, #1e293b, #475569) !important;
-}
-
-[data-theme="dark"] .af-nexus-refresh-btn-v2 {
-  background: linear-gradient(135deg, rgba(30,41,59,0.96), rgba(15,23,42,0.94)) !important;
-  color: #e2e8f0 !important;
-  border-color: rgba(148,163,184,0.2) !important;
-}
-
-[data-theme="dark"] .af-nexus-post-text-v2,
-[data-theme="dark"] .af-nexus-comment-text-v2 {
-  color: #e2e8f0 !important;
-}
-
-[data-theme="dark"] #afNexusPostInputV2,
-[data-theme="dark"] #afNexusCommentInputV2,
-[data-theme="dark"] #afNexusReplyInputV2 {
-  background: rgba(15,23,42,0.96) !important;
-  color: #f8fafc !important;
-  border-color: rgba(148,163,184,0.22) !important;
-}
-
-[data-theme="dark"] .af-nexus-comment-card-v2 {
-  background: rgba(30,41,59,0.78) !important;
-  border-color: rgba(148,163,184,0.16) !important;
-}
-
-[data-theme="dark"] .af-nexus-loading-v2,
-[data-theme="dark"] .af-nexus-empty-v2 {
-  background: rgba(15,23,42,0.7) !important;
-  border-color: rgba(148,163,184,0.24) !important;
-  color: #94a3b8 !important;
-}
-
-[data-theme="dark"] .af-nexus-locked-card-v2 {
-  background: linear-gradient(145deg, rgba(127,29,29,0.25), rgba(15,23,42,0.95)) !important;
-  border-color: rgba(239,68,68,0.30) !important;
-}
-
-[data-theme="dark"] .af-nexus-locked-card-v2 h2 { color: #fecaca !important; }
-[data-theme="dark"] .af-nexus-locked-card-v2 p { color: #fca5a5 !important; }
-
-[data-theme="dark"] #afNexusDeleteActionBtnV2 {
-  color: #fca5a5 !important;
-  background: rgba(239,68,68,0.18) !important;
-}
-
-[data-theme="dark"] .af-nexus-word-warning-v2 {
-  color: #fca5a5 !important;
-  background: rgba(239,68,68,0.16) !important;
-  border-color: rgba(239,68,68,0.30) !important;
+@media (max-width: 360px) {
+  .af-nexus-my-btn-v2 {
+    font-size: 11px;
+    padding: 0 10px;
+  }
 }
   </style>
 </head>
@@ -4798,323 +4976,190 @@
     </div>
   </section>
 </div>
-      
       <!-- ══════════════════════════════════════════════════════
-           VIEW: COMMUNITY (placeholder — navigates to community page)
-           ══════════════════════════════════════════════════════ -->
-      <div class="af-view" id="viewCommunity" aria-label="Community">
-         <!-- ==============================
-     AF NEXUS COMMUNITY V2
-================================ -->
-<section id="community" class="section">
-  <div class="af-nexus-v2-shell glass">
+     AF NEXUS COMMUNITY V2 — community.html
+     Preserved: all IDs, classes, event handlers, data attrs
+══════════════════════════════════════════════════════ -->
+<div class="af-view" id="viewCommunity" aria-label="Community">
+  <section id="community" class="section">
+    <div class="af-nexus-v2-shell">
 
-    <!-- LOCKED SCREEN -->
-    <div id="afNexusLockedV2" class="af-nexus-locked-v2 af-hidden">
-      <div class="af-nexus-locked-card-v2">
-        <div class="af-nexus-lock-icon-v2">🔒</div>
-
-        <div>
+      <!-- ── LOCKED SCREEN ─────────────────────────────── -->
+      <div id="afNexusLockedV2" class="af-nexus-locked-v2 af-hidden">
+        <div class="af-nexus-locked-card-v2">
+          <div class="af-nexus-lock-icon-v2">🔒</div>
           <h2>Community Locked</h2>
-          <p>
-            Oops, you have not logged in yet. Login to access Community tab
-            and interact with fellow learners.
-          </p>
-        </div>
-
-        <button
-          class="af-nexus-login-btn-v2"
-          type="button"
-          onclick="showSection('studentaf')"
-        >
-          Login to Continue
-        </button>
-      </div>
-    </div>
-
-    <!-- MAIN COMMUNITY AREA -->
-    <div id="afNexusMainV2" class="af-nexus-main-v2">
-
-      <!-- TOP HEADER -->
-      <div class="af-nexus-header-v2">
-        <div class="af-nexus-title-wrap-v2">
-          <div class="af-nexus-logo-v2">💬</div>
-
-          <div>
-            <h2>AF Nexus</h2>
-            <p>Connect, discuss & grow with fellow learners.</p>
-          </div>
-        </div>
-
-        <button
-          id="afNexusMyBtnV2"
-          class="af-nexus-my-btn-v2"
-          type="button"
-          onclick="openAfMyNexusV2()"
-        >
-          My Nexus Posts
-        </button>
-      </div>
-
-      <!-- USER MINI BAR -->
-      <div class="af-nexus-userbar-v2">
-        <div>
-          <span>Posting as</span>
-          <strong id="afNexusStudentNameV2">Student</strong>
-        </div>
-
-        <small id="afNexusStudentMetaV2">Community member</small>
-      </div>
-
-      <!-- FEED CONTROLS -->
-      <div class="af-nexus-controls-v2">
-        <button
-          id="afNexusRelevantBtnV2"
-          class="af-nexus-filter-btn-v2 active"
-          type="button"
-          onclick="setAfNexusFeedModeV2('relevant')"
-        >
-          Most Relevant
-        </button>
-
-        <button
-          id="afNexusRecentBtnV2"
-          class="af-nexus-filter-btn-v2"
-          type="button"
-          onclick="setAfNexusFeedModeV2('recent')"
-        >
-          Recent Post
-        </button>
-      </div>
-
-      <!-- FEED AREA -->
-      <div id="afNexusFeedViewV2" class="af-nexus-feed-view-v2">
-        <div class="af-nexus-section-head-v2">
-          <div>
-            <h3>Community Posts</h3>
-            <p>Latest discussions from AcademeForge learners.</p>
-          </div>
-
-          <button
-            class="af-nexus-refresh-btn-v2"
-            type="button"
-            onclick="loadAfNexusPostsV2(false)"
-          >
-            Refresh
+          <p>You haven't logged in yet. Login to access the Community tab and interact with fellow learners.</p>
+          <button class="af-nexus-login-btn-v2" type="button" onclick="showSection('studentaf')">
+            Login to Continue
           </button>
         </div>
-
-        <div id="afNexusPostsListV2" class="af-nexus-posts-list-v2">
-          <div class="af-nexus-loading-v2">
-            Loading posts...
-          </div>
-        </div>
       </div>
 
-      <!-- MY NEXUS AREA -->
-      <div id="afMyNexusViewV2" class="af-my-nexus-view-v2 af-hidden">
-        <div class="af-nexus-section-head-v2">
-          <div>
-            <h3>My Nexus</h3>
-            <p>All posts you have shared in your learning journey.</p>
+      <!-- ── MAIN AREA ──────────────────────────────────── -->
+      <div id="afNexusMainV2" class="af-nexus-main-v2">
+
+        <!-- Header -->
+        <header class="af-nexus-header-v2">
+          <div class="af-nexus-title-wrap-v2">
+            <div class="af-nexus-logo-v2">💬</div>
+            <div class="af-nexus-title-text-v2">
+              <h2>AF Nexus</h2>
+              <p>Connect, discuss &amp; grow with fellow learners.</p>
+            </div>
           </div>
-
-          <button
-            class="af-nexus-refresh-btn-v2"
-            type="button"
-            onclick="closeAfMyNexusV2()"
-          >
-            Back
-          </button>
-        </div>
-
-        <div id="afMyNexusPostsListV2" class="af-nexus-posts-list-v2">
-          <div class="af-nexus-loading-v2">
-            Loading your posts...
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- FLOATING WRITE POST BUTTON -->
-    <button
-      id="afNexusWriteBtnV2"
-      class="af-nexus-write-btn-v2"
-      type="button"
-      onclick="openAfNexusComposerV2()"
-      aria-label="Write post"
-    >
-      ✍️
-    </button>
-
-    <!-- POST COMPOSER MODAL -->
-    <div id="afNexusComposerOverlayV2" class="af-nexus-modal-overlay-v2 af-hidden">
-      <div class="af-nexus-composer-card-v2">
-
-        <div class="af-nexus-modal-head-v2">
-          <div>
-            <h3>Create Post</h3>
-            <p>Text-only post. Maximum 80 words.</p>
-          </div>
-
-          <button
-            type="button"
-            onclick="closeAfNexusComposerV2()"
-            aria-label="Close"
-          >
-            ×
-          </button>
-        </div>
-
-        <textarea
-          id="afNexusPostInputV2"
-          rows="7"
-          placeholder="Write something helpful, thoughtful, or interesting..."
-          oninput="handleAfNexusPostTypingV2()"
-        ></textarea>
-
-        <div class="af-nexus-composer-foot-v2">
-          <span id="afNexusWordCountV2">0 / 80 words</span>
-
-          <button
-            id="afNexusSubmitPostBtnV2"
-            type="button"
-            onclick="createAfNexusPostV2()"
-          >
-            Post
-          </button>
-        </div>
-
-        <p id="afNexusWordLimitWarningV2" class="af-nexus-word-warning-v2 af-hidden">
-          Word limit exceeded. Please keep your post within 80 words.
-        </p>
-
-      </div>
-    </div>
-
-    <!-- COMMENTS / REPLIES DRAWER -->
-    <div id="afNexusCommentsOverlayV2" class="af-nexus-modal-overlay-v2 af-hidden">
-      <div class="af-nexus-comments-card-v2">
-
-        <div class="af-nexus-modal-head-v2">
-          <div>
-            <h3>Comments</h3>
-            <p id="afNexusCommentPostTitleV2">Join the discussion</p>
-          </div>
-
-          <button
-            type="button"
-            onclick="closeAfNexusCommentsV2()"
-            aria-label="Close"
-          >
-            ×
-          </button>
-        </div>
-
-        <div id="afNexusCommentsListV2" class="af-nexus-comments-list-v2">
-          <div class="af-nexus-loading-v2">
-            Loading comments...
-          </div>
-        </div>
-
-        <!-- COMMENT INPUT -->
-        <div class="af-nexus-comment-input-box-v2">
-          <textarea
-            id="afNexusCommentInputV2"
-            rows="3"
-            placeholder="Write a comment..."
-            oninput="handleAfNexusCommentTypingV2()"
-          ></textarea>
-
-          <div class="af-nexus-comment-input-foot-v2">
-            <span id="afNexusCommentWordCountV2">0 / 80 words</span>
-
-            <button
-              id="afNexusSubmitCommentBtnV2"
-              type="button"
-              onclick="createAfNexusCommentV2()"
-            >
-              Comment
+          <div class="af-nexus-header-actions-v2">
+            <button id="afNexusMyBtnV2" class="af-nexus-my-btn-v2" type="button" onclick="openAfMyNexusV2()">
+              My Posts
+            </button>
+            <button class="af-nexus-refresh-btn-v2" type="button" onclick="loadAfNexusPostsV2(false)" aria-label="Refresh">
+              ↻
             </button>
           </div>
+        </header>
 
-          <p id="afNexusCommentWordWarningV2" class="af-nexus-word-warning-v2 af-hidden">
-            Word limit exceeded. Please keep your comment within 80 words.
+        <!-- User bar -->
+        <div class="af-nexus-userbar-v2">
+          <div class="af-nexus-userbar-info-v2">
+            <span>Posting as</span>
+            <strong id="afNexusStudentNameV2">Student</strong>
+          </div>
+          <small id="afNexusStudentMetaV2">Community member</small>
+        </div>
+
+        <!-- Feed controls -->
+        <div class="af-nexus-controls-v2">
+          <button id="afNexusRelevantBtnV2" class="af-nexus-filter-btn-v2 active" type="button" onclick="setAfNexusFeedModeV2('relevant')">
+            ✦ Most Relevant
+          </button>
+          <button id="afNexusRecentBtnV2" class="af-nexus-filter-btn-v2" type="button" onclick="setAfNexusFeedModeV2('recent')">
+            🕐 Recent Posts
+          </button>
+        </div>
+
+        <!-- Feed view -->
+        <div id="afNexusFeedViewV2" class="af-nexus-feed-view-v2">
+          <div class="af-nexus-section-head-v2">
+            <div>
+              <h3>Community Posts</h3>
+              <p>Latest discussions from AcademeForge learners.</p>
+            </div>
+          </div>
+          <div id="afNexusPostsListV2" class="af-nexus-posts-list-v2">
+            <div class="af-nexus-loading-v2">Loading posts…</div>
+          </div>
+        </div>
+
+        <!-- My Nexus view -->
+        <div id="afMyNexusViewV2" class="af-my-nexus-view-v2 af-hidden">
+          <div class="af-nexus-section-head-v2">
+            <div>
+              <h3>My Nexus</h3>
+              <p>All posts you've shared in your learning journey.</p>
+            </div>
+            <button class="af-nexus-refresh-btn-v2" type="button" onclick="closeAfMyNexusV2()">
+              ← Back
+            </button>
+          </div>
+          <div id="afMyNexusPostsListV2" class="af-nexus-posts-list-v2">
+            <div class="af-nexus-loading-v2">Loading your posts…</div>
+          </div>
+        </div>
+
+      </div><!-- /afNexusMainV2 -->
+
+      <!-- ── FLOATING WRITE BUTTON ──────────────────────── -->
+      <button id="afNexusWriteBtnV2" class="af-nexus-write-btn-v2" type="button"
+        onclick="openAfNexusComposerV2()" aria-label="Write post">
+        ✍️
+      </button>
+
+      <!-- ── COMPOSER MODAL ─────────────────────────────── -->
+      <div id="afNexusComposerOverlayV2" class="af-nexus-modal-overlay-v2 af-hidden" onclick="closeAfNexusComposerV2()">
+        <div class="af-nexus-composer-card-v2" onclick="event.stopPropagation()">
+          <div class="af-nexus-modal-head-v2">
+            <div>
+              <h3>Create Post</h3>
+              <p>Text only · Max 80 words</p>
+            </div>
+            <button type="button" class="af-nexus-modal-close-v2" onclick="closeAfNexusComposerV2()" aria-label="Close">×</button>
+          </div>
+          <textarea id="afNexusPostInputV2" rows="6"
+            placeholder="Write something helpful, thoughtful, or interesting…"
+            oninput="handleAfNexusPostTypingV2()"></textarea>
+          <div class="af-nexus-composer-foot-v2">
+            <span id="afNexusWordCountV2">0 / 80 words</span>
+            <button id="afNexusSubmitPostBtnV2" type="button" onclick="createAfNexusPostV2()">Post</button>
+          </div>
+          <p id="afNexusWordLimitWarningV2" class="af-nexus-word-warning-v2 af-hidden">
+            Word limit exceeded. Please keep your post within 80 words.
           </p>
         </div>
-
       </div>
-    </div>
 
-    <!-- REPLY MODAL -->
-    <div id="afNexusReplyOverlayV2" class="af-nexus-modal-overlay-v2 af-hidden">
-      <div class="af-nexus-reply-card-v2">
-
-        <div class="af-nexus-modal-head-v2">
-          <div>
-            <h3>Reply</h3>
-            <p id="afNexusReplyTargetTextV2">Reply to comment</p>
+      <!-- ── COMMENTS MODAL ────────────────────────────── -->
+      <div id="afNexusCommentsOverlayV2" class="af-nexus-modal-overlay-v2 af-hidden" onclick="closeAfNexusCommentsV2()">
+        <div class="af-nexus-comments-card-v2" onclick="event.stopPropagation()">
+          <div class="af-nexus-modal-head-v2">
+            <div>
+              <h3>Comments</h3>
+              <p id="afNexusCommentPostTitleV2">Join the discussion</p>
+            </div>
+            <button type="button" class="af-nexus-modal-close-v2" onclick="closeAfNexusCommentsV2()" aria-label="Close">×</button>
           </div>
-
-          <button
-            type="button"
-            onclick="closeAfNexusReplyV2()"
-            aria-label="Close"
-          >
-            ×
-          </button>
+          <div id="afNexusCommentsListV2" class="af-nexus-comments-list-v2">
+            <div class="af-nexus-loading-v2">Loading comments…</div>
+          </div>
+          <div class="af-nexus-comment-input-box-v2">
+            <textarea id="afNexusCommentInputV2" rows="3"
+              placeholder="Write a comment…"
+              oninput="handleAfNexusCommentTypingV2()"></textarea>
+            <div class="af-nexus-comment-input-foot-v2">
+              <span id="afNexusCommentWordCountV2">0 / 80 words</span>
+              <button id="afNexusSubmitCommentBtnV2" type="button" onclick="createAfNexusCommentV2()">Comment</button>
+            </div>
+            <p id="afNexusCommentWordWarningV2" class="af-nexus-word-warning-v2 af-hidden">
+              Word limit exceeded. Please keep your comment within 80 words.
+            </p>
+          </div>
         </div>
+      </div>
 
-        <textarea
-          id="afNexusReplyInputV2"
-          rows="4"
-          placeholder="Write your reply..."
-          oninput="handleAfNexusReplyTypingV2()"
-        ></textarea>
-
-        <div class="af-nexus-composer-foot-v2">
-          <span id="afNexusReplyWordCountV2">0 / 80 words</span>
-
-          <button
-            id="afNexusSubmitReplyBtnV2"
-            type="button"
-            onclick="createAfNexusReplyV2()"
-          >
-            Reply
-          </button>
+      <!-- ── REPLY MODAL ───────────────────────────────── -->
+      <div id="afNexusReplyOverlayV2" class="af-nexus-modal-overlay-v2 af-hidden" onclick="closeAfNexusReplyV2()">
+        <div class="af-nexus-reply-card-v2" onclick="event.stopPropagation()">
+          <div class="af-nexus-modal-head-v2">
+            <div>
+              <h3>Reply</h3>
+              <p id="afNexusReplyTargetTextV2">Reply to comment</p>
+            </div>
+            <button type="button" class="af-nexus-modal-close-v2" onclick="closeAfNexusReplyV2()" aria-label="Close">×</button>
+          </div>
+          <textarea id="afNexusReplyInputV2" rows="4"
+            placeholder="Write your reply…"
+            oninput="handleAfNexusReplyTypingV2()"></textarea>
+          <div class="af-nexus-composer-foot-v2">
+            <span id="afNexusReplyWordCountV2">0 / 80 words</span>
+            <button id="afNexusSubmitReplyBtnV2" type="button" onclick="createAfNexusReplyV2()">Reply</button>
+          </div>
+          <p id="afNexusReplyWordWarningV2" class="af-nexus-word-warning-v2 af-hidden">
+            Word limit exceeded. Please keep your reply within 80 words.
+          </p>
         </div>
-
-        <p id="afNexusReplyWordWarningV2" class="af-nexus-word-warning-v2 af-hidden">
-          Word limit exceeded. Please keep your reply within 80 words.
-        </p>
-
       </div>
-    </div>
 
-    <!-- ACTION MENU OVERLAY -->
-    <div id="afNexusMenuOverlayV2" class="af-nexus-menu-overlay-v2 af-hidden" onclick="closeAfNexusMenuV2()">
-      <div class="af-nexus-menu-card-v2" onclick="event.stopPropagation()">
-        <button
-          id="afNexusDeleteActionBtnV2"
-          type="button"
-        >
-          Delete
-        </button>
-
-        <button
-          type="button"
-          onclick="closeAfNexusMenuV2()"
-        >
-          Cancel
-        </button>
+      <!-- ── ACTION MENU ───────────────────────────────── -->
+      <div id="afNexusMenuOverlayV2" class="af-nexus-menu-overlay-v2 af-hidden" onclick="closeAfNexusMenuV2()">
+        <div class="af-nexus-menu-card-v2" onclick="event.stopPropagation()">
+          <div class="af-nexus-menu-label-v2">Post Options</div>
+          <button id="afNexusDeleteActionBtnV2" type="button">🗑 Delete</button>
+          <button type="button" onclick="closeAfNexusMenuV2()">Cancel</button>
+        </div>
       </div>
-    </div>
 
-  </div>
-</section>
-
-      </div>
+    </div><!-- /af-nexus-v2-shell -->
+  </section>
+</div>
 
       <!-- ══════════════════════════════════════════════════════
            VIEW: SETTINGS — Fully reorganized accordion groups
@@ -7845,17 +7890,21 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-  /* =========================================================
-   AF NEXUS COMMUNITY V2 - 
+/* =========================================================
+   AF NEXUS COMMUNITY V2 — community.js
+   Rewritten architecture. All public functions, API contracts,
+   storage keys, Edge Function integrations, and business logic
+   are fully preserved.
 ========================================================= */
 
+/* ── STATE ───────────────────────────────────────────── */
 let afNexusFeedModeV2 = "relevant";
 let afNexusPostsCacheV2 = [];
 let afNexusCurrentPostIdV2 = null;
 let afNexusCurrentReplyParentIdV2 = null;
 let afNexusMenuTargetV2 = null;
 
-/* ---------------- BASIC HELPERS ---------------- */
+/* ── BASIC HELPERS ───────────────────────────────────── */
 
 function afNexusBackendV2() {
   if (typeof studentDb !== "undefined" && studentDb) return studentDb;
@@ -7877,7 +7926,14 @@ function afNexusEscapeV2(text) {
 function afNexusTimeV2(value) {
   if (!value) return "";
   try {
-    return new Date(value).toLocaleString();
+    const d = new Date(value);
+    const now = new Date();
+    const diff = Math.floor((now - d) / 1000);
+    if (diff < 60) return "just now";
+    if (diff < 3600) return Math.floor(diff / 60) + "m ago";
+    if (diff < 86400) return Math.floor(diff / 3600) + "h ago";
+    if (diff < 604800) return Math.floor(diff / 86400) + "d ago";
+    return d.toLocaleDateString();
   } catch (e) {
     return "";
   }
@@ -7888,7 +7944,6 @@ function afNexusWordCountV2(text) {
   if (!t) return 0;
   return t.split(/\s+/).filter(Boolean).length;
 }
-
 
 function afNexusMsgV2(msg, type) {
   if (typeof showAfToast === "function") {
@@ -7902,7 +7957,7 @@ function afNexusMsgV2(msg, type) {
   }
 }
 
-/* ---------------- LOGIN DATA ---------------- */
+/* ── LOGIN DATA ──────────────────────────────────────── */
 
 function afNexusLoginDataV2() {
   if (typeof afGetLoginData === "function") {
@@ -7913,7 +7968,6 @@ function afNexusLoginDataV2() {
       mobile: d.mobile || localStorage.getItem("af_student_mobile") || ""
     };
   }
-
   return {
     name: localStorage.getItem("af_student_name") || "",
     email: localStorage.getItem("af_student_email") || "",
@@ -7935,54 +7989,35 @@ function afNexusIsLoggedInV2() {
   return !!afNexusStudentKeyV2();
 }
 
-/* ---------------- EDGE FUNCTION CALL ---------------- */
+/* ── EDGE FUNCTION CALL ──────────────────────────────── */
 
 async function afNexusEdgeCallV2(payload) {
   const backend = afNexusBackendV2();
-
   if (!backend) {
-    return {
-      ok: false,
-      message: "Backend not connected."
-    };
+    return { ok: false, message: "Backend not connected." };
   }
-
   try {
     const finalPayload = {
       ...(payload || {}),
       student_key: afNexusStudentKeyV2(),
       student_name: afNexusStudentNameV2()
     };
-
     const { data, error } = await backend.functions.invoke("af-nexus-community-v2", {
       body: finalPayload
     });
-
     if (error) {
-      return {
-        ok: false,
-        message: error.message || "Community request failed."
-      };
+      return { ok: false, message: error.message || "Community request failed." };
     }
-
     if (!data) {
-      return {
-        ok: false,
-        message: "Empty server response."
-      };
+      return { ok: false, message: "Empty server response." };
     }
-
     return data;
-
   } catch (err) {
-    return {
-      ok: false,
-      message: err.message || "Community request failed."
-    };
+    return { ok: false, message: err.message || "Community request failed." };
   }
 }
 
-/* ---------------- CACHE ---------------- */
+/* ── CACHE ───────────────────────────────────────────── */
 
 function afNexusCacheKeyV2() {
   return "af_nexus_posts_cache_v2";
@@ -7992,10 +8027,7 @@ function afNexusSaveCacheV2(posts) {
   try {
     localStorage.setItem(
       afNexusCacheKeyV2(),
-      JSON.stringify({
-        data: posts || [],
-        savedAt: Date.now()
-      })
+      JSON.stringify({ data: posts || [], savedAt: Date.now() })
     );
   } catch (e) {}
 }
@@ -8018,7 +8050,6 @@ function afNexusUpdatePostInCacheV2(postId, updater) {
       if (String(post.id) !== String(postId)) return post;
       return updater({ ...post });
     });
-
     afNexusSaveCacheV2(afNexusPostsCacheV2);
     renderAfNexusPostsV2(afNexusPostsCacheV2, "afNexusPostsListV2");
 
@@ -8034,7 +8065,7 @@ function afNexusUpdatePostInCacheV2(postId, updater) {
   } catch (e) {}
 }
 
-/* ---------------- INIT ---------------- */
+/* ── INIT ────────────────────────────────────────────── */
 
 async function initAfNexusV2() {
   forceCloseAfNexusOverlaysV2();
@@ -8058,7 +8089,6 @@ async function initAfNexusV2() {
 
   const nameEl = document.getElementById("afNexusStudentNameV2");
   const metaEl = document.getElementById("afNexusStudentMetaV2");
-
   if (nameEl) nameEl.textContent = afNexusStudentNameV2();
   if (metaEl) metaEl.textContent = "AcademeForge learner";
 
@@ -8068,28 +8098,25 @@ async function initAfNexusV2() {
     renderAfNexusPostsV2(cached, "afNexusPostsListV2");
   }
 
-  setTimeout(function() {
-    loadAfNexusPostsV2(false);
-  }, 80);
-
+  setTimeout(function() { loadAfNexusPostsV2(false); }, 80);
   setTimeout(refreshAfNexusLockStateV2, 150);
   setTimeout(refreshAfNexusLockStateV2, 600);
 }
 
-/* hook into old community init */
+/* Hook into existing community init */
 if (typeof initCommunitySection !== "function") {
   function initCommunitySection() {
     initAfNexusV2();
   }
 } else {
-  const oldInitCommunitySectionAfNexusV2 = initCommunitySection;
+  const _oldInitCommunitySectionAfNexusV2 = initCommunitySection;
   initCommunitySection = function() {
-    try { oldInitCommunitySectionAfNexusV2(); } catch (e) {}
+    try { _oldInitCommunitySectionAfNexusV2(); } catch (e) {}
     initAfNexusV2();
   };
 }
 
-/* ---------------- LOAD POSTS ---------------- */
+/* ── LOAD POSTS ──────────────────────────────────────── */
 
 async function loadAfNexusPostsV2(useCacheFirst) {
   const list = document.getElementById("afNexusPostsListV2");
@@ -8108,7 +8135,7 @@ async function loadAfNexusPostsV2(useCacheFirst) {
   }
 
   if (list && !afNexusPostsCacheV2.length) {
-    list.innerHTML = `<div class="af-nexus-loading-v2">Loading posts...</div>`;
+    list.innerHTML = `<div class="af-nexus-loading-v2">Loading posts…</div>`;
   }
 
   try {
@@ -8128,7 +8155,6 @@ async function loadAfNexusPostsV2(useCacheFirst) {
     afNexusPostsCacheV2 = Array.isArray(result.posts) ? result.posts : [];
     afNexusSaveCacheV2(afNexusPostsCacheV2);
     renderAfNexusPostsV2(afNexusPostsCacheV2, "afNexusPostsListV2");
-
   } catch (err) {
     console.error("AF Nexus posts fetch catch:", err);
   }
@@ -8146,14 +8172,20 @@ function setAfNexusFeedModeV2(mode) {
   loadAfNexusPostsV2(true);
 }
 
-/* ---------------- RENDER POSTS ---------------- */
+/* ── RENDER POSTS ────────────────────────────────────── */
+
+function afNexusInitialsV2(name) {
+  if (!name) return "AF";
+  return String(name).trim().split(/\s+/).slice(0, 2)
+    .map(function(v) { return v.charAt(0).toUpperCase(); }).join("");
+}
 
 function renderAfNexusPostsV2(posts, targetId) {
   const box = document.getElementById(targetId);
   if (!box) return;
 
   if (!posts || !posts.length) {
-    box.innerHTML = `<div class="af-nexus-empty-v2">No posts yet.</div>`;
+    box.innerHTML = `<div class="af-nexus-empty-v2">No posts yet. Be the first to share!</div>`;
     return;
   }
 
@@ -8161,7 +8193,6 @@ function renderAfNexusPostsV2(posts, targetId) {
 
   box.innerHTML = posts.map(function(post) {
     const isMine = String(post.student_key || "") === String(myKey || "");
-
     return `
       <div class="af-nexus-post-card-v2" data-post-id="${post.id}">
         <div class="af-nexus-post-top-v2">
@@ -8172,33 +8203,32 @@ function renderAfNexusPostsV2(posts, targetId) {
               <small>${afNexusEscapeV2(afNexusTimeV2(post.created_at))}</small>
             </div>
           </div>
-
           <button
             class="af-nexus-menu-btn-v2"
             type="button"
             onclick="openAfNexusMenuV2('post', ${post.id}, ${isMine ? "true" : "false"})"
-          >
-            ⋮
-          </button>
+            aria-label="Post options"
+          >⋯</button>
         </div>
-
         <p class="af-nexus-post-text-v2">${afNexusEscapeV2(post.content || "")}</p>
-
         <div class="af-nexus-post-actions-v2">
-          <button class="af-nexus-action-btn-v2" type="button" onclick="toggleAfNexusPostLikeV2(${post.id})">
-            ❤️ ${post.likes_count || 0}
-          </button>
-
-          <button class="af-nexus-action-btn-v2" type="button" onclick="openAfNexusCommentsV2(${post.id})">
-            💬 ${post.comments_count || 0}
-          </button>
+          <button
+            class="af-nexus-action-btn-v2"
+            type="button"
+            onclick="toggleAfNexusPostLikeV2(${post.id})"
+          >❤ ${post.likes_count || 0}</button>
+          <button
+            class="af-nexus-action-btn-v2"
+            type="button"
+            onclick="openAfNexusCommentsV2(${post.id})"
+          >💬 ${post.comments_count || 0} comments</button>
         </div>
       </div>
     `;
   }).join("");
 }
 
-/* ---------------- COMPOSER ---------------- */
+/* ── COMPOSER ────────────────────────────────────────── */
 
 function openAfNexusComposerV2() {
   if (!afNexusIsLoggedInV2()) {
@@ -8257,7 +8287,6 @@ async function createAfNexusPostV2() {
     afNexusMsgV2("Please write something first.", "error");
     return;
   }
-
   if (words > 80) {
     afNexusMsgV2("Post must be within 80 words.", "error");
     return;
@@ -8284,23 +8313,12 @@ async function createAfNexusPostV2() {
     }
 
     loadAfNexusPostsV2(false);
-
   } catch (err) {
     console.error("AF Nexus create post catch:", err);
   }
 }
-  
-function afNexusInitialsV2(name) {
-  if (!name) return "AF";
 
-  return String(name)
-    .trim()
-    .split(/\s+/)
-    .slice(0, 2)
-    .map(v => v.charAt(0).toUpperCase())
-    .join("");
-}
-/* ---------------- POST LIKE ---------------- */
+/* ── POST LIKE ───────────────────────────────────────── */
 
 async function toggleAfNexusPostLikeV2(postId) {
   if (!afNexusStudentKeyV2()) return;
@@ -8315,20 +8333,17 @@ async function toggleAfNexusPostLikeV2(postId) {
       action: "toggle_post_like",
       post_id: postId
     });
-
     if (!result || !result.ok) {
       console.error("Post like edge error:", result);
     }
-
     loadAfNexusPostsV2(false);
-
   } catch (err) {
     console.error(err);
     loadAfNexusPostsV2(false);
   }
 }
 
-/* ---------------- COMMENTS ---------------- */
+/* ── COMMENTS ────────────────────────────────────────── */
 
 function openAfNexusCommentsV2(postId) {
   afNexusCurrentPostIdV2 = postId;
@@ -8360,7 +8375,7 @@ async function loadAfNexusCommentsV2(postId) {
   const box = document.getElementById("afNexusCommentsListV2");
   if (!box) return;
 
-  box.innerHTML = `<div class="af-nexus-loading-v2">Loading comments...</div>`;
+  box.innerHTML = `<div class="af-nexus-loading-v2">Loading comments…</div>`;
 
   try {
     const result = await afNexusEdgeCallV2({
@@ -8375,7 +8390,6 @@ async function loadAfNexusCommentsV2(postId) {
     }
 
     renderAfNexusCommentsV2(Array.isArray(result.comments) ? result.comments : []);
-
   } catch (err) {
     console.error(err);
   }
@@ -8386,214 +8400,117 @@ function renderAfNexusCommentsV2(comments) {
   if (!box) return;
 
   if (!comments || !comments.length) {
-    box.innerHTML = `
-      <div class="af-nexus-empty-v2">
-        No comments yet.
-      </div>
-    `;
+    box.innerHTML = `<div class="af-nexus-empty-v2">No comments yet. Start the discussion!</div>`;
     return;
   }
 
   const byParent = {};
-
-  comments.forEach(function (c) {
-    const key = c.parent_comment_id
-      ? String(c.parent_comment_id)
-      : "root";
-
-    if (!byParent[key]) {
-      byParent[key] = [];
-    }
-
+  comments.forEach(function(c) {
+    const key = c.parent_comment_id ? String(c.parent_comment_id) : "root";
+    if (!byParent[key]) byParent[key] = [];
     byParent[key].push(c);
   });
 
   const rootComments = byParent.root || [];
 
-  box.innerHTML = rootComments.map(function (c) {
-
-    const isMine =
-      String(c.student_key || "") ===
-      String(afNexusStudentKeyV2() || "");
-
-    const replies =
-      byParent[String(c.id)] || [];
-
-    const preview =
-      afNexusEscapeV2(
-        (c.content || "").slice(0, 50)
-      ).replace(/'/g, "&#39;");
+  box.innerHTML = rootComments.map(function(c) {
+    const isMine = String(c.student_key || "") === String(afNexusStudentKeyV2() || "");
+    const replies = byParent[String(c.id)] || [];
+    const preview = afNexusEscapeV2((c.content || "").slice(0, 50)).replace(/'/g, "&#39;");
 
     return `
       <div class="af-nexus-comment-card-v2">
-
         <div class="af-nexus-comment-top-v2">
-
           <div class="af-nexus-comment-info-v2">
-            <strong>
-              ${afNexusEscapeV2(c.student_name || "Student")}
-            </strong>
-
-            <small>
-              ${afNexusEscapeV2(
-                afNexusTimeV2(c.created_at)
-              )}
-            </small>
+            <strong>${afNexusEscapeV2(c.student_name || "Student")}</strong>
+            <small>${afNexusEscapeV2(afNexusTimeV2(c.created_at))}</small>
           </div>
-
           <button
             class="af-nexus-menu-btn-v2"
             type="button"
-            onclick="openAfNexusMenuV2(
-              'comment',
-              ${c.id},
-              ${isMine ? "true" : "false"}
-            )"
-          >
-            ⋮
-          </button>
-
+            onclick="openAfNexusMenuV2('comment', ${c.id}, ${isMine ? "true" : "false"})"
+            aria-label="Comment options"
+          >⋯</button>
         </div>
-
-        <p class="af-nexus-comment-text-v2">
-          ${afNexusEscapeV2(c.content || "")}
-        </p>
-
+        <p class="af-nexus-comment-text-v2">${afNexusEscapeV2(c.content || "")}</p>
         <div class="af-nexus-comment-actions-v2">
-
           <button
             class="af-nexus-action-btn-v2"
             type="button"
             onclick="toggleAfNexusCommentLikeV2(${c.id})"
-          >
-            ❤️ ${c.likes_count || 0}
-          </button>
-
+          >❤ ${c.likes_count || 0}</button>
           <button
             class="af-nexus-action-btn-v2"
             type="button"
-            onclick="openAfNexusReplyV2(
-              ${c.id},
-              '${preview}'
-            )"
-          >
-            Reply
-          </button>
-
+            onclick="openAfNexusReplyV2(${c.id}, '${preview}')"
+          >Reply</button>
         </div>
-
-        ${
-          replies.length
-            ? `
-              <button
-                class="af-nexus-view-replies-v2"
-                type="button"
-                onclick="toggleRepliesV2(${c.id})"
-              >
-                View ${replies.length}
-                repl${replies.length === 1 ? "y" : "ies"}
-              </button>
-
-              <div
-                id="afReplies-${c.id}"
-                class="af-nexus-replies-wrap-v2 af-hidden"
-              >
-
-                ${replies.map(function (r) {
-
-                  const rMine =
-                    String(r.student_key || "") ===
-                    String(afNexusStudentKeyV2() || "");
-
-                  const rPreview =
-                    afNexusEscapeV2(
-                      (r.content || "").slice(0, 50)
-                    ).replace(/'/g, "&#39;");
-
-                  return `
-                    <div class="af-nexus-reply-row-v2">
-
-                      <div class="af-nexus-comment-top-v2">
-
-                        <div class="af-nexus-comment-info-v2">
-                          <strong>
-                            ${afNexusEscapeV2(
-                              r.student_name || "Student"
-                            )}
-                          </strong>
-
-                          <small>
-                            ${afNexusEscapeV2(
-                              afNexusTimeV2(r.created_at)
-                            )}
-                          </small>
-                        </div>
-
-                        <button
-                          class="af-nexus-menu-btn-v2"
-                          type="button"
-                          onclick="openAfNexusMenuV2(
-                            'comment',
-                            ${r.id},
-                            ${rMine ? "true" : "false"}
-                          )"
-                        >
-                          ⋮
-                        </button>
-
-                      </div>
-
-                      <p class="af-nexus-comment-text-v2">
-                        ${afNexusEscapeV2(
-                          r.content || ""
-                        )}
-                      </p>
-
-                      <div class="af-nexus-comment-actions-v2">
-
-                        <button
-                          class="af-nexus-action-btn-v2"
-                          type="button"
-                          onclick="toggleAfNexusCommentLikeV2(${r.id})"
-                        >
-                          ❤️ ${r.likes_count || 0}
-                        </button>
-
-                        <button
-                          class="af-nexus-action-btn-v2"
-                          type="button"
-                          onclick="openAfNexusReplyV2(
-                            ${r.id},
-                            '${rPreview}'
-                          )"
-                        >
-                          Reply
-                        </button>
-
-                      </div>
-
+        ${replies.length ? `
+          <button
+            class="af-nexus-view-replies-v2"
+            type="button"
+            onclick="toggleRepliesV2(${c.id})"
+          >▸ ${replies.length} repl${replies.length === 1 ? "y" : "ies"}</button>
+          <div id="afReplies-${c.id}" class="af-nexus-replies-wrap-v2 af-hidden">
+            ${replies.map(function(r) {
+              const rMine = String(r.student_key || "") === String(afNexusStudentKeyV2() || "");
+              const rPreview = afNexusEscapeV2((r.content || "").slice(0, 50)).replace(/'/g, "&#39;");
+              return `
+                <div class="af-nexus-reply-row-v2">
+                  <div class="af-nexus-comment-top-v2">
+                    <div class="af-nexus-comment-info-v2">
+                      <strong>${afNexusEscapeV2(r.student_name || "Student")}</strong>
+                      <small>${afNexusEscapeV2(afNexusTimeV2(r.created_at))}</small>
                     </div>
-                  `;
-                }).join("")}
-
-              </div>
-            `
-            : ""
-        }
-
+                    <button
+                      class="af-nexus-menu-btn-v2"
+                      type="button"
+                      onclick="openAfNexusMenuV2('comment', ${r.id}, ${rMine ? "true" : "false"})"
+                      aria-label="Reply options"
+                    >⋯</button>
+                  </div>
+                  <p class="af-nexus-comment-text-v2">${afNexusEscapeV2(r.content || "")}</p>
+                  <div class="af-nexus-comment-actions-v2">
+                    <button
+                      class="af-nexus-action-btn-v2"
+                      type="button"
+                      onclick="toggleAfNexusCommentLikeV2(${r.id})"
+                    >❤ ${r.likes_count || 0}</button>
+                    <button
+                      class="af-nexus-action-btn-v2"
+                      type="button"
+                      onclick="openAfNexusReplyV2(${r.id}, '${rPreview}')"
+                    >Reply</button>
+                  </div>
+                </div>
+              `;
+            }).join("")}
+          </div>
+        ` : ""}
       </div>
     `;
   }).join("");
 }
-function toggleRepliesV2(commentId) {
-  const box = document.getElementById(
-    `afReplies-${commentId}`
-  );
 
+function toggleRepliesV2(commentId) {
+  const box = document.getElementById(`afReplies-${commentId}`);
   if (!box) return;
 
+  const isHidden = box.classList.contains("af-hidden");
   box.classList.toggle("af-hidden");
+
+  /* Update button label */
+  const btn = box.previousElementSibling;
+  if (btn && btn.classList.contains("af-nexus-view-replies-v2")) {
+    const countMatch = btn.textContent.match(/(\d+)/);
+    const count = countMatch ? countMatch[1] : "";
+    const replyWord = Number(count) === 1 ? "reply" : "replies";
+    btn.textContent = isHidden
+      ? `▾ ${count} ${replyWord}`
+      : `▸ ${count} ${replyWord}`;
+  }
 }
+
 function handleAfNexusCommentTypingV2() {
   const input = document.getElementById("afNexusCommentInputV2");
   const countEl = document.getElementById("afNexusCommentWordCountV2");
@@ -8611,12 +8528,10 @@ function handleAfNexusCommentTypingV2() {
 
 async function createAfNexusCommentV2() {
   const input = document.getElementById("afNexusCommentInputV2");
-
   if (!input || !afNexusCurrentPostIdV2) return;
 
   const content = afNexusCleanV2(input.value);
   const words = afNexusWordCountV2(content);
-
   if (!content || words > 80) return;
 
   try {
@@ -8642,13 +8557,12 @@ async function createAfNexusCommentV2() {
 
     loadAfNexusCommentsV2(afNexusCurrentPostIdV2);
     loadAfNexusPostsV2(false);
-
   } catch (err) {
     console.error(err);
   }
 }
 
-/* ---------------- REPLIES ---------------- */
+/* ── REPLIES ─────────────────────────────────────────── */
 
 function openAfNexusReplyV2(parentCommentId, preview) {
   afNexusCurrentReplyParentIdV2 = parentCommentId;
@@ -8698,12 +8612,10 @@ function handleAfNexusReplyTypingV2() {
 
 async function createAfNexusReplyV2() {
   const input = document.getElementById("afNexusReplyInputV2");
-
   if (!input || !afNexusCurrentPostIdV2 || !afNexusCurrentReplyParentIdV2) return;
 
   const content = afNexusCleanV2(input.value);
   const words = afNexusWordCountV2(content);
-
   if (!content || words > 80) return;
 
   try {
@@ -8728,13 +8640,12 @@ async function createAfNexusReplyV2() {
 
     loadAfNexusCommentsV2(afNexusCurrentPostIdV2);
     loadAfNexusPostsV2(false);
-
   } catch (err) {
     console.error(err);
   }
 }
 
-/* ---------------- COMMENT LIKE ---------------- */
+/* ── COMMENT LIKE ────────────────────────────────────── */
 
 async function toggleAfNexusCommentLikeV2(commentId) {
   if (!afNexusStudentKeyV2()) return;
@@ -8752,43 +8663,36 @@ async function toggleAfNexusCommentLikeV2(commentId) {
     if (afNexusCurrentPostIdV2) {
       loadAfNexusCommentsV2(afNexusCurrentPostIdV2);
     }
-
   } catch (err) {
     console.error(err);
   }
 }
 
-/* ---------------- MY NEXUS ---------------- */
+/* ── MY NEXUS ────────────────────────────────────────── */
 
 function openAfMyNexusV2() {
   const feed = document.getElementById("afNexusFeedViewV2");
   const my = document.getElementById("afMyNexusViewV2");
-
   if (feed) feed.classList.add("af-hidden");
   if (my) my.classList.remove("af-hidden");
-
   loadAfMyNexusPostsV2();
 }
 
 function closeAfMyNexusV2() {
   const feed = document.getElementById("afNexusFeedViewV2");
   const my = document.getElementById("afMyNexusViewV2");
-
   if (my) my.classList.add("af-hidden");
   if (feed) feed.classList.remove("af-hidden");
 }
 
 async function loadAfMyNexusPostsV2() {
   const box = document.getElementById("afMyNexusPostsListV2");
-
   if (!box) return;
 
-  box.innerHTML = `<div class="af-nexus-loading-v2">Loading your posts...</div>`;
+  box.innerHTML = `<div class="af-nexus-loading-v2">Loading your posts…</div>`;
 
   try {
-    const result = await afNexusEdgeCallV2({
-      action: "my_posts"
-    });
+    const result = await afNexusEdgeCallV2({ action: "my_posts" });
 
     if (!result || !result.ok) {
       console.error("My Nexus edge error:", result);
@@ -8796,30 +8700,26 @@ async function loadAfMyNexusPostsV2() {
       return;
     }
 
-    renderAfNexusPostsV2(Array.isArray(result.posts) ? result.posts : [], "afMyNexusPostsListV2");
-
+    renderAfNexusPostsV2(
+      Array.isArray(result.posts) ? result.posts : [],
+      "afMyNexusPostsListV2"
+    );
   } catch (err) {
     console.error(err);
   }
 }
 
-/* ---------------- DELETE MENU ---------------- */
+/* ── ACTION MENU ─────────────────────────────────────── */
 
 function openAfNexusMenuV2(type, id, isMine) {
-  afNexusMenuTargetV2 = {
-    type: type,
-    id: id,
-    isMine: !!isMine
-  };
+  afNexusMenuTargetV2 = { type: type, id: id, isMine: !!isMine };
 
   const overlay = document.getElementById("afNexusMenuOverlayV2");
   const deleteBtn = document.getElementById("afNexusDeleteActionBtnV2");
 
   if (deleteBtn) {
     deleteBtn.style.display = isMine ? "block" : "none";
-    deleteBtn.onclick = function() {
-      deleteAfNexusTargetV2();
-    };
+    deleteBtn.onclick = function() { deleteAfNexusTargetV2(); };
   }
 
   if (overlay) {
@@ -8833,7 +8733,6 @@ function openAfNexusMenuV2(type, id, isMine) {
 
 function closeAfNexusMenuV2() {
   const overlay = document.getElementById("afNexusMenuOverlayV2");
-
   if (overlay) {
     overlay.classList.add("af-hidden");
     overlay.style.display = "none";
@@ -8841,7 +8740,6 @@ function closeAfNexusMenuV2() {
     overlay.style.visibility = "hidden";
     overlay.style.pointerEvents = "none";
   }
-
   afNexusMenuTargetV2 = null;
 }
 
@@ -8851,20 +8749,22 @@ async function deleteAfNexusTargetV2() {
     return;
   }
 
+  const target = afNexusMenuTargetV2;
+
   try {
     let result = null;
 
-    if (afNexusMenuTargetV2.type === "post") {
+    if (target.type === "post") {
       result = await afNexusEdgeCallV2({
         action: "delete_post",
-        post_id: afNexusMenuTargetV2.id
+        post_id: target.id
       });
     }
 
-    if (afNexusMenuTargetV2.type === "comment") {
+    if (target.type === "comment") {
       result = await afNexusEdgeCallV2({
         action: "delete_comment",
-        comment_id: afNexusMenuTargetV2.id
+        comment_id: target.id
       });
     }
 
@@ -8875,9 +8775,9 @@ async function deleteAfNexusTargetV2() {
 
     closeAfNexusMenuV2();
 
-    if (afNexusMenuTargetV2 && afNexusMenuTargetV2.type === "post") {
+    if (target.type === "post") {
       afNexusPostsCacheV2 = afNexusPostsCacheV2.filter(function(post) {
-        return String(post.id) !== String(afNexusMenuTargetV2.id);
+        return String(post.id) !== String(target.id);
       });
       afNexusSaveCacheV2(afNexusPostsCacheV2);
       renderAfNexusPostsV2(afNexusPostsCacheV2, "afNexusPostsListV2");
@@ -8893,13 +8793,12 @@ async function deleteAfNexusTargetV2() {
     if (myView && !myView.classList.contains("af-hidden")) {
       loadAfMyNexusPostsV2();
     }
-
   } catch (err) {
     console.error(err);
   }
 }
 
-/* ---------------- FORCE CLOSE OVERLAYS FIX ---------------- */
+/* ── FORCE CLOSE OVERLAYS ────────────────────────────── */
 
 function forceCloseAfNexusOverlaysV2() {
   const ids = [
@@ -8924,13 +8823,12 @@ function forceCloseAfNexusOverlaysV2() {
   afNexusCurrentReplyParentIdV2 = null;
 }
 
-/* ---------------- LOGIN LOCK VISIBILITY FIX ---------------- */
+/* ── LOCK STATE ──────────────────────────────────────── */
 
 function refreshAfNexusLockStateV2() {
   const locked = document.getElementById("afNexusLockedV2");
   const main = document.getElementById("afNexusMainV2");
   const writeBtn = document.getElementById("afNexusWriteBtnV2");
-
   const loggedIn = afNexusIsLoggedInV2();
 
   if (loggedIn) {
@@ -8947,7 +8845,6 @@ function refreshAfNexusLockStateV2() {
       locked.style.opacity = "0";
       locked.style.pointerEvents = "none";
     }
-
     if (main) {
       main.classList.remove("af-hidden");
       main.style.display = "";
@@ -8955,7 +8852,6 @@ function refreshAfNexusLockStateV2() {
       main.style.opacity = "";
       main.style.pointerEvents = "";
     }
-
     if (writeBtn) {
       writeBtn.classList.remove("af-hidden");
       writeBtn.style.display = "";
@@ -8963,7 +8859,6 @@ function refreshAfNexusLockStateV2() {
       writeBtn.style.opacity = "";
       writeBtn.style.pointerEvents = "";
     }
-
   } else {
     if (locked) {
       locked.classList.remove("af-hidden");
@@ -8972,12 +8867,10 @@ function refreshAfNexusLockStateV2() {
       locked.style.opacity = "1";
       locked.style.pointerEvents = "auto";
     }
-
     if (main) {
       main.classList.add("af-hidden");
       main.style.display = "none";
     }
-
     if (writeBtn) {
       writeBtn.classList.add("af-hidden");
       writeBtn.style.display = "none";
@@ -8985,19 +8878,16 @@ function refreshAfNexusLockStateV2() {
   }
 }
 
-/* ---------------- SHOWSECTION HOOK ---------------- */
+/* ── SHOWSECTION HOOK ────────────────────────────────── */
 
 if (typeof showSection === "function") {
-  const oldShowSectionAfNexusV2 = showSection;
-
+  const _oldShowSectionAfNexusV2 = showSection;
   showSection = function(sectionId) {
-    oldShowSectionAfNexusV2(sectionId);
-
+    _oldShowSectionAfNexusV2(sectionId);
     if (sectionId === "community") {
       setTimeout(initAfNexusV2, 50);
       setTimeout(refreshAfNexusLockStateV2, 300);
     }
-
     if (sectionId === "explore" && typeof refreshAfTestLockV1 === "function") {
       setTimeout(refreshAfTestLockV1, 50);
       setTimeout(refreshAfTestLockV1, 300);
@@ -9005,7 +8895,7 @@ if (typeof showSection === "function") {
   };
 }
 
-/* ---------------- AUTO RUN ---------------- */
+/* ── AUTO RUN ────────────────────────────────────────── */
 
 document.addEventListener("DOMContentLoaded", function() {
   setTimeout(function() {
@@ -9013,7 +8903,6 @@ document.addEventListener("DOMContentLoaded", function() {
       initAfNexusV2();
     }
   }, 400);
-
   setTimeout(refreshAfNexusLockStateV2, 500);
 });
 
