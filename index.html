@@ -4316,6 +4316,46 @@
     justify-content: center;
   }
 }
+    /* ── MY NEXUS HEAD ──────────────────────────────────── */
+.af-nexus-my-head-wrap-v2 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.af-nexus-back-btn-v2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  border-radius: var(--nx-r-md);
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, var(--nx-blue), var(--nx-indigo));
+  box-shadow: 0 4px 12px rgba(36,99,235,0.22);
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-family: inherit;
+  transition: opacity 0.15s var(--nx-ease), transform 0.15s var(--nx-ease);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.af-nexus-back-btn-v2:hover {
+  opacity: 0.9;
+  transform: translateX(-2px);
+}
+
+.af-nexus-back-btn-v2:active {
+  transform: scale(0.96);
+  opacity: 0.85;
+}
+
+[data-theme="dark"] .af-nexus-back-btn-v2 {
+  box-shadow: 0 4px 12px rgba(36,99,235,0.35);
+}
   </style>
 </head>
 
@@ -5051,18 +5091,22 @@
         </div>
 
         <!-- MY NEXUS VIEW -->
-        <div id="nxMyView" class="af-my-nexus-view-v2 af-hidden">
-          <div class="af-nexus-section-head-v2">
-            <div>
-              <h3>My Nexus</h3>
-              <p>All your posts in one place.</p>
-            </div>
-            <button class="af-nexus-refresh-btn-v2" type="button" onclick="nxCloseMyPosts()">← Back</button>
-          </div>
-          <div id="nxMyPostsList" class="af-nexus-posts-list-v2">
-            <div class="af-nexus-loading-v2">Loading…</div>
-          </div>
-        </div>
+<div id="nxMyView" class="af-my-nexus-view-v2 af-hidden">
+  <div class="af-nexus-section-head-v2">
+    <div class="af-nexus-my-head-wrap-v2">
+      <button class="af-nexus-back-btn-v2" type="button" onclick="nxCloseMyPosts()">
+        ← Back
+      </button>
+      <div>
+        <h3>My Nexus</h3>
+        <p>All your posts in one place.</p>
+      </div>
+    </div>
+  </div>
+  <div id="nxMyPostsList" class="af-nexus-posts-list-v2">
+    <div class="af-nexus-loading-v2">Loading…</div>
+  </div>
+</div>
 
       </div><!-- /nxMain -->
 
