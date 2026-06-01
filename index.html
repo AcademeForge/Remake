@@ -3141,10 +3141,10 @@
         </div><!-- /af-home-body -->
       </div><!-- /viewHome -->
 
-      <!-- ══════════════════════════════════════════════════════
-           VIEW: STUDENT (placeholder — navigates to /account/)
-           ══════════════════════════════════════════════════════ -->
-      <div class="af-view" id="viewStudent" aria-label="Student">
+     <!-- ══════════════════════════════════════════════════════
+     VIEW: STUDENT (placeholder — navigates to /account/)
+     ══════════════════════════════════════════════════════ -->
+<div class="af-view" id="viewStudent" aria-label="Student">
 
 <section id="studentaf" class="section">
   <div class="student-wrapaf">
@@ -3206,7 +3206,7 @@
       </div>
 
       <!-- CREATE ID BOX -->
-      <div id="studentCreateBoxaf" class="student-boxaf" style="display:none;">
+      <div id="studentCreateBoxaf" class="student-boxaf hidden-box">
         <label class="student-labelaf">Full Name</label>
         <input
           id="createNameaf"
@@ -3239,81 +3239,82 @@
           placeholder="Create password"
         >
 
-    <button class="student-main-btnaf" type="button" onclick="sendCreateOtpaf()">
-  Send Email OTP
-</button>
+        <button class="student-main-btnaf" type="button" onclick="sendCreateOtpaf()">
+          Send Email OTP
+        </button>
 
-<div id="createOtpAreaaf" style="display:none; margin-top:14px;">
-  <label class="student-labelaf">Email OTP</label>
-  <input
-    id="createOtpaf"
-    class="student-inputaf"
-    type="text"
-    maxlength="6"
-    placeholder="Enter OTP sent to your email"
-  >
+        <div id="createOtpAreaaf" class="hidden-box" style="margin-top:14px;">
+          <label class="student-labelaf">Email OTP</label>
+          <input
+            id="createOtpaf"
+            class="student-inputaf"
+            type="text"
+            maxlength="6"
+            placeholder="Enter OTP sent to your email"
+          >
 
-  <button class="student-main-btnaf secondary" type="button" onclick="verifyCreateOtpAndCreateIdaf()">
-    Verify OTP & Create ID
-  </button>
-</div>
+          <button class="student-main-btnaf secondary" type="button" onclick="verifyCreateOtpAndCreateIdaf()">
+            Verify OTP & Create ID
+          </button>
+        </div>
 
         <p class="student-helpaf">
           Your phone number will be used as your Student ID.
         </p>
       </div>
 
-<!-- FORGOT PASSWORD BOX -->
-<div id="studentForgotBoxaf" class="student-boxaf" style="display:none;">
-  <label class="student-labelaf">Student ID / Phone / Email</label>
-  <input
-    id="forgotLoginaf"
-    class="student-inputaf"
-    type="text"
-    placeholder="Enter your Student ID, phone, or email"
-  >
+      <!-- FORGOT PASSWORD BOX -->
+      <div id="studentForgotBoxaf" class="student-boxaf hidden-box">
+        <label class="student-labelaf">Student ID / Phone / Email</label>
+        <input
+          id="forgotLoginaf"
+          class="student-inputaf"
+          type="text"
+          placeholder="Enter your Student ID, phone, or email"
+        >
 
-  <button class="student-main-btnaf" type="button" onclick="findStudentForResetaf()">
-    Send Email OTP
-  </button>
+        <button class="student-main-btnaf" type="button" onclick="findStudentForResetaf()">
+          Send Email OTP
+        </button>
 
-  <div id="forgotOtpAreaaf" style="display:none; margin-top:14px;">
-    <label class="student-labelaf">Email OTP</label>
-    <input
-      id="forgotOtpaf"
-      class="student-inputaf"
-      type="text"
-      maxlength="6"
-      placeholder="Enter OTP sent to your email"
-    >
+        <div id="forgotOtpAreaaf" class="hidden-box" style="margin-top:14px;">
+          <label class="student-labelaf">Email OTP</label>
+          <input
+            id="forgotOtpaf"
+            class="student-inputaf"
+            type="text"
+            maxlength="6"
+            placeholder="Enter OTP sent to your email"
+          >
 
-    <button class="student-main-btnaf secondary" type="button" onclick="verifyForgotOtpaf()">
-      Verify OTP
-    </button>
-  </div>
+          <button class="student-main-btnaf secondary" type="button" onclick="verifyForgotOtpaf()">
+            Verify OTP
+          </button>
+        </div>
 
-  <div id="resetPasswordAreaaf" style="display:none; margin-top:14px;">
-    <label class="student-labelaf">New Password</label>
-    <input
-      id="newPasswordaf"
-      class="student-inputaf"
-      type="password"
-      placeholder="Create new password"
-    >
+        <div id="resetPasswordAreaaf" class="hidden-box" style="margin-top:14px;">
+          <label class="student-labelaf">New Password</label>
+          <input
+            id="newPasswordaf"
+            class="student-inputaf"
+            type="password"
+            placeholder="Create new password"
+          >
 
-    <button class="student-main-btnaf secondary" type="button" onclick="resetStudentPasswordaf()">
-      Reset Password
-    </button>
-  </div>
+          <button class="student-main-btnaf secondary" type="button" onclick="resetStudentPasswordaf()">
+            Reset Password
+          </button>
+        </div>
 
-  <button class="student-link-btnaf" type="button" onclick="switchStudentModeaf('login')">
-    Back to Login
-  </button>
+        <button class="student-link-btnaf" type="button" onclick="switchStudentModeaf('login')">
+          Back to Login
+        </button>
 
-  <p class="student-helpaf">
-    We’ll verify your registered email before allowing password reset.
-  </p>
-</div>
+        <p class="student-helpaf">
+          We'll verify your registered email before allowing password reset.
+        </p>
+      </div>
+
       <div id="studentMessageaf" class="student-messageaf"></div>
 
       <div class="student-noteaf">
@@ -3322,151 +3323,223 @@
       </div>
     </div>
 
-   <!-- ==============================
-     STUDENT COURSE DASHBOARD - AF
-     Show after login
-================================ -->
+    <!-- ==============================
+         STUDENT COURSE DASHBOARD - AF
+         Show after login
+    ================================ -->
 
-<div class="student-dashboardaf hidden-box" id="courseSelectBox">
-  <div class="student-dash-headaf">
-    <div>
-      <h2>📚 My Courses</h2>
-      <p id="studentWelcomeTextaf">Welcome Student</p>
+    <div class="student-dashboardaf hidden-box" id="courseSelectBox">
+      <div class="student-dash-headaf">
+        <div>
+          <h2>📚 My Courses</h2>
+          <p id="studentWelcomeTextaf">Welcome Student</p>
+        </div>
+
+        <button class="student-logoutaf" type="button" onclick="logoutStudentaf()">
+          Logout
+        </button>
+      </div>
+
+      <p class="student-dash-subaf">
+        Your enrolled programs are ready to explore.
+      </p>
+
+      <div class="course-select-gridaf" id="courseCardsaf"></div>
     </div>
 
-    <button class="student-logoutaf" type="button" onclick="logoutStudentaf()">
-      Logout
-    </button>
-  </div>
 
-  <p class="student-dash-subaf">
-    Your enrolled programs are ready to explore.
-  </p>
+    <!-- ==============================
+         NO COURSE / MESSAGE AREA - AF
+    ================================ -->
 
-  <div class="course-select-gridaf" id="courseCardsaf"></div>
-</div>
+    <div class="student-dashboardaf hidden-box" id="noCourseBoxaf">
+      <div class="no-course-cardaf">
+        <div class="no-course-iconaf">😬</div>
+        <h2>Oops!</h2>
+        <p>You are not enrolled in any batch.</p>
+        <p>Please enroll from the Batch section.</p>
 
-
-<!-- ==============================
-     NO COURSE / MESSAGE AREA - AF
-================================ -->
-
-<div class="student-dashboardaf hidden-box" id="noCourseBoxaf">
-  <div class="no-course-cardaf">
-    <div class="no-course-iconaf">😬</div>
-    <h2>Oops!</h2>
-    <p>You are not enrolled in any batch.</p>
-    <p>Please enroll from the Batch section.</p>
-
-    <button class="student-logoutaf" type="button" onclick="logoutStudentafWithMessage()">
-      Logout
-    </button>
-  </div>
-</div>
-
-
-<!-- ==============================
-     COURSE DETAILS - AF
-================================ -->
-
-<div class="student-dashboardaf hidden-box" id="courseDetailsBoxaf">
-  <button class="back-miniaf" type="button" onclick="backToCoursesaf()">
-    ← Back to Courses
-  </button>
-
-  <div class="course-detail-headaf">
-    <div class="course-detail-iconaf" id="courseDetailIconaf">📘</div>
-
-    <div>
-      <h2 id="courseTitleaf">Course Name</h2>
-      <p id="courseIntroaf">Course intro will appear here.</p>
+        <button class="student-logoutaf" type="button" onclick="logoutStudentafWithMessage()">
+          Logout
+        </button>
+      </div>
     </div>
-  </div>
 
-  <div class="course-info-boxaf">
-    <h3>📌 Course Details</h3>
-    <p id="courseDetailsaf"></p>
-  </div>
 
-  <div class="course-info-boxaf">
-    <h3>🧾 Course Syllabus</h3>
-    <ul id="courseSyllabusaf"></ul>
-  </div>
+    <!-- ==============================
+         COURSE DETAILS - AF
+    ================================ -->
 
-  <div class="course-info-boxaf">
-    <h3>🏫 Facilities</h3>
-    <ul id="courseFacilitiesaf"></ul>
-  </div>
+    <div class="student-dashboardaf hidden-box" id="courseDetailsBoxaf">
+      <button class="back-miniaf" type="button" onclick="backToCoursesaf()">
+        ← Back to Courses
+      </button>
 
-  <button class="student-main-btnaf" type="button" onclick="startLearningaf()">
-    Continue Learning
-  </button>
+      <div class="course-detail-headaf">
+        <div class="course-detail-iconaf" id="courseDetailIconaf">📘</div>
+
+        <div>
+          <h2 id="courseTitleaf">Course Name</h2>
+          <p id="courseIntroaf">Course intro will appear here.</p>
+        </div>
+      </div>
+
+      <div class="course-info-boxaf">
+        <h3>📌 Course Details</h3>
+        <p id="courseDetailsaf"></p>
+      </div>
+
+      <div class="course-info-boxaf">
+        <h3>🧾 Course Syllabus</h3>
+        <ul id="courseSyllabusaf"></ul>
+      </div>
+
+      <div class="course-info-boxaf">
+        <h3>🏫 Facilities</h3>
+        <ul id="courseFacilitiesaf"></ul>
+      </div>
+
+      <button class="student-main-btnaf" type="button" onclick="startLearningaf()">
+        Continue Learning
+      </button>
+    </div>
+
+
+    <!-- ==============================
+         LEARNING CHOICE - AF
+    ================================ -->
+
+    <div class="student-dashboardaf hidden-box" id="learningBoxaf">
+      <button class="back-miniaf" type="button" onclick="backToCourseDetailsaf()">
+        ← Back to Course
+      </button>
+
+      <h2 id="learningTitleaf">Start Learning</h2>
+      <p class="student-dash-subaf">Select what you want to access.</p>
+
+      <div class="learning-choiceaf">
+        <button class="learning-btnaf" type="button" onclick="openLearningModeaf('lectures')">
+          <span>🎥</span>
+          <strong>Lectures</strong>
+          <small>Chapter-wise video lecture list</small>
+        </button>
+
+        <button class="learning-btnaf" type="button" onclick="openLearningModeaf('notes')">
+          <span>📝</span>
+          <strong>Notes</strong>
+          <small>Chapter-wise study notes list</small>
+        </button>
+      </div>
+    </div>
+
+
+    <!-- ==============================
+         CHAPTER LIST - AF
+    ================================ -->
+
+    <div class="student-dashboardaf hidden-box" id="chapterBoxaf">
+      <button class="back-miniaf" type="button" onclick="backToLearningaf()">
+        ← Back
+      </button>
+
+      <h2 id="chapterModeTitleaf">Lectures</h2>
+      <p class="student-dash-subaf">Select a chapter to continue.</p>
+
+      <div class="chapter-listaf" id="chapterListaf"></div>
+    </div>
+
+
+    <!-- ==============================
+         CONTENT LIST - AF
+    ================================ -->
+
+    <div class="student-dashboardaf hidden-box" id="contentBoxaf">
+      <button class="back-miniaf" type="button" onclick="backToChaptersaf()">
+        ← Back to Chapters
+      </button>
+
+      <h2 id="contentTitleaf">Chapter Content</h2>
+      <p class="student-dash-subaf" id="contentSubtitleaf">
+        Select and study one by one.
+      </p>
+
+      <div class="content-listaf" id="contentListaf"></div>
+    </div>
+
+  </div>
+</section>
 </div>
 
+<!-- ══════════════════════════════════════════════════════
+     VIEW: BATCHES (placeholder — navigates to batches page)
+     ══════════════════════════════════════════════════════ -->
+<div class="af-view" id="viewBatches" aria-label="Batches">
 
-<!-- ==============================
-     LEARNING CHOICE - AF
-================================ -->
+  <section id="batchaf" class="section">
+    <div class="batch-wrapaf">
+      <div class="batch-pageaf" id="batchListBoxaf">
+        <div class="batch-topbaraf">
+          <div>
+            <h2>All Batches</h2>
+            <p id="batchCountTextaf">5 batches available</p>
+          </div>
+        </div>
 
-<div class="student-dashboardaf hidden-box" id="learningBoxaf">
-  <button class="back-miniaf" type="button" onclick="backToCourseDetailsaf()">
-    ← Back to Course
-  </button>
+        <div class="batch-search-boxaf">
+          <span>🔍</span>
+          <input id="batchSearchInputaf" type="text" placeholder="Search for batches" oninput="filterBatchesaf()">
+        </div>
 
-  <h2 id="learningTitleaf">Start Learning</h2>
-  <p class="student-dash-subaf">Select what you want to access.</p>
+        <div class="batch-gridaf" id="batchCardsaf"></div>
+      </div>
 
-  <div class="learning-choiceaf">
-    <button class="learning-btnaf" type="button" onclick="openLearningModeaf('lectures')">
-      <span>🎥</span>
-      <strong>Lectures</strong>
-      <small>Chapter-wise video lecture list</small>
-    </button>
+      <div class="batch-pageaf hidden-box" id="batchDetailsBoxaf">
+        <button class="batch-backaf" type="button" onclick="backToBatchListaf()">← Back to Batches</button>
 
-    <button class="learning-btnaf" type="button" onclick="openLearningModeaf('notes')">
-      <span>📝</span>
-      <strong>Notes</strong>
-      <small>Chapter-wise study notes list</small>
-    </button>
-  </div>
+        <div class="batch-detail-cardaf">
+          <img id="batchDetailImageaf" src="" alt="Batch Image" class="batch-detail-imgaf">
+
+          <div class="batch-detail-bodyaf">
+            <div class="batch-detail-headrowaf">
+              <div>
+                <p class="batch-categoryaf" id="batchDetailCategoryaf">Target</p>
+                <h2 id="batchDetailTitleaf">Batch Name</h2>
+              </div>
+              <span class="batch-languageaf" id="batchDetailLanguageaf">HINGLISH</span>
+            </div>
+
+            <p class="batch-detail-descaf" id="batchDetailDescaf">Batch description will appear here.</p>
+
+            <div class="batch-price-rowaf">
+              <strong id="batchDetailPriceaf">₹49</strong>
+              <del id="batchDetailOldPriceaf">₹99</del>
+              <span id="batchDetailOffaf">51% OFF</span>
+            </div>
+
+            <button id="batchDetailBuyBtnaf" class="batch-buy-mainaf" type="button" onclick="buySelectedBatchaf()">Buy Now</button>
+          </div>
+        </div>
+
+        <div class="batch-info-boxaf">
+          <h3>📌 What you will learn</h3>
+          <ul id="batchLearnListaf"></ul>
+        </div>
+
+        <div class="batch-info-boxaf">
+          <h3>🏫 Batch Facilities</h3>
+          <ul id="batchFacilityListaf"></ul>
+        </div>
+
+        <div class="batch-info-boxaf">
+          <h3>🧾 Batch Details</h3>
+          <p id="batchFullDetailsaf"></p>
+        </div>
+      </div>
+
+      <div id="afToastWrap" class="af-toast-wrap"></div>
+    </div>
+  </section>
 </div>
-
-
-<!-- ==============================
-     CHAPTER LIST - AF
-================================ -->
-
-<div class="student-dashboardaf hidden-box" id="chapterBoxaf">
-  <button class="back-miniaf" type="button" onclick="backToLearningaf()">
-    ← Back
-  </button>
-
-  <h2 id="chapterModeTitleaf">Lectures</h2>
-  <p class="student-dash-subaf">Select a chapter to continue.</p>
-
-  <div class="chapter-listaf" id="chapterListaf"></div>
-</div>
-
-
-<!-- ==============================
-     CONTENT LIST - AF
-================================ -->
-
-<div class="student-dashboardaf hidden-box" id="contentBoxaf">
-  <button class="back-miniaf" type="button" onclick="backToChaptersaf()">
-    ← Back to Chapters
-  </button>
-
-  <h2 id="contentTitleaf">Chapter Content</h2>
-  <p class="student-dash-subaf" id="contentSubtitleaf">
-    Select and study one by one.
-  </p>
-
-  <div class="content-listaf" id="contentListaf"></div>
-</div>
- </section>
-</div>
-
       <!-- ══════════════════════════════════════════════════════
            VIEW: BATCHES (placeholder — navigates to batches page)
            ══════════════════════════════════════════════════════ -->
