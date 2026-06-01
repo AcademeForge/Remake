@@ -8303,6 +8303,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 400);
   });
 
+  /* Re-check login state when localStorage changes (e.g. after login in another tab) */
+  window.addEventListener('storage', function () {
+    window.refreshAfNexusLockStateV2();
+  });
+
+})();
+
   </script>
 
 </body>
