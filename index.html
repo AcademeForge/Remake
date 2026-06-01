@@ -3163,6 +3163,10 @@
    AF NEXUS COMMUNITY V2 — community.css (FIXED & POLISHED)
 ========================================================= */
 
+/* =========================================================
+   AF NEXUS COMMUNITY V2 — community.css
+========================================================= */
+
 /* ── 1. VARIABLES ─────────────────────────────────────── */
 :root {
   --nx-bg: #f0f2f5;
@@ -3175,7 +3179,6 @@
   --nx-text: #0d1117;
   --nx-text-2: #3d4a5c;
   --nx-text-muted: #8393a7;
-  --nx-text-inv: #ffffff;
 
   --nx-blue: #2463eb;
   --nx-blue-dark: #1a4cc5;
@@ -3185,20 +3188,12 @@
 
   --nx-shadow-sm: 0 1px 4px rgba(0,0,0,0.07);
   --nx-shadow-md: 0 4px 18px rgba(0,0,0,0.09);
-  --nx-shadow-lg: 0 12px 40px rgba(0,0,0,0.13);
   --nx-shadow-modal: 0 24px 72px rgba(0,0,0,0.20);
 
-  --nx-r-xs: 6px;
   --nx-r-sm: 10px;
   --nx-r-md: 14px;
   --nx-r-lg: 18px;
   --nx-r-xl: 24px;
-
-  --nx-gap: 12px;
-  --nx-gap-sm: 8px;
-  --nx-gap-xs: 4px;
-  --nx-pad: 16px;
-  --nx-pad-sm: 12px;
 
   --nx-ease: cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -3214,18 +3209,22 @@
   --nx-text: #f0f4f8;
   --nx-text-2: #a8b8cc;
   --nx-text-muted: #566677;
-  --nx-text-inv: #ffffff;
 
   --nx-shadow-sm: 0 1px 4px rgba(0,0,0,0.4);
   --nx-shadow-md: 0 4px 18px rgba(0,0,0,0.4);
-  --nx-shadow-lg: 0 12px 40px rgba(0,0,0,0.5);
   --nx-shadow-modal: 0 24px 72px rgba(0,0,0,0.7);
 }
 
 /* ── 2. RESET ─────────────────────────────────────────── */
 .af-nexus-v2-shell *,
 .af-nexus-v2-shell *::before,
-.af-nexus-v2-shell *::after {
+.af-nexus-v2-shell *::after,
+.af-nexus-modal-overlay-v2 *,
+.af-nexus-modal-overlay-v2 *::before,
+.af-nexus-modal-overlay-v2 *::after,
+.af-nexus-menu-overlay-v2 *,
+.af-nexus-menu-overlay-v2 *::before,
+.af-nexus-menu-overlay-v2 *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -3241,7 +3240,7 @@
   width: 100%;
   max-width: 680px;
   margin: 0 auto;
-  padding: 14px 14px 100px;
+  padding: 14px 14px 40px;
   background: var(--nx-bg);
   min-height: 100dvh;
   display: flex;
@@ -3422,7 +3421,7 @@
   background: var(--nx-surface);
   cursor: pointer;
   flex-shrink: 0;
-  transition: background 0.15s var(--nx-ease), transform 0.15s var(--nx-ease);
+  transition: background 0.15s var(--nx-ease), transform 0.2s var(--nx-ease);
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -3436,7 +3435,7 @@
   color: var(--nx-text-2);
 }
 
-/* ── 6. USER BAR WITH WRITE POST ──────────────────────── */
+/* ── 6. USER BAR ──────────────────────────────────────── */
 .af-nexus-userbar-v2 {
   display: flex;
   align-items: center;
@@ -3476,7 +3475,6 @@
   display: block;
 }
 
-/* WRITE POST BUTTON — replaces floating FAB */
 .af-nexus-write-post-btn-v2 {
   display: inline-flex;
   align-items: center;
@@ -3506,9 +3504,11 @@
   opacity: 0.9;
 }
 
-/* Hide the old floating FAB completely */
-.af-nexus-write-btn-v2 {
+/* Legacy FAB — always hidden */
+.af-nexus-write-btn-v2,
+#afNexusWriteBtnV2 {
   display: none !important;
+  pointer-events: none !important;
 }
 
 /* ── 7. FEED CONTROLS ─────────────────────────────────── */
@@ -3544,8 +3544,8 @@
   box-shadow: 0 4px 12px rgba(36,99,235,0.24);
 }
 
-[data-theme="dark"] .af-nexus-filter-btn-v2.active {
-  background: linear-gradient(135deg, var(--nx-blue), var(--nx-indigo));
+[data-theme="dark"] .af-nexus-filter-btn-v2 {
+  color: var(--nx-text-muted);
 }
 
 /* ── 8. SECTION HEAD ──────────────────────────────────── */
@@ -3570,7 +3570,7 @@
   color: var(--nx-text-muted);
 }
 
-/* ── 9. POSTS LIST ────────────────────────────────────── */
+/* ── 9. FEED & POSTS ──────────────────────────────────── */
 .af-nexus-feed-view-v2,
 .af-my-nexus-view-v2 {
   display: flex;
@@ -3734,66 +3734,64 @@
   color: var(--nx-text-2);
 }
 
-/* ── 11. FLOATING FAB — DISABLED ──────────────────────── */
-/* The old floating pencil FAB is fully removed.
-   Write Post is now in the userbar. */
-#afNexusWriteBtnV2,
-.af-nexus-write-btn-v2 {
-  display: none !important;
-  pointer-events: none !important;
-}
-
-/* ── 12. MODALS (SHARED) ──────────────────────────────── */
-.af-nexus-modal-overlay-v2,
-.af-nexus-menu-overlay-v2 {
+/* ── 11. MODALS — SHARED OVERLAY ──────────────────────── */
+/*
+  All modals use position:fixed and are placed OUTSIDE the shell
+  so they are never clipped by any overflow or stacking context.
+  They always center relative to the viewport.
+*/
+.af-nexus-modal-overlay-v2 {
   position: fixed;
   inset: 0;
   z-index: 10000;
-  display: grid;
-  place-items: end center;
-  padding: 0;
-  background: rgba(8, 12, 22, 0.60);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(8, 12, 22, 0.65);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
+  overflow-y: auto;
 }
 
-.af-nexus-composer-card-v2,
-.af-nexus-comments-card-v2,
-.af-nexus-reply-card-v2 {
+/* Card base — shared by composer, comments, reply */
+.af-nexus-modal-card-v2 {
+  position: relative;
   width: 100%;
-  max-width: 600px;
-  max-height: 88dvh;
-  overflow: hidden;
-  border-radius: var(--nx-r-xl) var(--nx-r-xl) 0 0;
+  max-width: 560px;
+  max-height: calc(100dvh - 32px);
   background: var(--nx-surface);
   border: 1px solid var(--nx-border-strong);
-  border-bottom: none;
+  border-radius: var(--nx-r-xl);
   box-shadow: var(--nx-shadow-modal);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  /* Prevent the card from shrinking below its content */
+  flex-shrink: 0;
 }
 
-@media (min-width: 601px) {
+/* On small screens the card slides up from bottom */
+@media (max-width: 540px) {
   .af-nexus-modal-overlay-v2 {
-    place-items: center;
-    padding: 20px;
+    align-items: flex-end;
+    padding: 0;
   }
 
-  .af-nexus-composer-card-v2,
-  .af-nexus-comments-card-v2,
-  .af-nexus-reply-card-v2 {
-    border-radius: var(--nx-r-xl);
-    border-bottom: 1px solid var(--nx-border-strong);
-    max-height: 85dvh;
+  .af-nexus-modal-card-v2 {
+    border-radius: var(--nx-r-xl) var(--nx-r-xl) 0 0;
+    max-height: 92dvh;
+    max-width: 100%;
   }
 }
 
+/* Modal head */
 .af-nexus-modal-head-v2 {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
-  padding: 16px 16px 13px;
+  padding: 16px 16px 14px;
   border-bottom: 1px solid var(--nx-border);
   flex-shrink: 0;
 }
@@ -3812,12 +3810,13 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  max-width: 300px;
+  max-width: 360px;
 }
 
 .af-nexus-modal-close-v2 {
   width: 32px;
   height: 32px;
+  flex-shrink: 0;
   border: none;
   border-radius: var(--nx-r-sm);
   cursor: pointer;
@@ -3827,7 +3826,6 @@
   background: var(--nx-surface-3);
   display: grid;
   place-items: center;
-  flex-shrink: 0;
   transition: background 0.15s var(--nx-ease), color 0.15s var(--nx-ease);
   -webkit-tap-highlight-color: transparent;
 }
@@ -3842,10 +3840,17 @@
   color: var(--nx-text-muted);
 }
 
+/* Modal body (composer & reply) */
+.af-nexus-modal-body-v2 {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  flex: 1;
+}
+
 /* Shared textarea */
-#afNexusPostInputV2,
-#afNexusCommentInputV2,
-#afNexusReplyInputV2,
 #nxPostInput,
 #nxCommentInput,
 #nxReplyInput {
@@ -3862,13 +3867,10 @@
   background: var(--nx-surface-2);
   border: 1.5px solid var(--nx-border-strong);
   font-family: inherit;
-  transition: border-color 0.15s var(--nx-ease), background 0.15s var(--nx-ease), box-shadow 0.15s;
+  transition: border-color 0.15s var(--nx-ease), box-shadow 0.15s;
   -webkit-tap-highlight-color: transparent;
 }
 
-#afNexusPostInputV2:focus,
-#afNexusCommentInputV2:focus,
-#afNexusReplyInputV2:focus,
 #nxPostInput:focus,
 #nxCommentInput:focus,
 #nxReplyInput:focus {
@@ -3877,17 +3879,6 @@
   box-shadow: 0 0 0 3px rgba(36,99,235,0.12);
 }
 
-#afNexusPostInputV2.af-limit-exceeded-v2,
-#afNexusCommentInputV2.af-limit-exceeded-v2,
-#afNexusReplyInputV2.af-limit-exceeded-v2 {
-  border-color: var(--nx-red);
-  background: #fff8f8;
-  box-shadow: 0 0 0 3px rgba(229,62,62,0.10);
-}
-
-[data-theme="dark"] #afNexusPostInputV2,
-[data-theme="dark"] #afNexusCommentInputV2,
-[data-theme="dark"] #afNexusReplyInputV2,
 [data-theme="dark"] #nxPostInput,
 [data-theme="dark"] #nxCommentInput,
 [data-theme="dark"] #nxReplyInput {
@@ -3896,15 +3887,21 @@
   color: var(--nx-text);
 }
 
-[data-theme="dark"] #afNexusPostInputV2.af-limit-exceeded-v2,
-[data-theme="dark"] #afNexusCommentInputV2.af-limit-exceeded-v2,
-[data-theme="dark"] #afNexusReplyInputV2.af-limit-exceeded-v2 {
-  background: rgba(229,62,62,0.10);
+/* Word limit exceeded state */
+#nxPostInput.af-limit-exceeded-v2,
+#nxCommentInput.af-limit-exceeded-v2,
+#nxReplyInput.af-limit-exceeded-v2 {
+  border-color: var(--nx-red);
+  box-shadow: 0 0 0 3px rgba(229,62,62,0.10);
+}
+
+[data-theme="dark"] #nxPostInput.af-limit-exceeded-v2,
+[data-theme="dark"] #nxCommentInput.af-limit-exceeded-v2,
+[data-theme="dark"] #nxReplyInput.af-limit-exceeded-v2 {
   border-color: var(--nx-red);
 }
 
 .af-nexus-word-warning-v2 {
-  margin: 9px 0 0;
   padding: 8px 12px;
   border-radius: var(--nx-r-sm);
   font-size: 12px;
@@ -3920,39 +3917,92 @@
   border-color: rgba(229,62,62,0.25);
 }
 
-/* Modal body content padding */
-.af-nexus-composer-card-v2 > *:not(.af-nexus-modal-head-v2) {
-  padding-left: var(--nx-pad);
-  padding-right: var(--nx-pad);
+/* Foot row — word count + submit (composer & reply) */
+.af-nexus-composer-foot-v2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-shrink: 0;
 }
 
-.af-nexus-composer-card-v2 > *:last-child {
-  padding-bottom: var(--nx-pad);
+.af-nexus-composer-foot-v2 span {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--nx-text-muted);
 }
 
-.af-nexus-composer-card-v2 #afNexusPostInputV2,
-.af-nexus-composer-card-v2 #nxPostInput {
-  margin-top: var(--nx-pad);
+.af-nexus-composer-foot-v2 button {
+  min-height: 40px;
+  border: none;
+  border-radius: var(--nx-r-md);
+  cursor: pointer;
+  padding: 0 20px;
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, var(--nx-blue), var(--nx-indigo));
+  box-shadow: 0 4px 14px rgba(36,99,235,0.22);
+  transition: opacity 0.15s var(--nx-ease), transform 0.15s var(--nx-ease);
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* Footer row — word count + submit */
-.af-nexus-composer-foot-v2,
+.af-nexus-composer-foot-v2 button:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.af-nexus-composer-foot-v2 button:active {
+  transform: scale(0.97);
+}
+
+.af-nexus-composer-foot-v2 button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* ── 12. COMMENTS MODAL SPECIFICS ─────────────────────── */
+/* Comments list is scrollable; input box stays pinned at bottom */
+.af-nexus-comments-card-v2 {
+  /* inherits af-nexus-modal-card-v2 */
+}
+
+.af-nexus-comments-list-v2 {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 80px;
+  overscroll-behavior: contain;
+}
+
+.af-nexus-comment-input-box-v2 {
+  padding: 12px 16px 16px;
+  border-top: 1px solid var(--nx-border);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--nx-surface);
+}
+
 .af-nexus-comment-input-foot-v2 {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-top: 10px;
 }
 
-.af-nexus-composer-foot-v2 span,
 .af-nexus-comment-input-foot-v2 span {
   font-size: 12px;
   font-weight: 700;
   color: var(--nx-text-muted);
 }
 
-.af-nexus-composer-foot-v2 button,
 .af-nexus-comment-input-foot-v2 button {
   min-height: 40px;
   border: none;
@@ -3968,18 +4018,15 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.af-nexus-composer-foot-v2 button:hover,
 .af-nexus-comment-input-foot-v2 button:hover {
   opacity: 0.92;
   transform: translateY(-1px);
 }
 
-.af-nexus-composer-foot-v2 button:active,
 .af-nexus-comment-input-foot-v2 button:active {
   transform: scale(0.97);
 }
 
-.af-nexus-composer-foot-v2 button:disabled,
 .af-nexus-comment-input-foot-v2 button:disabled {
   opacity: 0.35;
   cursor: not-allowed;
@@ -3987,38 +4034,16 @@
   transform: none;
 }
 
-/* ── 14. COMMENTS ─────────────────────────────────────── */
-.af-nexus-comments-card-v2 {
-  padding: 0;
-}
-
-.af-nexus-comments-list-v2 {
-  flex: 1;
-  overflow-y: auto;
-  padding: 12px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  min-height: 60px;
-  max-height: 52dvh;
-  overscroll-behavior: contain;
-}
-
-.af-nexus-comment-input-box-v2 {
-  padding: 12px 16px 16px;
-  border-top: 1px solid var(--nx-border);
-  flex-shrink: 0;
-}
-
+/* ── 13. COMMENT CARDS ────────────────────────────────── */
 .af-nexus-comment-card-v2 {
-  background: var(--nx-surface);
+  background: var(--nx-surface-2);
   border: 1px solid var(--nx-border);
   border-radius: var(--nx-r-md);
   padding: 12px;
 }
 
 [data-theme="dark"] .af-nexus-comment-card-v2 {
-  background: var(--nx-surface-2);
+  background: var(--nx-surface-3);
   border-color: var(--nx-border);
 }
 
@@ -4039,12 +4064,17 @@
   font-size: 13px;
   font-weight: 700;
   color: var(--nx-text);
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .af-nexus-comment-info-v2 small {
-  margin-left: 6px;
+  margin-top: 2px;
   font-size: 11px;
   color: var(--nx-text-muted);
+  display: block;
 }
 
 .af-nexus-comment-text-v2 {
@@ -4076,7 +4106,7 @@
   color: var(--nx-text-2);
 }
 
-/* ── 15. REPLIES ──────────────────────────────────────── */
+/* ── 14. REPLIES ──────────────────────────────────────── */
 .af-nexus-view-replies-v2 {
   margin-top: 8px;
   border: none;
@@ -4086,10 +4116,11 @@
   font-weight: 700;
   color: var(--nx-blue);
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 4px;
   -webkit-tap-highlight-color: transparent;
+  font-family: inherit;
 }
 
 .af-nexus-view-replies-v2:hover {
@@ -4098,7 +4129,7 @@
 
 .af-nexus-replies-wrap-v2 {
   margin-top: 8px;
-  margin-left: 10px;
+  margin-left: 8px;
   padding-left: 12px;
   border-left: 2px solid var(--nx-border-strong);
   display: flex;
@@ -4114,33 +4145,16 @@
   border-top: 1px solid var(--nx-border);
 }
 
-.af-nexus-reply-card-v2 {
-  padding: 0;
-}
-
-.af-nexus-reply-card-v2 > *:not(.af-nexus-modal-head-v2) {
-  padding-left: var(--nx-pad);
-  padding-right: var(--nx-pad);
-}
-
-.af-nexus-reply-card-v2 > *:last-child {
-  padding-bottom: var(--nx-pad);
-}
-
-.af-nexus-reply-card-v2 #afNexusReplyInputV2,
-.af-nexus-reply-card-v2 #nxReplyInput {
-  margin-top: var(--nx-pad);
-}
-
-/* ── 16. ACTION MENU ──────────────────────────────────── */
+/* ── 15. ACTION MENU ──────────────────────────────────── */
 .af-nexus-menu-overlay-v2 {
   position: fixed;
   inset: 0;
   z-index: 10001;
-  display: grid;
-  place-items: end center;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
   padding: 12px;
-  background: rgba(8,12,22,0.55);
+  background: rgba(8,12,22,0.60);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 }
@@ -4184,39 +4198,37 @@
   background: var(--nx-surface-3);
   transition: background 0.15s var(--nx-ease), color 0.15s var(--nx-ease);
   -webkit-tap-highlight-color: transparent;
+  font-family: inherit;
 }
 
 .af-nexus-menu-card-v2 button:hover {
   background: var(--nx-border-strong);
 }
 
-#afNexusDeleteActionBtnV2,
 #nxDeleteBtn {
   color: var(--nx-red-dark);
   background: rgba(229,62,62,0.08);
 }
 
-[data-theme="dark"] #afNexusDeleteActionBtnV2,
 [data-theme="dark"] #nxDeleteBtn {
   color: #fca5a5;
   background: rgba(229,62,62,0.10);
 }
 
-#afNexusDeleteActionBtnV2:hover,
 #nxDeleteBtn:hover {
   background: rgba(229,62,62,0.15);
 }
 
-/* ── 17. DARK MODE OVERRIDES ──────────────────────────── */
+/* ── 16. DARK MODE SURFACE OVERRIDES ──────────────────── */
 [data-theme="dark"] .af-nexus-v2-shell {
   background: var(--nx-bg);
   color: var(--nx-text);
 }
 
 [data-theme="dark"] .af-nexus-header-v2,
-[data-theme="dark"] .af-nexus-post-card-v2,
 [data-theme="dark"] .af-nexus-userbar-v2,
-[data-theme="dark"] .af-nexus-controls-v2 {
+[data-theme="dark"] .af-nexus-controls-v2,
+[data-theme="dark"] .af-nexus-post-card-v2 {
   background: var(--nx-surface);
   border-color: var(--nx-border);
 }
@@ -4228,22 +4240,16 @@
   color: var(--nx-text-muted);
 }
 
-[data-theme="dark"] .af-nexus-composer-card-v2,
-[data-theme="dark"] .af-nexus-comments-card-v2,
-[data-theme="dark"] .af-nexus-reply-card-v2 {
+[data-theme="dark"] .af-nexus-modal-card-v2 {
   background: var(--nx-surface);
   border-color: var(--nx-border-strong);
 }
 
-[data-theme="dark"] .af-nexus-filter-btn-v2 {
-  color: var(--nx-text-muted);
+[data-theme="dark"] .af-nexus-comment-input-box-v2 {
+  background: var(--nx-surface);
 }
 
-/* ── 18. OVERLAY VISIBILITY OVERRIDES ─────────────────── */
-#afNexusComposerOverlayV2.af-hidden,
-#afNexusCommentsOverlayV2.af-hidden,
-#afNexusReplyOverlayV2.af-hidden,
-#afNexusMenuOverlayV2.af-hidden,
+/* ── 17. VISIBILITY HELPERS ───────────────────────────── */
 #nxComposerModal.af-hidden,
 #nxCommentsModal.af-hidden,
 #nxReplyModal.af-hidden,
@@ -4252,24 +4258,14 @@
   pointer-events: none !important;
 }
 
-#afNexusLockedV2.af-hidden,
 #nxLocked.af-hidden {
   display: none !important;
-  height: 0 !important;
-  min-height: 0 !important;
-  max-height: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  overflow: hidden !important;
-  opacity: 0 !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
 }
 
-/* ── 19. RESPONSIVE ───────────────────────────────────── */
+/* ── 18. RESPONSIVE ───────────────────────────────────── */
 @media (max-width: 430px) {
   .af-nexus-v2-shell {
-    padding: 12px 12px 90px;
+    padding: 10px 10px 30px;
   }
 
   .af-nexus-title-text-v2 p {
@@ -4288,10 +4284,6 @@
   .af-nexus-section-head-v2 {
     flex-direction: column;
     align-items: flex-start;
-  }
-
-  .af-nexus-section-head-v2 .af-nexus-refresh-btn-v2 {
-    align-self: flex-start;
   }
 }
 
@@ -4993,8 +4985,8 @@
   </section>
 </div>
       
-      <!-- ══════════════════════════════════════════════════════
-     AF NEXUS COMMUNITY V2 — 
+    <!-- ══════════════════════════════════════════════════════
+     AF NEXUS COMMUNITY V2 — community.html
 ══════════════════════════════════════════════════════ -->
 <div class="af-view" id="viewCommunity" aria-label="Community">
   <section id="community" class="section">
@@ -5013,6 +5005,7 @@
       <!-- MAIN -->
       <div id="nxMain" class="af-nexus-main-v2">
 
+        <!-- HEADER -->
         <header class="af-nexus-header-v2">
           <div class="af-nexus-title-wrap-v2">
             <div class="af-nexus-logo-v2">💬</div>
@@ -5027,21 +5020,18 @@
           </div>
         </header>
 
-       <div class="af-nexus-userbar-v2">
-  <div class="af-nexus-userbar-info-v2">
-    <span>Posting as</span>
-    <strong id="nxUserName">Student</strong>
-  </div>
+        <!-- USER BAR -->
+        <div class="af-nexus-userbar-v2">
+          <div class="af-nexus-userbar-info-v2">
+            <span>Posting as</span>
+            <strong id="nxUserName">Student</strong>
+          </div>
+          <button class="af-nexus-write-post-btn-v2" type="button" onclick="nxOpenComposer()">
+            ✍️ Write Post
+          </button>
+        </div>
 
-  <button
-    type="button"
-    class="af-nexus-write-post-btn-v2"
-    onclick="nxOpenComposer()"
-  >
-    ✍️ Write Post
-  </button>
-</div>
-
+        <!-- FEED CONTROLS -->
         <div class="af-nexus-controls-v2">
           <button id="nxBtnRelevant" class="af-nexus-filter-btn-v2 active" type="button" onclick="nxSetMode('relevant')">✦ Most relevant</button>
           <button id="nxBtnRecent" class="af-nexus-filter-btn-v2" type="button" onclick="nxSetMode('recent')">🕐 Recent posts</button>
@@ -5050,7 +5040,10 @@
         <!-- FEED VIEW -->
         <div id="nxFeedView" class="af-nexus-feed-view-v2">
           <div class="af-nexus-section-head-v2">
-            <div><h3>Community posts</h3><p>Discussions from AcademeForge learners.</p></div>
+            <div>
+              <h3>Community posts</h3>
+              <p>Discussions from AcademeForge learners.</p>
+            </div>
           </div>
           <div id="nxPostsList" class="af-nexus-posts-list-v2">
             <div class="af-nexus-loading-v2">Loading posts…</div>
@@ -5060,7 +5053,10 @@
         <!-- MY NEXUS VIEW -->
         <div id="nxMyView" class="af-my-nexus-view-v2 af-hidden">
           <div class="af-nexus-section-head-v2">
-            <div><h3>My Nexus</h3><p>All your posts in one place.</p></div>
+            <div>
+              <h3>My Nexus</h3>
+              <p>All your posts in one place.</p>
+            </div>
             <button class="af-nexus-refresh-btn-v2" type="button" onclick="nxCloseMyPosts()">← Back</button>
           </div>
           <div id="nxMyPostsList" class="af-nexus-posts-list-v2">
@@ -5070,84 +5066,98 @@
 
       </div><!-- /nxMain -->
 
-      <!-- FLOATING WRITE BUTTON -->
+      <!-- LEGACY FAB (hidden, kept for JS compatibility) -->
       <button id="afNexusWriteBtnV2" class="af-nexus-write-btn-v2" type="button"
         onclick="nxOpenComposer()" aria-label="Write post">✍️</button>
 
-      <!-- COMPOSER MODAL -->
-      <div id="nxComposerModal" class="af-nexus-modal-overlay-v2 af-hidden" onclick="nxCloseComposer()">
-        <div class="af-nexus-composer-card-v2" onclick="event.stopPropagation()">
-          <div class="af-nexus-modal-head-v2">
-            <div><h3>Create post</h3><p>Text only · max 80 words</p></div>
-            <button type="button" class="af-nexus-modal-close-v2" onclick="nxCloseComposer()">×</button>
-          </div>
-          <div style="padding:14px;">
-            <textarea id="nxPostInput" rows="6"
-              placeholder="Write something helpful, thoughtful, or interesting…"
-              oninput="nxPostTyping()"></textarea>
-            <div class="af-nexus-composer-foot-v2">
-              <span id="nxPostCount">0 / 80 words</span>
-              <button id="nxPostSubmit" type="button" onclick="nxCreatePost()" disabled>Post</button>
-            </div>
-            <p id="nxPostWarn" class="af-nexus-word-warning-v2 af-hidden">Word limit exceeded. Please keep within 80 words.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- COMMENTS MODAL -->
-      <div id="nxCommentsModal" class="af-nexus-modal-overlay-v2 af-hidden" onclick="nxCloseComments()">
-        <div class="af-nexus-comments-card-v2" onclick="event.stopPropagation()">
-          <div class="af-nexus-modal-head-v2">
-            <div><h3>Comments</h3><p>Join the discussion</p></div>
-            <button type="button" class="af-nexus-modal-close-v2" onclick="nxCloseComments()">×</button>
-          </div>
-          <div id="nxCommentsList" class="af-nexus-comments-list-v2">
-            <div class="af-nexus-loading-v2">Loading comments…</div>
-          </div>
-          <div class="af-nexus-comment-input-box-v2">
-            <textarea id="nxCommentInput" rows="3"
-              placeholder="Write a comment…"
-              oninput="nxCommentTyping()"></textarea>
-            <div class="af-nexus-comment-input-foot-v2">
-              <span id="nxCommentCount">0 / 80 words</span>
-              <button id="nxCommentSubmit" type="button" onclick="nxCreateComment()" disabled>Comment</button>
-            </div>
-            <p id="nxCommentWarn" class="af-nexus-word-warning-v2 af-hidden">Word limit exceeded.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- REPLY MODAL -->
-      <div id="nxReplyModal" class="af-nexus-modal-overlay-v2 af-hidden" onclick="nxCloseReply()">
-        <div class="af-nexus-reply-card-v2" onclick="event.stopPropagation()">
-          <div class="af-nexus-modal-head-v2">
-            <div><h3>Reply</h3><p id="nxReplyTarget">Reply to comment</p></div>
-            <button type="button" class="af-nexus-modal-close-v2" onclick="nxCloseReply()">×</button>
-          </div>
-          <div style="padding:14px;">
-            <textarea id="nxReplyInput" rows="4"
-              placeholder="Write your reply…"
-              oninput="nxReplyTyping()"></textarea>
-            <div class="af-nexus-composer-foot-v2">
-              <span id="nxReplyCount">0 / 80 words</span>
-              <button id="nxReplySubmit" type="button" onclick="nxCreateReply()" disabled>Reply</button>
-            </div>
-            <p id="nxReplyWarn" class="af-nexus-word-warning-v2 af-hidden">Word limit exceeded.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- ACTION MENU -->
-      <div id="nxMenuModal" class="af-nexus-menu-overlay-v2 af-hidden" onclick="nxCloseMenu()">
-        <div class="af-nexus-menu-card-v2" onclick="event.stopPropagation()">
-          <div class="af-nexus-menu-label-v2">Options</div>
-          <button id="nxDeleteBtn" type="button" onclick="nxDeleteTarget()">🗑 Delete</button>
-          <button type="button" onclick="nxCloseMenu()">Cancel</button>
-        </div>
-      </div>
-
-    </div>
+    </div><!-- /nxRoot -->
   </section>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     MODALS — rendered outside shell so they are not
+     clipped by any overflow/stacking context on the shell.
+══════════════════════════════════════════════════════ -->
+
+<!-- COMPOSER MODAL -->
+<div id="nxComposerModal" class="af-nexus-modal-overlay-v2 af-hidden" onclick="nxCloseComposer()">
+  <div class="af-nexus-modal-card-v2 af-nexus-composer-card-v2" onclick="event.stopPropagation()">
+    <div class="af-nexus-modal-head-v2">
+      <div>
+        <h3>Create post</h3>
+        <p>Text only · max 80 words</p>
+      </div>
+      <button type="button" class="af-nexus-modal-close-v2" onclick="nxCloseComposer()">×</button>
+    </div>
+    <div class="af-nexus-modal-body-v2">
+      <textarea id="nxPostInput" rows="6"
+        placeholder="Write something helpful, thoughtful, or interesting…"
+        oninput="nxPostTyping()"></textarea>
+      <p id="nxPostWarn" class="af-nexus-word-warning-v2 af-hidden">Word limit exceeded. Please keep within 80 words.</p>
+      <div class="af-nexus-composer-foot-v2">
+        <span id="nxPostCount">0 / 80 words</span>
+        <button id="nxPostSubmit" type="button" onclick="nxCreatePost()" disabled>Post</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COMMENTS MODAL -->
+<div id="nxCommentsModal" class="af-nexus-modal-overlay-v2 af-hidden" onclick="nxCloseComments()">
+  <div class="af-nexus-modal-card-v2 af-nexus-comments-card-v2" onclick="event.stopPropagation()">
+    <div class="af-nexus-modal-head-v2">
+      <div>
+        <h3>Comments</h3>
+        <p id="nxCommentsPostPreview">Join the discussion</p>
+      </div>
+      <button type="button" class="af-nexus-modal-close-v2" onclick="nxCloseComments()">×</button>
+    </div>
+    <div id="nxCommentsList" class="af-nexus-comments-list-v2">
+      <div class="af-nexus-loading-v2">Loading comments…</div>
+    </div>
+    <div class="af-nexus-comment-input-box-v2">
+      <textarea id="nxCommentInput" rows="3"
+        placeholder="Write a comment…"
+        oninput="nxCommentTyping()"></textarea>
+      <p id="nxCommentWarn" class="af-nexus-word-warning-v2 af-hidden">Word limit exceeded.</p>
+      <div class="af-nexus-comment-input-foot-v2">
+        <span id="nxCommentCount">0 / 80 words</span>
+        <button id="nxCommentSubmit" type="button" onclick="nxCreateComment()" disabled>Comment</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- REPLY MODAL -->
+<div id="nxReplyModal" class="af-nexus-modal-overlay-v2 af-hidden" onclick="nxCloseReply()">
+  <div class="af-nexus-modal-card-v2 af-nexus-reply-card-v2" onclick="event.stopPropagation()">
+    <div class="af-nexus-modal-head-v2">
+      <div>
+        <h3>Reply</h3>
+        <p id="nxReplyTarget">Reply to comment</p>
+      </div>
+      <button type="button" class="af-nexus-modal-close-v2" onclick="nxCloseReply()">×</button>
+    </div>
+    <div class="af-nexus-modal-body-v2">
+      <textarea id="nxReplyInput" rows="4"
+        placeholder="Write your reply…"
+        oninput="nxReplyTyping()"></textarea>
+      <p id="nxReplyWarn" class="af-nexus-word-warning-v2 af-hidden">Word limit exceeded.</p>
+      <div class="af-nexus-composer-foot-v2">
+        <span id="nxReplyCount">0 / 80 words</span>
+        <button id="nxReplySubmit" type="button" onclick="nxCreateReply()" disabled>Reply</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ACTION MENU -->
+<div id="nxMenuModal" class="af-nexus-menu-overlay-v2 af-hidden" onclick="nxCloseMenu()">
+  <div class="af-nexus-menu-card-v2" onclick="event.stopPropagation()">
+    <div class="af-nexus-menu-label-v2">Options</div>
+    <button id="nxDeleteBtn" type="button" onclick="nxDeleteTarget()">🗑 Delete</button>
+    <button type="button" onclick="nxCloseMenu()">Cancel</button>
+  </div>
 </div>
       <!-- ══════════════════════════════════════════════════════
            VIEW: SETTINGS — Fully reorganized accordion groups
@@ -7879,9 +7889,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /* =========================================================
-   AF NEXUS COMMUNITY V2 — community
+   AF NEXUS COMMUNITY V2 — community.js
 ========================================================= */
-/* AF NEXUS COMMUNITY V2 — community.js (rewritten) */
 
 (function () {
 
@@ -7930,7 +7939,10 @@ document.addEventListener("DOMContentLoaded", function () {
     return String(n).trim().split(/\s+/).slice(0, 2).map(v => v.charAt(0).toUpperCase()).join('');
   }
   function esc(t) {
-    return String(t || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return String(t || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
   }
   function timeAgo(v) {
     if (!v) return '';
@@ -7947,6 +7959,22 @@ document.addEventListener("DOMContentLoaded", function () {
   function show(id) { const el = $id(id); if (el) el.classList.remove('af-hidden'); }
   function hide(id) { const el = $id(id); if (el) el.classList.add('af-hidden'); }
 
+  /* ── BODY SCROLL LOCK ── */
+  function lockScroll() {
+    document.body.style.overflow = 'hidden';
+  }
+  function unlockScroll() {
+    // Only unlock if no other modals are open
+    const modals = ['nxComposerModal', 'nxCommentsModal', 'nxReplyModal', 'nxMenuModal'];
+    const anyOpen = modals.some(id => {
+      const el = $id(id);
+      return el && !el.classList.contains('af-hidden');
+    });
+    if (!anyOpen) {
+      document.body.style.overflow = '';
+    }
+  }
+
   /* ── CACHE ── */
   function loadCache() {
     try {
@@ -7957,18 +7985,20 @@ document.addEventListener("DOMContentLoaded", function () {
     } catch (e) { return []; }
   }
   function saveCache(posts) {
-    try { localStorage.setItem('af_nx_cache', JSON.stringify({ data: posts || [], at: Date.now() })); } catch (e) { }
+    try {
+      localStorage.setItem('af_nx_cache', JSON.stringify({ data: posts || [], at: Date.now() }));
+    } catch (e) {}
   }
 
   /* ── INIT ── */
   function initNx() {
     if (!isLoggedIn()) {
-      hide('nxMain'); hide('afNexusWriteBtnV2');
+      hide('nxMain');
       show('nxLocked');
       return;
     }
     hide('nxLocked');
-    show('nxMain'); show('afNexusWriteBtnV2');
+    show('nxMain');
     const n = $id('nxUserName');
     if (n) n.textContent = studentName();
     const cached = loadCache();
@@ -8008,6 +8038,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const myKey = studentKey();
     box.innerHTML = posts.map(p => {
       const isMine = String(p.student_key || '') === String(myKey || '');
+      const postPreview = esc((p.content || '').slice(0, 60)).replace(/'/g, '&#39;');
       return `<div class="af-nexus-post-card-v2" data-post-id="${p.id}">
         <div class="af-nexus-post-top-v2">
           <div class="af-nexus-author-v2">
@@ -8022,7 +8053,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <p class="af-nexus-post-text-v2">${esc(p.content || '')}</p>
         <div class="af-nexus-post-actions-v2">
           <button class="af-nexus-action-btn-v2" type="button" onclick="nxLikePost(${p.id})">❤ ${p.likes_count || 0}</button>
-          <button class="af-nexus-action-btn-v2" type="button" onclick="nxOpenComments(${p.id})">💬 ${p.comments_count || 0} comments</button>
+          <button class="af-nexus-action-btn-v2" type="button" onclick="nxOpenComments(${p.id},'${postPreview}')">💬 ${p.comments_count || 0} comments</button>
         </div>
       </div>`;
     }).join('');
@@ -8043,26 +8074,44 @@ document.addEventListener("DOMContentLoaded", function () {
     const inp = $id('nxPostInput');
     if (inp) { inp.value = ''; nxPostTyping(); setTimeout(() => inp.focus(), 80); }
     show('nxComposerModal');
+    lockScroll();
   }
-  function nxCloseComposer() { hide('nxComposerModal'); }
+  function nxCloseComposer() {
+    hide('nxComposerModal');
+    unlockScroll();
+  }
   function nxPostTyping() {
-    const inp = $id('nxPostInput'), cnt = $id('nxPostCount'), warn = $id('nxPostWarn'), btn = $id('nxPostSubmit');
+    const inp = $id('nxPostInput');
+    const cnt = $id('nxPostCount');
+    const warn = $id('nxPostWarn');
+    const btn = $id('nxPostSubmit');
     const w = wordCount(inp ? inp.value : ''), ex = w > 80;
     if (cnt) cnt.textContent = w + ' / 80 words';
     if (warn) warn.classList.toggle('af-hidden', !ex);
     if (btn) btn.disabled = ex || w === 0;
+    if (inp) inp.classList.toggle('af-limit-exceeded-v2', ex);
   }
   async function nxCreatePost() {
     const inp = $id('nxPostInput');
     if (!inp) return;
     const content = inp.value.trim();
     if (!content || wordCount(content) > 80) return;
-    const btn = $id('nxPostSubmit'); if (btn) btn.disabled = true;
+    const btn = $id('nxPostSubmit');
+    if (btn) btn.disabled = true;
     try {
       const res = await edgeCall({ action: 'create_post', content });
-      if (!res || !res.ok) { alert(res?.message || 'Could not create post.'); if (btn) btn.disabled = false; return; }
-      inp.value = ''; nxCloseComposer();
-      if (res.post) { _postsCache = [res.post].concat(_postsCache || []); saveCache(_postsCache); renderPosts(_postsCache, 'nxPostsList'); }
+      if (!res || !res.ok) {
+        alert(res?.message || 'Could not create post.');
+        if (btn) btn.disabled = false;
+        return;
+      }
+      inp.value = '';
+      nxCloseComposer();
+      if (res.post) {
+        _postsCache = [res.post].concat(_postsCache || []);
+        saveCache(_postsCache);
+        renderPosts(_postsCache, 'nxPostsList');
+      }
       nxLoadPosts(false);
     } catch (e) { console.error(e); }
   }
@@ -8073,33 +8122,50 @@ document.addEventListener("DOMContentLoaded", function () {
     _postsCache = _postsCache.map(p =>
       String(p.id) !== String(postId) ? p : { ...p, likes_count: Number(p.likes_count || 0) + 1 }
     );
-    saveCache(_postsCache); renderPosts(_postsCache, 'nxPostsList');
-    try { await edgeCall({ action: 'toggle_post_like', post_id: postId }); nxLoadPosts(false); } catch (e) { nxLoadPosts(false); }
+    saveCache(_postsCache);
+    renderPosts(_postsCache, 'nxPostsList');
+    try {
+      await edgeCall({ action: 'toggle_post_like', post_id: postId });
+      nxLoadPosts(false);
+    } catch (e) { nxLoadPosts(false); }
   }
 
   /* ── COMMENTS ── */
-  function nxOpenComments(postId) {
+  function nxOpenComments(postId, preview) {
     _currentPostId = postId;
     const inp = $id('nxCommentInput');
     if (inp) { inp.value = ''; nxCommentTyping(); }
+    const previewEl = $id('nxCommentsPostPreview');
+    if (previewEl) previewEl.textContent = preview ? preview + '…' : 'Join the discussion';
     show('nxCommentsModal');
+    lockScroll();
     nxLoadComments(postId);
   }
-  function nxCloseComments() { hide('nxCommentsModal'); _currentPostId = null; }
+  function nxCloseComments() {
+    hide('nxCommentsModal');
+    _currentPostId = null;
+    unlockScroll();
+  }
   async function nxLoadComments(postId) {
     const box = $id('nxCommentsList');
     if (!box) return;
     box.innerHTML = '<div class="af-nexus-loading-v2">Loading comments…</div>';
     try {
       const res = await edgeCall({ action: 'fetch_comments', post_id: postId });
-      if (!res || !res.ok) { box.innerHTML = '<div class="af-nexus-empty-v2">Could not load comments.</div>'; return; }
+      if (!res || !res.ok) {
+        box.innerHTML = '<div class="af-nexus-empty-v2">Could not load comments.</div>';
+        return;
+      }
       nxRenderComments(Array.isArray(res.comments) ? res.comments : []);
     } catch (e) { console.error(e); }
   }
   function nxRenderComments(comments) {
     const box = $id('nxCommentsList');
     if (!box) return;
-    if (!comments || !comments.length) { box.innerHTML = '<div class="af-nexus-empty-v2">No comments yet. Start the discussion!</div>'; return; }
+    if (!comments || !comments.length) {
+      box.innerHTML = '<div class="af-nexus-empty-v2">No comments yet. Start the discussion!</div>';
+      return;
+    }
     const byParent = {};
     comments.forEach(c => {
       const k = c.parent_comment_id ? String(c.parent_comment_id) : 'root';
@@ -8159,34 +8225,52 @@ document.addEventListener("DOMContentLoaded", function () {
     if (btn && btn.classList.contains('af-nexus-view-replies-v2')) {
       const m = btn.textContent.match(/(\d+)/);
       const cnt = m ? m[1] : '';
-      btn.textContent = hidden ? `▾ ${cnt} repl${Number(cnt) === 1 ? 'y' : 'ies'}` : `▸ ${cnt} repl${Number(cnt) === 1 ? 'y' : 'ies'}`;
+      const plural = Number(cnt) === 1 ? 'y' : 'ies';
+      btn.textContent = hidden ? `▾ ${cnt} repl${plural}` : `▸ ${cnt} repl${plural}`;
     }
   }
   function nxCommentTyping() {
-    const inp = $id('nxCommentInput'), cnt = $id('nxCommentCount'), warn = $id('nxCommentWarn'), btn = $id('nxCommentSubmit');
+    const inp = $id('nxCommentInput');
+    const cnt = $id('nxCommentCount');
+    const warn = $id('nxCommentWarn');
+    const btn = $id('nxCommentSubmit');
     const w = wordCount(inp ? inp.value : ''), ex = w > 80;
     if (cnt) cnt.textContent = w + ' / 80 words';
     if (warn) warn.classList.toggle('af-hidden', !ex);
     if (btn) btn.disabled = ex || w === 0;
+    if (inp) inp.classList.toggle('af-limit-exceeded-v2', ex);
   }
   async function nxCreateComment() {
     const inp = $id('nxCommentInput');
     if (!inp || !_currentPostId) return;
     const content = inp.value.trim();
     if (!content || wordCount(content) > 80) return;
-    const btn = $id('nxCommentSubmit'); if (btn) btn.disabled = true;
+    const btn = $id('nxCommentSubmit');
+    if (btn) btn.disabled = true;
     try {
       const res = await edgeCall({ action: 'create_comment', post_id: _currentPostId, parent_comment_id: null, content });
-      if (!res || !res.ok) { alert(res?.message || 'Could not comment.'); if (btn) btn.disabled = false; return; }
-      inp.value = ''; nxCommentTyping();
-      _postsCache = _postsCache.map(p => String(p.id) === String(_currentPostId) ? { ...p, comments_count: Number(p.comments_count || 0) + 1 } : p);
-      saveCache(_postsCache); renderPosts(_postsCache, 'nxPostsList');
-      nxLoadComments(_currentPostId); nxLoadPosts(false);
+      if (!res || !res.ok) {
+        alert(res?.message || 'Could not comment.');
+        if (btn) btn.disabled = false;
+        return;
+      }
+      inp.value = '';
+      nxCommentTyping();
+      _postsCache = _postsCache.map(p =>
+        String(p.id) === String(_currentPostId) ? { ...p, comments_count: Number(p.comments_count || 0) + 1 } : p
+      );
+      saveCache(_postsCache);
+      renderPosts(_postsCache, 'nxPostsList');
+      nxLoadComments(_currentPostId);
+      nxLoadPosts(false);
     } catch (e) { console.error(e); }
   }
   async function nxLikeComment(cId) {
     if (!studentKey()) return;
-    try { await edgeCall({ action: 'toggle_comment_like', comment_id: cId }); if (_currentPostId) nxLoadComments(_currentPostId); } catch (e) { console.error(e); }
+    try {
+      await edgeCall({ action: 'toggle_comment_like', comment_id: cId });
+      if (_currentPostId) nxLoadComments(_currentPostId);
+    } catch (e) { console.error(e); }
   }
 
   /* ── REPLIES ── */
@@ -8197,28 +8281,46 @@ document.addEventListener("DOMContentLoaded", function () {
     const inp = $id('nxReplyInput');
     if (inp) { inp.value = ''; nxReplyTyping(); setTimeout(() => inp.focus(), 80); }
     show('nxReplyModal');
+    lockScroll();
   }
-  function nxCloseReply() { hide('nxReplyModal'); _replyParentId = null; }
+  function nxCloseReply() {
+    hide('nxReplyModal');
+    _replyParentId = null;
+    unlockScroll();
+  }
   function nxReplyTyping() {
-    const inp = $id('nxReplyInput'), cnt = $id('nxReplyCount'), warn = $id('nxReplyWarn'), btn = $id('nxReplySubmit');
+    const inp = $id('nxReplyInput');
+    const cnt = $id('nxReplyCount');
+    const warn = $id('nxReplyWarn');
+    const btn = $id('nxReplySubmit');
     const w = wordCount(inp ? inp.value : ''), ex = w > 80;
     if (cnt) cnt.textContent = w + ' / 80 words';
     if (warn) warn.classList.toggle('af-hidden', !ex);
     if (btn) btn.disabled = ex || w === 0;
+    if (inp) inp.classList.toggle('af-limit-exceeded-v2', ex);
   }
   async function nxCreateReply() {
     const inp = $id('nxReplyInput');
     if (!inp || !_currentPostId || !_replyParentId) return;
     const content = inp.value.trim();
     if (!content || wordCount(content) > 80) return;
-    const btn = $id('nxReplySubmit'); if (btn) btn.disabled = true;
+    const btn = $id('nxReplySubmit');
+    if (btn) btn.disabled = true;
     try {
       const res = await edgeCall({ action: 'create_comment', post_id: _currentPostId, parent_comment_id: _replyParentId, content });
-      if (!res || !res.ok) { alert(res?.message || 'Could not reply.'); if (btn) btn.disabled = false; return; }
+      if (!res || !res.ok) {
+        alert(res?.message || 'Could not reply.');
+        if (btn) btn.disabled = false;
+        return;
+      }
       nxCloseReply();
-      _postsCache = _postsCache.map(p => String(p.id) === String(_currentPostId) ? { ...p, comments_count: Number(p.comments_count || 0) + 1 } : p);
-      saveCache(_postsCache); renderPosts(_postsCache, 'nxPostsList');
-      nxLoadComments(_currentPostId); nxLoadPosts(false);
+      _postsCache = _postsCache.map(p =>
+        String(p.id) === String(_currentPostId) ? { ...p, comments_count: Number(p.comments_count || 0) + 1 } : p
+      );
+      saveCache(_postsCache);
+      renderPosts(_postsCache, 'nxPostsList');
+      nxLoadComments(_currentPostId);
+      nxLoadPosts(false);
     } catch (e) { console.error(e); }
   }
 
@@ -8240,7 +8342,10 @@ document.addEventListener("DOMContentLoaded", function () {
     box.innerHTML = '<div class="af-nexus-loading-v2">Loading your posts…</div>';
     try {
       const res = await edgeCall({ action: 'my_posts' });
-      if (!res || !res.ok) { box.innerHTML = '<div class="af-nexus-empty-v2">Could not load your posts.</div>'; return; }
+      if (!res || !res.ok) {
+        box.innerHTML = '<div class="af-nexus-empty-v2">Could not load your posts.</div>';
+        return;
+      }
       renderPosts(Array.isArray(res.posts) ? res.posts : [], 'nxMyPostsList');
     } catch (e) { console.error(e); }
   }
@@ -8251,8 +8356,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const del = $id('nxDeleteBtn');
     if (del) del.style.display = isMine ? 'block' : 'none';
     show('nxMenuModal');
+    lockScroll();
   }
-  function nxCloseMenu() { hide('nxMenuModal'); _menuTarget = null; }
+  function nxCloseMenu() {
+    hide('nxMenuModal');
+    _menuTarget = null;
+    unlockScroll();
+  }
   async function nxDeleteTarget() {
     if (!_menuTarget || !_menuTarget.isMine) { nxCloseMenu(); return; }
     const t = _menuTarget;
@@ -8264,7 +8374,8 @@ document.addEventListener("DOMContentLoaded", function () {
       nxCloseMenu();
       if (t.type === 'post') {
         _postsCache = _postsCache.filter(p => String(p.id) !== String(t.id));
-        saveCache(_postsCache); renderPosts(_postsCache, 'nxPostsList');
+        saveCache(_postsCache);
+        renderPosts(_postsCache, 'nxPostsList');
       }
       if (_currentPostId) nxLoadComments(_currentPostId);
       nxLoadPosts(false);
@@ -8277,6 +8388,15 @@ document.addEventListener("DOMContentLoaded", function () {
   function nxGoLogin() {
     if (typeof showSection === 'function') showSection('studentaf');
   }
+
+  /* ── KEYBOARD: close modals on Escape ── */
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    if ($id('nxMenuModal') && !$id('nxMenuModal').classList.contains('af-hidden')) { nxCloseMenu(); return; }
+    if ($id('nxReplyModal') && !$id('nxReplyModal').classList.contains('af-hidden')) { nxCloseReply(); return; }
+    if ($id('nxCommentsModal') && !$id('nxCommentsModal').classList.contains('af-hidden')) { nxCloseComments(); return; }
+    if ($id('nxComposerModal') && !$id('nxComposerModal').classList.contains('af-hidden')) { nxCloseComposer(); return; }
+  });
 
   /* ── EXPOSE GLOBALS ── */
   window.nxLoadPosts = nxLoadPosts;
@@ -8307,8 +8427,8 @@ document.addEventListener("DOMContentLoaded", function () {
   window.initAfNexusV2 = initNx;
   window.initCommunitySection = initNx;
   window.refreshAfNexusLockStateV2 = function () {
-    if (isLoggedIn()) { hide('nxLocked'); show('nxMain'); show('afNexusWriteBtnV2'); }
-    else { show('nxLocked'); hide('nxMain'); hide('afNexusWriteBtnV2'); }
+    if (isLoggedIn()) { hide('nxLocked'); show('nxMain'); }
+    else { show('nxLocked'); hide('nxMain'); }
   };
 
   if (typeof showSection === 'function') {
