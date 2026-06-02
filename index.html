@@ -3810,6 +3810,170 @@ body,
   overflow: hidden;
   text-overflow: ellipsis;
 }
+        /* ── SETTINGS SECTIONS (Contact, Bug Report, Request Status, Learning Heatmap) ── */
+    .request-status-section-af { background: var(--bg-base); }
+    .request-status-page-af { display: flex; flex-direction: column; gap: 16px; padding: var(--gap-md); }
+    .request-status-hero-af { display: flex; align-items: center; gap: 12px; padding: 16px 0 4px; }
+    .request-status-back-af { background: none; border: none; font-size: 14px; font-weight: 600; color: var(--af-primary); cursor: pointer; padding: 6px 10px 6px 0; flex-shrink: 0; }
+    .request-status-hero-text-af { flex: 1; min-width: 0; }
+    .request-status-hero-text-af p { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 2px; }
+    .request-status-hero-text-af h2 { font-family: var(--font-display); font-size: 20px; font-weight: 800; color: var(--text-primary); margin: 0 0 2px; }
+    .request-status-hero-text-af span { font-size: 12px; color: var(--text-muted); }
+    .request-status-refresh-af { background: var(--bg-group); border: 1px solid var(--border-card); border-radius: var(--r-sm); width: 36px; height: 36px; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); flex-shrink: 0; transition: opacity 0.15s; }
+    .request-status-refresh-af:active { opacity: 0.6; }
+    .request-status-message-af { font-size: 13px; color: var(--text-muted); text-align: center; padding: 12px 0; }
+    .request-status-list-af { display: flex; flex-direction: column; gap: 10px; }
+    .request-status-card-af { background: var(--bg-card); border: 1px solid var(--border-card); border-radius: var(--r-lg); padding: 16px; box-shadow: var(--shadow-card); }
+    .rs-card-head-af { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .rs-card-reason-af { font-size: 13px; font-weight: 700; color: var(--text-primary); }
+    .rs-card-status-af { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 99px; background: var(--bg-group); color: var(--text-secondary); }
+    .rs-status-pending { background: rgba(245,158,11,0.12); color: #b45309; }
+    .rs-status-open    { background: rgba(37,99,235,0.10);  color: #1d4ed8; }
+    .rs-status-resolved { background: rgba(34,197,94,0.12); color: #166534; }
+    .rs-card-desc-af { font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin: 0 0 8px; }
+    .rs-card-date-af { font-size: 11px; color: var(--text-muted); }
+
+    .contact-us-af-section { background: var(--bg-base); }
+    .contact-us-af-page { display: flex; flex-direction: column; gap: 16px; padding: var(--gap-md); }
+    .contact-back-btn-af { background: none; border: none; font-size: 14px; font-weight: 600; color: var(--af-primary); cursor: pointer; padding: 6px 0; text-align: left; }
+    .contact-us-af-card { background: var(--bg-card); border: 1px solid var(--border-card); border-radius: var(--r-xl); padding: 20px; box-shadow: var(--shadow-card); }
+    .contact-us-af-head { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 20px; }
+    .contact-us-af-icon { font-size: 28px; width: 48px; height: 48px; border-radius: var(--r-md); background: linear-gradient(135deg, rgba(79,70,229,0.12), rgba(6,182,212,0.08)); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .contact-us-af-head > div { flex: 1; }
+    .contact-us-af-kicker { font-size: 11px; font-weight: 700; color: var(--af-primary); text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 4px; }
+    .contact-us-af-head h2 { font-family: var(--font-display); font-size: 17px; font-weight: 800; color: var(--text-primary); margin: 0 0 4px; }
+    .contact-us-af-head p { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin: 0; }
+    .contact-us-af-form { display: flex; flex-direction: column; gap: 14px; }
+    .contact-field-af { display: flex; flex-direction: column; gap: 5px; }
+    .contact-field-af label { font-size: 12px; font-weight: 600; color: var(--text-secondary); }
+    .contact-field-af input, .contact-field-af select, .contact-field-af textarea {
+      width: 100%; padding: 11px 13px; border-radius: var(--r-md);
+      border: 1px solid var(--border-input); background: var(--bg-input);
+      color: var(--text-primary); font-size: 14px; font-family: inherit;
+      outline: none; transition: border-color 0.15s;
+    }
+    .contact-field-af input:focus, .contact-field-af select:focus, .contact-field-af textarea:focus { border-color: var(--af-primary); }
+    .contact-field-af textarea { resize: vertical; min-height: 90px; }
+    .contact-field-af select { background-color: var(--bg-input); }
+    .contact-message-af { font-size: 13px; color: var(--text-secondary); min-height: 18px; }
+    .contact-message-af.is-success { color: #166534; }
+    .contact-message-af.is-error   { color: #991b1b; }
+    .contact-submit-btn-af {
+      width: 100%; padding: 14px; border-radius: var(--r-lg);
+      background: linear-gradient(135deg, var(--af-primary), var(--af-primary-dark));
+      color: white; font-weight: 700; font-size: 15px; cursor: pointer;
+      box-shadow: var(--shadow-btn); border: none; transition: opacity 0.15s; font-family: inherit;
+    }
+    .contact-submit-btn-af:active { opacity: 0.8; }
+
+    .learning-heatmap-section { background: var(--bg-base); }
+    .learning-heatmap-page { display: flex; flex-direction: column; gap: 16px; padding: var(--gap-md); }
+    .learning-back-btn { background: none; border: none; font-size: 14px; font-weight: 600; color: var(--af-primary); cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 6px 0; }
+    .learning-heatmap-hero { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+    .learning-heatmap-kicker { font-size: 11px; font-weight: 700; color: var(--af-primary); text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 4px; }
+    .learning-heatmap-hero h2 { font-family: var(--font-display); font-size: 20px; font-weight: 800; color: var(--text-primary); margin: 0 0 4px; }
+    .learning-heatmap-hero p { font-size: 12px; color: var(--text-muted); margin: 0; line-height: 1.5; }
+    .learning-streak-card { display: flex; flex-direction: column; align-items: center; gap: 2px; background: var(--bg-card); border: 1px solid var(--border-card); border-radius: var(--r-lg); padding: 12px 16px; flex-shrink: 0; box-shadow: var(--shadow-card); }
+    .learning-streak-fire { font-size: 22px; }
+    .learning-streak-card strong { font-family: var(--font-display); font-size: 22px; font-weight: 800; color: var(--text-primary); line-height: 1; }
+    .learning-streak-card small { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; }
+    .learning-week-card { background: var(--bg-card); border: 1px solid var(--border-card); border-radius: var(--r-xl); padding: 18px; box-shadow: var(--shadow-card); }
+    .learning-week-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .learning-week-card-top h3 { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--text-primary); margin: 0 0 3px; }
+    .learning-week-card-top p { font-size: 12px; color: var(--text-muted); margin: 0; }
+    .learning-refresh-btn { background: var(--bg-group); border: 1px solid var(--border-card); border-radius: var(--r-sm); width: 32px; height: 32px; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); transition: opacity 0.15s; }
+    .learning-refresh-btn:active { opacity: 0.6; }
+    .learning-week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+    .learning-day-box { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 4px; border-radius: var(--r-sm); background: var(--bg-group); }
+    .learning-day-box span { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; }
+    .learning-day-box strong { font-size: 12px; font-weight: 700; color: var(--text-secondary); }
+    .learning-day-box.active { background: linear-gradient(135deg, var(--af-primary), var(--af-accent)); }
+    .learning-day-box.active span, .learning-day-box.active strong { color: white; }
+    .learning-info-card { background: var(--bg-card); border: 1px solid var(--border-card); border-radius: var(--r-xl); padding: 18px; box-shadow: var(--shadow-card); }
+    .learning-info-card h3 { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--text-primary); margin: 0 0 12px; }
+    .learning-info-card ul { display: flex; flex-direction: column; gap: 8px; margin: 0; padding-left: 16px; }
+    .learning-info-card li { font-size: 13px; color: var(--text-secondary); line-height: 1.5; list-style: disc; }
+
+    /* ── LATEST TEST REVIEW ── */
+    #afReviewPageV1 .panel { margin: var(--gap-md); border-radius: var(--r-xl); padding: 20px; background: var(--bg-card); border: 1px solid var(--border-card); box-shadow: var(--shadow-card); }
+    #afReviewPageV1 .back-mini { background: none; border: none; font-size: 14px; font-weight: 600; color: var(--af-primary); cursor: pointer; padding: 0 0 14px; display: block; }
+    #afReviewPageV1 h2 { font-family: var(--font-display); font-size: 20px; font-weight: 800; color: var(--text-primary); margin: 0 0 16px; }
+    .af-test-empty-card-v1 { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 32px 16px; text-align: center; }
+    .af-test-empty-icon-v1 { font-size: 40px; }
+    .af-test-empty-card-v1 h3 { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: var(--text-primary); margin: 0; }
+    .af-test-empty-card-v1 p { font-size: 13px; color: var(--text-muted); margin: 0; }
+
+    /* ── LANGUAGE MODAL ── */
+    .af-lang-overlay {
+      position: fixed; inset: 0; z-index: 950;
+      background: var(--bg-overlay); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+      display: flex; align-items: flex-end; justify-content: center;
+      opacity: 0; visibility: hidden; transition: opacity 0.2s, visibility 0.2s;
+    }
+    .af-lang-overlay[aria-hidden="false"] { opacity: 1; visibility: visible; }
+    .af-lang-modal {
+      width: 100%; max-width: var(--shell-max); background: var(--bg-card-solid);
+      border-radius: var(--r-xl) var(--r-xl) 0 0;
+      padding: 16px 20px calc(24px + env(safe-area-inset-bottom, 0px));
+      display: flex; flex-direction: column; gap: 14px;
+      transform: translateY(100%); transition: transform 0.25s ease;
+    }
+    .af-lang-overlay[aria-hidden="false"] .af-lang-modal { transform: translateY(0); }
+    .af-lang-drag-handle { width: 36px; height: 4px; background: var(--border-input); border-radius: 99px; align-self: center; }
+    .af-lang-modal-head { display: flex; align-items: flex-start; justify-content: space-between; }
+    .af-lang-kicker { font-size: 11px; font-weight: 700; color: var(--af-primary); text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 2px; }
+    .af-lang-heading { font-family: var(--font-display); font-size: 18px; font-weight: 800; color: var(--text-primary); margin: 0; }
+    .af-lang-close { background: var(--bg-group); border: 1px solid var(--border-card); border-radius: var(--r-sm); width: 30px; height: 30px; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); flex-shrink: 0; }
+    .af-lang-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .af-lang-option { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: var(--r-md); background: var(--bg-group); border: 1px solid var(--border-card); cursor: pointer; text-align: left; transition: border-color 0.15s; }
+    .af-lang-option.active { border-color: var(--af-primary); background: rgba(79,70,229,0.07); }
+    .af-lang-option-icon { font-size: 20px; flex-shrink: 0; }
+    .af-lang-option-name { font-size: 14px; font-weight: 700; color: var(--text-primary); display: block; }
+    .af-lang-option-meta { font-size: 11px; color: var(--text-muted); display: block; }
+    .af-lang-status { font-size: 12px; color: var(--text-muted); text-align: center; margin: 0; }
+
+    /* ── BUG REPORT MODAL ── */
+    .bug-report-overlay {
+      position: fixed; inset: 0; z-index: 950;
+      background: var(--bg-overlay); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+      display: flex; align-items: flex-end; justify-content: center;
+      opacity: 0; visibility: hidden; transition: opacity 0.2s, visibility 0.2s;
+    }
+    .bug-report-overlay[aria-hidden="false"] { opacity: 1; visibility: visible; }
+    .bug-report-modal {
+      width: 100%; max-width: var(--shell-max); background: var(--bg-card-solid);
+      border-radius: var(--r-xl) var(--r-xl) 0 0;
+      padding: 20px 20px calc(28px + env(safe-area-inset-bottom, 0px));
+      max-height: 90vh; overflow-y: auto;
+      transform: translateY(100%); transition: transform 0.25s ease;
+    }
+    .bug-report-overlay[aria-hidden="false"] .bug-report-modal { transform: translateY(0); }
+    .bug-report-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 18px; }
+    .bug-report-kicker { font-size: 11px; font-weight: 700; color: var(--af-primary); text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 2px; }
+    .bug-report-title { font-family: var(--font-display); font-size: 18px; font-weight: 800; color: var(--text-primary); margin: 0; }
+    .bug-report-x { background: var(--bg-group); border: 1px solid var(--border-card); border-radius: var(--r-sm); width: 30px; height: 30px; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); flex-shrink: 0; }
+    .bug-report-form { display: flex; flex-direction: column; gap: 14px; }
+    .bug-report-field { display: flex; flex-direction: column; gap: 5px; }
+    .bug-report-field span { font-size: 12px; font-weight: 600; color: var(--text-secondary); }
+    .bug-report-field input, .bug-report-field select, .bug-report-field textarea {
+      width: 100%; padding: 11px 13px; border-radius: var(--r-md);
+      border: 1px solid var(--border-input); background: var(--bg-input);
+      color: var(--text-primary); font-size: 14px; font-family: inherit;
+      outline: none; transition: border-color 0.15s;
+    }
+    .bug-report-field input:focus, .bug-report-field select:focus, .bug-report-field textarea:focus { border-color: var(--af-primary); }
+    .bug-report-field textarea { resize: vertical; min-height: 90px; }
+    .bug-report-field select { background-color: var(--bg-input); }
+    .bug-report-status { font-size: 13px; color: var(--text-secondary); min-height: 18px; }
+    .bug-report-status.success { color: #166534; }
+    .bug-report-status.error   { color: #991b1b; }
+    .bug-report-submit {
+      width: 100%; padding: 14px; border-radius: var(--r-lg);
+      background: linear-gradient(135deg, var(--af-primary), var(--af-primary-dark));
+      color: white; font-weight: 700; font-size: 15px; cursor: pointer;
+      box-shadow: var(--shadow-btn); border: none; transition: opacity 0.15s; font-family: inherit;
+    }
+    .bug-report-submit:active { opacity: 0.8; }
   </style>
 </head>
 
@@ -4397,16 +4561,11 @@ body,
   </div>
 </div>
 
-      <!-- VIEW: SETTINGS -->
+          <!-- SETTINGS -->
       <div class="af-view" id="viewSettings" aria-label="Settings">
         <div class="af-settings-page">
 
-          <button
-            class="af-settings-profile glass"
-            onclick="window.location.href='#'"
-            type="button"
-            aria-label="View profile"
-          >
+          <button class="af-settings-profile glass" onclick="afSwitchView('student')" type="button">
             <div class="af-settings-avatar" aria-hidden="true">👨‍🎓</div>
             <div class="af-settings-profile-text">
               <div class="af-settings-profile-name" id="settingsProfileName">Hi, Student</div>
@@ -4415,20 +4574,13 @@ body,
             <div class="af-settings-profile-arrow" aria-hidden="true">›</div>
           </button>
 
-          <a
-            href="https://academeforge.in"
-            class="af-settings-site-link glass"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Open official website"
-          >
-            <span>🌐 Official Website ✨</span>
-            <span aria-hidden="true">›</span>
+          <a href="https://academeforge.in" class="af-settings-site-link glass" target="_blank" rel="noopener noreferrer">
+            <span>🌐 Official Website ✨</span><span>›</span>
           </a>
 
           <div class="af-settings-night-row glass">
             <div class="af-settings-night-left">
-              <div class="af-settings-night-icon" aria-hidden="true">🌙</div>
+              <div class="af-settings-night-icon">🌙</div>
               <span class="af-settings-night-text">Night Mode</span>
             </div>
             <label class="af-toggle" aria-label="Toggle dark mode">
@@ -4439,198 +4591,133 @@ body,
 
           <div class="af-accordion-groups" role="list">
 
-            <!-- Tests -->
             <div class="af-accordion-group" role="listitem">
               <button class="af-accordion-trigger" onclick="afToggleAccordion(this)" aria-expanded="false" type="button">
-                <div class="af-accordion-group-icon" aria-hidden="true">🧪</div>
+                <div class="af-accordion-group-icon">🧪</div>
                 <span class="af-accordion-group-label">Tests</span>
                 <span class="af-accordion-count">2</span>
-                <span class="af-accordion-chevron" aria-hidden="true">⌄</span>
+                <span class="af-accordion-chevron">⌄</span>
               </button>
-              <div class="af-accordion-body" role="region">
+              <div class="af-accordion-body">
                 <div class="af-accordion-divider"></div>
-                <a class="af-accordion-item" href="#" aria-label="Open AF Test Arena">
-                  <div class="af-accordion-item-icon" aria-hidden="true">🧪</div>
-                  <div class="af-accordion-item-text">
-                    <div class="af-accordion-item-label">AF Test Arena</div>
-                    <div class="af-accordion-item-sub">Quizzes, ranks &amp; national leaderboard</div>
-                  </div>
-                  <span class="af-accordion-item-arrow" aria-hidden="true">›</span>
+                <a class="af-accordion-item" href="https://academeforge.in" target="_blank" rel="noopener noreferrer">
+                  <div class="af-accordion-item-icon">🧪</div>
+                  <div class="af-accordion-item-text"><div class="af-accordion-item-label">AF Test Arena</div><div class="af-accordion-item-sub">Quizzes, ranks &amp; national leaderboard</div></div>
+                  <span class="af-accordion-item-arrow">›</span>
                 </a>
-                <a class="af-accordion-item" href="#" aria-label="Open Latest Test Review">
-                  <div class="af-accordion-item-icon" aria-hidden="true">📖</div>
-                  <div class="af-accordion-item-text">
-                    <div class="af-accordion-item-label">Latest Test Review</div>
-                    <div class="af-accordion-item-sub">Review your last test performance</div>
-                  </div>
-                  <span class="af-accordion-item-arrow" aria-hidden="true">›</span>
+                <a class="af-accordion-item" href="#" onclick="event.preventDefault(); afShowComingSoon('Test Review','Review your latest test performance — coming soon!')">
+                  <div class="af-accordion-item-icon">📖</div>
+                  <div class="af-accordion-item-text"><div class="af-accordion-item-label">Latest Test Review</div><div class="af-accordion-item-sub">Review your last test performance</div></div>
+                  <span class="af-accordion-item-arrow">›</span>
                 </a>
               </div>
             </div>
 
-            <!-- Account -->
             <div class="af-accordion-group" role="listitem">
               <button class="af-accordion-trigger" onclick="afToggleAccordion(this)" aria-expanded="false" type="button">
-                <div class="af-accordion-group-icon" aria-hidden="true">👤</div>
+                <div class="af-accordion-group-icon">👤</div>
                 <span class="af-accordion-group-label">Account</span>
                 <span class="af-accordion-count">1</span>
-                <span class="af-accordion-chevron" aria-hidden="true">⌄</span>
+                <span class="af-accordion-chevron">⌄</span>
               </button>
-              <div class="af-accordion-body" role="region">
+              <div class="af-accordion-body">
                 <div class="af-accordion-divider"></div>
-                <a
-                  class="af-accordion-item"
-                  href="#"
-                  onclick="afSwitchView('student'); return false;"
-                  aria-label="Login or Create Student ID"
-                >
-                  <div class="af-accordion-item-icon" aria-hidden="true">📋</div>
-                  <div class="af-accordion-item-text">
-                    <div class="af-accordion-item-label">Login / Create ID</div>
-                    <div class="af-accordion-item-sub">Access your student account</div>
-                  </div>
-                  <span class="af-accordion-item-arrow" aria-hidden="true">›</span>
+                <a class="af-accordion-item" href="#" onclick="event.preventDefault(); afSwitchView('student')">
+                  <div class="af-accordion-item-icon">📋</div>
+                  <div class="af-accordion-item-text"><div class="af-accordion-item-label">Login / Create ID</div><div class="af-accordion-item-sub">Access your student account</div></div>
+                  <span class="af-accordion-item-arrow">›</span>
                 </a>
               </div>
             </div>
 
-            <!-- Learning Tools -->
             <div class="af-accordion-group" role="listitem">
               <button class="af-accordion-trigger" onclick="afToggleAccordion(this)" aria-expanded="false" type="button">
-                <div class="af-accordion-group-icon" aria-hidden="true">📚</div>
+                <div class="af-accordion-group-icon">📚</div>
                 <span class="af-accordion-group-label">Learning Tools</span>
                 <span class="af-accordion-count">3</span>
-                <span class="af-accordion-chevron" aria-hidden="true">⌄</span>
+                <span class="af-accordion-chevron">⌄</span>
               </button>
-              <div class="af-accordion-body" role="region">
+              <div class="af-accordion-body">
                 <div class="af-accordion-divider"></div>
-                <a class="af-accordion-item" href="/YA/NotesAF/" aria-label="Open Revision Notes">
-                  <div class="af-accordion-item-icon" aria-hidden="true">📝</div>
-                  <div class="af-accordion-item-text">
-                    <div class="af-accordion-item-label">Revision Notes</div>
-                    <div class="af-accordion-item-sub">Chapter-wise notes for class 9–10</div>
-                  </div>
-                  <span class="af-accordion-item-arrow" aria-hidden="true">›</span>
+                <a class="af-accordion-item" href="/YA/NotesAF/">
+                  <div class="af-accordion-item-icon">📝</div>
+                  <div class="af-accordion-item-text"><div class="af-accordion-item-label">Revision Notes</div><div class="af-accordion-item-sub">Chapter-wise notes for class 9–10</div></div>
+                  <span class="af-accordion-item-arrow">›</span>
                 </a>
-                <a class="af-accordion-item" href="/YA/SM/" aria-label="Open Sudoku Master">
-                  <div class="af-accordion-item-icon" aria-hidden="true">🧩</div>
-                  <div class="af-accordion-item-text">
-                    <div class="af-accordion-item-label">Sudoku Master</div>
-                    <div class="af-accordion-item-sub">Brain training puzzle game</div>
-                  </div>
-                  <span class="af-accordion-item-arrow" aria-hidden="true">›</span>
+                <a class="af-accordion-item" href="/YA/SM/">
+                  <div class="af-accordion-item-icon">🧩</div>
+                  <div class="af-accordion-item-text"><div class="af-accordion-item-label">Sudoku Master</div><div class="af-accordion-item-sub">Brain training puzzle game</div></div>
+                  <span class="af-accordion-item-arrow">›</span>
                 </a>
-                <a class="af-accordion-item" href="#" aria-label="Open Learning Heatmap">
-                  <div class="af-accordion-item-icon" aria-hidden="true">🔥</div>
-                  <div class="af-accordion-item-text">
-                    <div class="af-accordion-item-label">Learning Heatmap</div>
-                    <div class="af-accordion-item-sub">Track your daily learning streak</div>
-                  </div>
-                  <span class="af-accordion-item-arrow" aria-hidden="true">›</span>
+                <a class="af-accordion-item" href="#" onclick="event.preventDefault(); _showLearningHeatmap()">
+                  <div class="af-accordion-item-icon">🔥</div>
+                  <div class="af-accordion-item-text"><div class="af-accordion-item-label">Learning Heatmap</div><div class="af-accordion-item-sub">Track your daily learning streak</div></div>
+                  <span class="af-accordion-item-arrow">›</span>
                 </a>
               </div>
             </div>
 
-            <!-- Verification -->
             <div class="af-accordion-group" role="listitem">
               <button class="af-accordion-trigger" onclick="afToggleAccordion(this)" aria-expanded="false" type="button">
-                <div class="af-accordion-group-icon" aria-hidden="true">🎖️</div>
+                <div class="af-accordion-group-icon">🎖️</div>
                 <span class="af-accordion-group-label">Verification</span>
                 <span class="af-accordion-count">1</span>
-                <span class="af-accordion-chevron" aria-hidden="true">⌄</span>
+                <span class="af-accordion-chevron">⌄</span>
               </button>
-              <div class="af-accordion-body" role="region">
+              <div class="af-accordion-body">
                 <div class="af-accordion-divider"></div>
-                <a class="af-accordion-item" href="/YA/verify/" aria-label="Verify a Certificate">
-                  <div class="af-accordion-item-icon" aria-hidden="true">🎖️</div>
-                  <div class="af-accordion-item-text">
-                    <div class="af-accordion-item-label">Certificate Verification</div>
-                    <div class="af-accordion-item-sub">Verify official certificates issued by AF</div>
-                  </div>
-                  <span class="af-accordion-item-arrow" aria-hidden="true">›</span>
+                <a class="af-accordion-item" href="/YA/verify/">
+                  <div class="af-accordion-item-icon">🎖️</div>
+                  <div class="af-accordion-item-text"><div class="af-accordion-item-label">Certificate Verification</div><div class="af-accordion-item-sub">Verify official certificates issued by AF</div></div>
+                  <span class="af-accordion-item-arrow">›</span>
                 </a>
               </div>
             </div>
 
-            <!-- Notifications -->
             <div class="af-accordion-group" role="listitem">
               <button class="af-accordion-trigger" onclick="afToggleAccordion(this)" aria-expanded="false" type="button">
-                <div class="af-accordion-group-icon" aria-hidden="true">🔔</div>
-                <span class="af-accordion-group-label">Notifications</span>
-                <span class="af-accordion-count new">New</span>
-                <span class="af-accordion-chevron" aria-hidden="true">⌄</span>
-              </button>
-              <div class="af-accordion-body" role="region">
-                <div class="af-accordion-divider"></div>
-                <a class="af-accordion-item" href="#" aria-label="View Notifications">
-                  <div class="af-accordion-item-icon" aria-hidden="true">🔔</div>
-                  <div class="af-accordion-item-text">
-                    <div class="af-accordion-item-label">Notifications</div>
-                    <div class="af-accordion-item-sub">Lectures, batches &amp; announcements</div>
-                  </div>
-                  <span class="af-accordion-item-badge">New</span>
-                </a>
-              </div>
-            </div>
-
-            <!-- Support -->
-            <div class="af-accordion-group" role="listitem">
-              <button class="af-accordion-trigger" onclick="afToggleAccordion(this)" aria-expanded="false" type="button">
-                <div class="af-accordion-group-icon" aria-hidden="true">☎</div>
+                <div class="af-accordion-group-icon">☎</div>
                 <span class="af-accordion-group-label">Support</span>
                 <span class="af-accordion-count">2</span>
-                <span class="af-accordion-chevron" aria-hidden="true">⌄</span>
+                <span class="af-accordion-chevron">⌄</span>
               </button>
-              <div class="af-accordion-body" role="region">
+              <div class="af-accordion-body">
                 <div class="af-accordion-divider"></div>
-                <a class="af-accordion-item" href="#" aria-label="Contact Us">
-                  <div class="af-accordion-item-icon" aria-hidden="true">☎</div>
-                  <div class="af-accordion-item-text">
-                    <div class="af-accordion-item-label">Contact Us</div>
-                    <div class="af-accordion-item-sub">Submit a support or call request</div>
-                  </div>
-                  <span class="af-accordion-item-arrow" aria-hidden="true">›</span>
+                <a class="af-accordion-item" href="#" onclick="event.preventDefault(); openContactUsPage()">
+                  <div class="af-accordion-item-icon">☎</div>
+                  <div class="af-accordion-item-text"><div class="af-accordion-item-label">Contact Us</div><div class="af-accordion-item-sub">Submit a support or call request</div></div>
+                  <span class="af-accordion-item-arrow">›</span>
                 </a>
-                <a class="af-accordion-item" href="#" aria-label="Contact Request Status">
-                  <div class="af-accordion-item-icon" aria-hidden="true">📞</div>
-                  <div class="af-accordion-item-text">
-                    <div class="af-accordion-item-label">Contact Request Status</div>
-                    <div class="af-accordion-item-sub">Track your contact requests</div>
-                  </div>
+                <a class="af-accordion-item" href="#" onclick="event.preventDefault(); openContactRequestStatusPageAf()">
+                  <div class="af-accordion-item-icon">📞</div>
+                  <div class="af-accordion-item-text"><div class="af-accordion-item-label">Contact Request Status</div><div class="af-accordion-item-sub">Track your contact requests</div></div>
                   <span class="af-accordion-item-badge">Track</span>
                 </a>
               </div>
             </div>
 
-            <!-- Bug Center -->
             <div class="af-accordion-group" role="listitem">
               <button class="af-accordion-trigger" onclick="afToggleAccordion(this)" aria-expanded="false" type="button">
-                <div class="af-accordion-group-icon" aria-hidden="true">🐞</div>
+                <div class="af-accordion-group-icon">🐞</div>
                 <span class="af-accordion-group-label">Bug Center</span>
                 <span class="af-accordion-count">2</span>
-                <span class="af-accordion-chevron" aria-hidden="true">⌄</span>
+                <span class="af-accordion-chevron">⌄</span>
               </button>
-              <div class="af-accordion-body" role="region">
+              <div class="af-accordion-body">
                 <div class="af-accordion-divider"></div>
-                <a class="af-accordion-item" href="#" aria-label="Report a Bug">
-                  <div class="af-accordion-item-icon" aria-hidden="true">🐞</div>
-                  <div class="af-accordion-item-text">
-                    <div class="af-accordion-item-label">Report a Bug</div>
-                    <div class="af-accordion-item-sub">Tell us what went wrong</div>
-                  </div>
-                  <span class="af-accordion-item-arrow" aria-hidden="true">›</span>
+                <a class="af-accordion-item" href="#" onclick="event.preventDefault(); openBugReportModal()">
+                  <div class="af-accordion-item-icon">🐞</div>
+                  <div class="af-accordion-item-text"><div class="af-accordion-item-label">Report a Bug</div><div class="af-accordion-item-sub">Tell us what went wrong</div></div>
+                  <span class="af-accordion-item-arrow">›</span>
                 </a>
-                <a class="af-accordion-item" href="#" aria-label="Bug Report Status">
-                  <div class="af-accordion-item-icon" aria-hidden="true">📌</div>
-                  <div class="af-accordion-item-text">
-                    <div class="af-accordion-item-label">Bug Report Status</div>
-                    <div class="af-accordion-item-sub">Track your reported bugs</div>
-                  </div>
+                <a class="af-accordion-item" href="#" onclick="event.preventDefault(); openRequestStatusPageAf()">
+                  <div class="af-accordion-item-icon">📌</div>
+                  <div class="af-accordion-item-text"><div class="af-accordion-item-label">Bug Report Status</div><div class="af-accordion-item-sub">Track your reported bugs</div></div>
                   <span class="af-accordion-item-badge">Track</span>
                 </a>
               </div>
             </div>
-
+            
             <!-- About Us -->
             <div class="af-accordion-group" role="listitem">
               <button class="af-accordion-trigger" onclick="afToggleAccordion(this)" aria-expanded="false" type="button">
@@ -4717,7 +4804,175 @@ body,
       <button class="af-modal-ok" onclick="afCloseModal()" type="button">Okay, Got It</button>
     </div>
   </div>
-  
+
+    <!-- LEARNING HEATMAP OVERLAY -->
+  <div class="af-modal-overlay" id="learningHeatmapOverlay" onclick="afCloseOverlay('learningHeatmapOverlay')"
+    <div class="af-modal-sheet" onclick="event.stopPropagation()" role="dialog" aria-modal="true" style="text-align:left;align-items:stretch;padding:24px;">
+      <div class="af-modal-drag" style="align-self:center;"></div>
+      <div class="learning-heatmap-page" style="padding:0;gap:16px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div><p class="learning-heatmap-kicker">Weekly Online Activity</p><h2 style="font-family:var(--font-display);font-size:20px;font-weight:800;color:var(--text-primary);margin:0 0 4px;">Learning Heatmap</h2></div>
+          <div class="learning-streak-card"><span class="learning-streak-fire">🔥</span><strong id="learningHeatmapStreakCount">0</strong><small>Day Streak</small></div>
+        </div>
+        <div class="learning-week-card">
+          <div class="learning-week-card-top">
+            <div><h3>This Week</h3><p id="learningHeatmapStatus">Checking activity...</p></div>
+            <button type="button" class="learning-refresh-btn" onclick="loadLearningHeatmap()">↻</button>
+          </div>
+          <div class="learning-week-grid" id="learningWeekGrid">
+            <div class="learning-day-box"><span>Mon</span><strong>-</strong></div>
+            <div class="learning-day-box"><span>Tue</span><strong>-</strong></div>
+            <div class="learning-day-box"><span>Wed</span><strong>-</strong></div>
+            <div class="learning-day-box"><span>Thu</span><strong>-</strong></div>
+            <div class="learning-day-box"><span>Fri</span><strong>-</strong></div>
+            <div class="learning-day-box"><span>Sat</span><strong>-</strong></div>
+            <div class="learning-day-box"><span>Sun</span><strong>-</strong></div>
+          </div>
+        </div>
+        <div class="learning-info-card">
+          <h3>How streak works</h3>
+          <ul>
+            <li>Login daily to keep your learning streak active.</li>
+            <li>Daily activity automatically marks your day as active.</li>
+            <li>Continuous daily learning increases your streak count.</li>
+            <li>If a day is missed, the streak starts again from zero.</li>
+          </ul>
+        </div>
+        <button class="af-modal-ok" onclick="afCloseOverlay('learningHeatmapOverlay')" type="button" style="max-width:100%;margin:0;">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT US OVERLAY -->
+  <div class="af-modal-overlay" id="contactUsOverlay" onclick="afCloseOverlay('contactUsOverlay')">
+    <div class="af-modal-sheet" onclick="event.stopPropagation()" role="dialog" aria-modal="true" style="text-align:left;align-items:stretch;padding:0;max-height:90vh;overflow-y:auto;">
+      <div style="padding:24px 24px 0;">
+        <div class="af-modal-drag" style="align-self:center;width:36px;margin:0 auto 16px;"></div>
+        <div class="contact-us-af-head">
+          <div class="contact-us-af-icon">☎</div>
+          <div>
+            <p class="contact-us-af-kicker">Support Request</p>
+            <h2 style="font-family:var(--font-display);font-size:17px;font-weight:800;color:var(--text-primary);margin:0 0 4px;">Request a Call or Email Reply</h2>
+            <p style="font-size:12px;color:var(--text-muted);line-height:1.5;margin:0;">Share your details and our team will contact you.</p>
+          </div>
+        </div>
+      </div>
+      <div style="padding:0 24px 32px;">
+        <div class="contact-us-af-form" id="contactUsFormAf" style="margin-top:16px;">
+          <div class="contact-field-af"><label for="contactNameAf">Full Name</label><input id="contactNameAf" type="text" placeholder="Enter your full name" maxlength="80" /></div>
+          <div class="contact-field-af"><label for="contactMobileAf">Mobile Number</label><input id="contactMobileAf" type="tel" placeholder="Enter your mobile number" maxlength="15" /></div>
+          <div class="contact-field-af"><label for="contactEmailAf">Email Address</label><input id="contactEmailAf" type="email" placeholder="Enter your email address" maxlength="120" /></div>
+          <div class="contact-field-af">
+            <label for="contactReasonAf">Reason for Contact</label>
+            <select id="contactReasonAf">
+              <option value="">Select a reason</option>
+              <option>Course Access Issue</option>
+              <option>Login or Student ID Issue</option>
+              <option>Payment or Enrollment Query</option>
+              <option>Technical Problem</option>
+              <option>General Support</option>
+            </select>
+          </div>
+          <div class="contact-field-af"><label for="contactProblemAf">Describe Your Problem</label><textarea id="contactProblemAf" rows="4" placeholder="Write your issue clearly." maxlength="1200"></textarea></div>
+          <div id="contactUsMessageAf" class="contact-message-af"></div>
+          <button id="contactSubmitBtnAf" type="button" class="contact-submit-btn-af" onclick="submitContactRequestAf(event)">Submit Request</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT STATUS OVERLAY -->
+  <div class="af-modal-overlay" id="contactStatusOverlay" onclick="afCloseOverlay('contactStatusOverlay')">
+    <div class="af-modal-sheet" onclick="event.stopPropagation()" role="dialog" aria-modal="true" style="text-align:left;align-items:stretch;padding:24px;max-height:90vh;overflow-y:auto;">
+      <div class="af-modal-drag" style="align-self:center;"></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+        <div><p style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;margin:0 0 2px;">Support Center</p><h2 style="font-family:var(--font-display);font-size:20px;font-weight:800;color:var(--text-primary);margin:0;">Contact Status</h2></div>
+        <button type="button" onclick="loadContactRequestStatusAf(true)" class="request-status-refresh-af">↻</button>
+      </div>
+      <div id="contactRequestStatusMessageAf" class="request-status-message-af">Loading...</div>
+      <div id="contactRequestStatusListAf" class="request-status-list-af"></div>
+      <button class="af-modal-ok" onclick="afCloseOverlay('contactStatusOverlay')" type="button" style="max-width:100%;margin-top:16px;">Close</button>
+    </div>
+  </div>
+
+  <!-- BUG STATUS OVERLAY -->
+  <div class="af-modal-overlay" id="bugStatusOverlay" onclick="afCloseOverlay('bugStatusOverlay')">
+    <div class="af-modal-sheet" onclick="event.stopPropagation()" role="dialog" aria-modal="true" style="text-align:left;align-items:stretch;padding:24px;max-height:90vh;overflow-y:auto;">
+      <div class="af-modal-drag" style="align-self:center;"></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+        <div><p style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;margin:0 0 2px;">Support Center</p><h2 style="font-family:var(--font-display);font-size:20px;font-weight:800;color:var(--text-primary);margin:0;">Request Status</h2></div>
+        <button type="button" onclick="loadRequestStatusAf(true)" class="request-status-refresh-af">↻</button>
+      </div>
+      <div id="requestStatusMessageAf" class="request-status-message-af">Loading...</div>
+      <div id="requestStatusListAf" class="request-status-list-af"></div>
+      <button class="af-modal-ok" onclick="afCloseOverlay('bugStatusOverlay')" type="button" style="max-width:100%;margin-top:16px;">Close</button>
+    </div>
+  </div>
+
+  <!-- LANGUAGE MODAL -->
+  <div id="afTranslationOverlay" class="af-lang-overlay" aria-hidden="true" onclick="closeAFTranslationModal()">
+    <div class="af-lang-modal" role="dialog" aria-modal="true" onclick="event.stopPropagation()">
+      <div class="af-lang-drag-handle"></div>
+      <div class="af-lang-modal-head">
+        <div><p class="af-lang-kicker">AcademeForge</p><h3 class="af-lang-heading">Choose Language</h3></div>
+        <button type="button" class="af-lang-close" onclick="closeAFTranslationModal()">×</button>
+      </div>
+      <div class="af-lang-grid">
+        <button type="button" class="af-lang-option active" data-lang="en" onclick="setAFAppLanguage('en')"><span class="af-lang-option-icon">🇬🇧</span><strong class="af-lang-option-name">English</strong><small class="af-lang-option-meta">Default</small></button>
+        <button type="button" class="af-lang-option" data-lang="hi" onclick="setAFAppLanguage('hi')"><span class="af-lang-option-icon">🇮🇳</span><strong class="af-lang-option-name">हिन्दी</strong><small class="af-lang-option-meta">Hindi</small></button>
+        <button type="button" class="af-lang-option" data-lang="bho" onclick="setAFAppLanguage('bho')"><span class="af-lang-option-icon">🇮🇳</span><strong class="af-lang-option-name">भोजपुरी</strong><small class="af-lang-option-meta">Bhojpuri</small></button>
+        <button type="button" class="af-lang-option" data-lang="bn" onclick="setAFAppLanguage('bn')"><span class="af-lang-option-icon">🇮🇳</span><strong class="af-lang-option-name">বাংলা</strong><small class="af-lang-option-meta">Bengali</small></button>
+        <button type="button" class="af-lang-option" data-lang="mr" onclick="setAFAppLanguage('mr')"><span class="af-lang-option-icon">🇮🇳</span><strong class="af-lang-option-name">मराठी</strong><small class="af-lang-option-meta">Marathi</small></button>
+        <button type="button" class="af-lang-option" data-lang="te" onclick="setAFAppLanguage('te')"><span class="af-lang-option-icon">🇮🇳</span><strong class="af-lang-option-name">తెలుగు</strong><small class="af-lang-option-meta">Telugu</small></button>
+        <button type="button" class="af-lang-option" data-lang="ta" onclick="setAFAppLanguage('ta')"><span class="af-lang-option-icon">🇮🇳</span><strong class="af-lang-option-name">தமிழ்</strong><small class="af-lang-option-meta">Tamil</small></button>
+        <button type="button" class="af-lang-option" data-lang="gu" onclick="setAFAppLanguage('gu')"><span class="af-lang-option-icon">🇮🇳</span><strong class="af-lang-option-name">ગુજરાતી</strong><small class="af-lang-option-meta">Gujarati</small></button>
+        <button type="button" class="af-lang-option" data-lang="ur" onclick="setAFAppLanguage('ur')"><span class="af-lang-option-icon">🇮🇳</span><strong class="af-lang-option-name">اردو</strong><small class="af-lang-option-meta">Urdu</small></button>
+        <button type="button" class="af-lang-option" data-lang="kn" onclick="setAFAppLanguage('kn')"><span class="af-lang-option-icon">🇮🇳</span><strong class="af-lang-option-name">ಕನ್ನಡ</strong><small class="af-lang-option-meta">Kannada</small></button>
+      </div>
+      <p id="afTranslationStatus" class="af-lang-status">Select a language to update the app instantly.</p>
+    </div>
+  </div>
+
+  <!-- BUG REPORT MODAL -->
+  <div id="bugReportOverlay" class="bug-report-overlay" aria-hidden="true" onclick="closeBugReportModal()">
+    <div class="bug-report-modal" role="dialog" aria-modal="true" onclick="event.stopPropagation()">
+      <div class="bug-report-header">
+        <div><p class="bug-report-kicker">AcademeForge Support</p><h3 class="bug-report-title">Report a Bug</h3></div>
+        <button type="button" class="bug-report-x" onclick="closeBugReportModal()">×</button>
+      </div>
+      <div class="bug-report-form" id="bugReportForm">
+        <div class="bug-report-field"><span>Your Name</span><input id="bugReporterName" type="text" maxlength="80" placeholder="Enter your name" /></div>
+        <div class="bug-report-field"><span>Contact Email</span><input id="bugReporterEmail" type="email" maxlength="120" placeholder="example@email.com" /></div>
+        <div class="bug-report-field">
+          <span>Bug Category</span>
+          <select id="bugCategory">
+            <option value="">Select issue type</option>
+            <option value="login">Login / Student ID</option>
+            <option value="navigation">Navigation</option>
+            <option value="dark_mode">Dark / Reading Mode</option>
+            <option value="notification">Notifications</option>
+            <option value="payment">Payment / Purchase</option>
+            <option value="ui">UI / Design</option>
+            <option value="performance">Slow / Lagging</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="bug-report-field">
+          <span>Priority</span>
+          <select id="bugPriority">
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+            <option value="critical">Critical</option>
+          </select>
+        </div>
+        <div class="bug-report-field"><span>What happened?</span><textarea id="bugDescription" maxlength="1200" rows="5" placeholder="Explain the issue clearly..."></textarea></div>
+        <div id="bugReportStatus" class="bug-report-status"></div>
+        <button id="bugReportSubmitBtn" type="button" class="bug-report-submit" onclick="submitBugReport(event)">Submit Report</button>
+      </div>
+    </div>
+  </div>
+
 <div id="afPullLoader">
   <div class="af-pull-spinner"></div>
 </div>
@@ -4819,6 +5074,69 @@ body,
       if (AF_VIEWS[lastTab]) afSwitchView(lastTab);
     }
 
+      /* legacy showSection — kept for any old references */
+  function showSection(id) { /* no-op: section system replaced by overlay modals */ }
+
+ /* ── SECTION-BASED HELPERS (now open overlays) ── */
+function _showLearningHeatmap() {
+  loadLearningHeatmap();
+  afOpenOverlay('learningHeatmapOverlay');
+}
+
+function openContactUsPage() {
+  afOpenOverlay('contactUsOverlay');
+}
+
+function backToSettingsFromContact() {
+  afCloseOverlay('contactUsOverlay');
+}
+
+function openContactRequestStatusPageAf() {
+  loadContactRequestStatusAf(false);
+  afOpenOverlay('contactStatusOverlay');
+}
+
+function openRequestStatusPageAf() {
+  loadRequestStatusAf(false);
+  afOpenOverlay('bugStatusOverlay');
+}
+
+function openStudentDashboardCardAf() {
+  afSwitchView('student');
+}
+
+    /* ── OVERLAY HELPERS ── */
+
+function afOpenOverlay(id) {
+
+  const nav = document.querySelector('.af-bottom-nav');
+
+  if (nav) {
+    nav.style.display = 'none';
+  }
+
+  const overlay = document.getElementById(id);
+
+  if (overlay) {
+    overlay.classList.add('open');
+  }
+}
+
+function afCloseOverlay(id) {
+
+  const overlay = document.getElementById(id);
+
+  if (overlay) {
+    overlay.classList.remove('open');
+  }
+
+  const nav = document.querySelector('.af-bottom-nav');
+
+  if (nav) {
+    nav.style.display = '';
+  }
+}
+    
  /* ─── SWIPE NAVIGATION ───────────────────────────────────────── */
 
 const AF_VIEW_ORDER = [
@@ -6681,6 +6999,248 @@ window.addEventListener('storage', function (e) {
 });
 
 })();
+
+    /* ── LANGUAGE ── */
+  const AF_LANG_NAMES = { en:'English', hi:'हिन्दी', bho:'भोजपुरी', bn:'বাংলা', mr:'मराठी', te:'తెలుగు', ta:'தமிழ்', gu:'ગુજરાતી', ur:'اردو', kn:'ಕನ್ನಡ' };
+  function afUpdateLangBadge() {
+    const code = localStorage.getItem('af_lang_code') || 'en';
+    const name = AF_LANG_NAMES[code] || 'English';
+    const lb = document.getElementById('currentLangBadge'); if (lb) lb.textContent = name;
+  }
+  function openAFTranslationModal() { document.getElementById('afTranslationOverlay').setAttribute('aria-hidden','false'); }
+  function closeAFTranslationModal() { document.getElementById('afTranslationOverlay').setAttribute('aria-hidden','true'); }
+  function setAFAppLanguage(code) {
+    if (!AF_LANG_NAMES[code]) return;
+    localStorage.setItem('af_lang_code', code); localStorage.setItem('af_language', AF_LANG_NAMES[code]);
+    afUpdateLangBadge();
+    document.querySelectorAll('.af-lang-option').forEach(b => { const a = b.getAttribute('data-lang') === code; b.classList.toggle('active',a); b.setAttribute('aria-selected',String(a)); });
+    const s = document.getElementById('afTranslationStatus'); if (s) s.textContent = 'Language set to ' + AF_LANG_NAMES[code] + '.';
+    closeAFTranslationModal();
+    afShowToast('🌐 Language changed to ' + AF_LANG_NAMES[code], 'success', 'Language');
+  }
+  window.openAFTranslationModal = openAFTranslationModal; window.closeAFTranslationModal = closeAFTranslationModal; window.setAFAppLanguage = setAFAppLanguage;
+
+  /* ── BUG REPORT ── */
+  function openBugReportModal() {
+    const o = document.getElementById('bugReportOverlay'); if (!o) return;
+    document.getElementById('bugReportForm').querySelectorAll('input,select,textarea').forEach(el => { if (el.tagName !== 'SELECT' || el.value !== el.querySelector('option') ) {} });
+    const s = document.getElementById('bugReportStatus'); if (s) { s.textContent = ''; s.className = 'bug-report-status'; }
+    o.setAttribute('aria-hidden','false');
+  }
+  function closeBugReportModal() {
+    const o = document.getElementById('bugReportOverlay'); if (o) o.setAttribute('aria-hidden','true');
+  }
+  function setBugReportStatus(msg, type) {
+    const s = document.getElementById('bugReportStatus'); if (!s) return;
+    s.textContent = msg; s.className = 'bug-report-status' + (type === 'success' ? ' success' : type === 'error' ? ' error' : '');
+  }
+  async function submitBugReport(event) {
+    if (event && event.preventDefault) event.preventDefault();
+    const btn = document.getElementById('bugReportSubmitBtn');
+    const name  = (document.getElementById('bugReporterName')?.value || '').trim();
+    const email = (document.getElementById('bugReporterEmail')?.value || '').trim();
+    const cat   = document.getElementById('bugCategory')?.value || '';
+    const pri   = document.getElementById('bugPriority')?.value || 'medium';
+    const desc  = (document.getElementById('bugDescription')?.value || '').trim();
+    if (name.length < 2) { setBugReportStatus('Please enter your name.','error'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { setBugReportStatus('Please enter a valid email.','error'); return; }
+    if (!cat) { setBugReportStatus('Please select a bug category.','error'); return; }
+    if (desc.length < 10) { setBugReportStatus('Please describe the bug in at least 10 characters.','error'); return; }
+    if (btn) { btn.disabled = true; btn.textContent = 'Submitting...'; }
+    setBugReportStatus('Submitting...','');
+    try {
+      const res = await fetch('https://afooyyydhlwngzssgqih.supabase.co/functions/v1/report-bug', {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json', 'Authorization':'Bearer '+STUDENT_SUPABASE_ANON_KEY, 'apikey':STUDENT_SUPABASE_ANON_KEY },
+        body: JSON.stringify({ reporterName:name, reporterEmail:email, category:cat, priority:pri, description:desc, pageUrl:window.location.href, deviceInfo:{ userAgent:navigator.userAgent, viewportWidth:window.innerWidth, viewportHeight:window.innerHeight } })
+      });
+      const data = await res.json().catch(() => null);
+      if (!res.ok) throw new Error(data?.error || 'Submission failed.');
+      setBugReportStatus('Bug report submitted successfully.','success');
+      setTimeout(() => closeBugReportModal(), 900);
+    } catch (err) {
+      setBugReportStatus(err.message || 'Something went wrong.','error');
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = 'Submit Report'; }
+    }
+  }
+  window.openBugReportModal = openBugReportModal; window.closeBugReportModal = closeBugReportModal; window.submitBugReport = submitBugReport;
+
+  /* ── CONTACT US ── */
+  function setContactMessageAf(type, msg) {
+    const el = document.getElementById('contactUsMessageAf'); if (!el) return;
+    el.textContent = msg; el.className = 'contact-message-af' + (type === 'success' ? ' is-success' : type === 'error' ? ' is-error' : '');
+    el.style.display = msg ? 'block' : 'none';
+  }
+  function getCurrentStudentContextAf() {
+    return {
+      student_id: null,
+      student_identifier: localStorage.getItem('af_student_mobile') || localStorage.getItem('af_student_id') || null,
+      student_name: localStorage.getItem('af_student_name') || null
+    };
+  }
+  async function submitContactRequestAf(event) {
+    if (event && event.preventDefault) event.preventDefault();
+    const btn = document.getElementById('contactSubmitBtnAf');
+    const name    = (document.getElementById('contactNameAf')?.value || '').trim();
+    const mobile  = (document.getElementById('contactMobileAf')?.value || '').trim();
+    const email   = (document.getElementById('contactEmailAf')?.value || '').trim().toLowerCase();
+    const reason  = document.getElementById('contactReasonAf')?.value || '';
+    const problem = (document.getElementById('contactProblemAf')?.value || '').trim();
+    if (name.length < 2)    { setContactMessageAf('error','Please enter your full name.'); return; }
+    if (mobile.length < 8)  { setContactMessageAf('error','Please enter a valid mobile number.'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { setContactMessageAf('error','Please enter a valid email address.'); return; }
+    if (!reason)             { setContactMessageAf('error','Please select a reason.'); return; }
+    if (problem.length < 10) { setContactMessageAf('error','Please describe your issue.'); return; }
+    if (btn) { btn.disabled = true; btn.textContent = 'Submitting...'; }
+    try {
+      const ctx = getCurrentStudentContextAf();
+      const res = await fetch('https://afooyyydhlwngzssgqih.supabase.co/functions/v1/contact-request', {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json', 'apikey':STUDENT_SUPABASE_ANON_KEY, 'Authorization':'Bearer '+STUDENT_SUPABASE_ANON_KEY },
+        body: JSON.stringify({ ...ctx, full_name:name, mobile_number:mobile, email, contact_reason:reason, problem_description:problem, page_url:window.location.href, user_agent:navigator.userAgent })
+      });
+      const data = await res.json().catch(() => null);
+      if (!res.ok || !data?.success) throw new Error(data?.message || 'Submission failed.');
+      setContactMessageAf('success','Your request has been submitted. Our team will contact you soon.');
+      document.getElementById('contactNameAf').value = '';
+      document.getElementById('contactMobileAf').value = '';
+      document.getElementById('contactEmailAf').value = '';
+      document.getElementById('contactReasonAf').value = '';
+      document.getElementById('contactProblemAf').value = '';
+    } catch (err) {
+      setContactMessageAf('error', err.message || 'Something went wrong. Please try again.');
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = 'Submit Request'; }
+    }
+  }
+  window.openContactUsPage = openContactUsPage; window.backToSettingsFromContact = backToSettingsFromContact; window.submitContactRequestAf = submitContactRequestAf;
+
+  /* ── CONTACT STATUS ── */
+  async function loadContactRequestStatusAf(force) {
+    const msgEl  = document.getElementById('contactRequestStatusMessageAf');
+    const listEl = document.getElementById('contactRequestStatusListAf');
+    if (!msgEl || !listEl) return;
+    msgEl.textContent = 'Loading...'; listEl.innerHTML = '';
+    try {
+      const ident = localStorage.getItem('af_student_mobile') || localStorage.getItem('af_student_id') || '';
+      if (!ident) { msgEl.textContent = 'Login to view your contact requests.'; return; }
+      const res = await fetch('https://afooyyydhlwngzssgqih.supabase.co/functions/v1/contact-request-status?identifier=' + encodeURIComponent(ident), { headers: { 'apikey':STUDENT_SUPABASE_ANON_KEY, 'Authorization':'Bearer '+STUDENT_SUPABASE_ANON_KEY } });
+      const data = await res.json().catch(() => null);
+      if (!res.ok || !data) throw new Error('Failed to load.');
+      const rows = Array.isArray(data.data) ? data.data : (Array.isArray(data) ? data : []);
+      if (!rows.length) { msgEl.textContent = 'No contact requests found.'; return; }
+      msgEl.textContent = '';
+      listEl.innerHTML = rows.map(r => `<div class="request-status-card-af"><div class="rs-card-head-af"><span class="rs-card-reason-af">${r.contact_reason||'General'}</span><span class="rs-card-status-af rs-status-${r.status||'pending'}">${r.status||'Pending'}</span></div><p class="rs-card-desc-af">${r.problem_description||''}</p><span class="rs-card-date-af">${r.created_at ? new Date(r.created_at).toLocaleDateString() : ''}</span></div>`).join('');
+    } catch (err) { if (msgEl) msgEl.textContent = err.message || 'Could not load.'; }
+  }
+  window.openContactRequestStatusPageAf = openContactRequestStatusPageAf; window.loadContactRequestStatusAf = loadContactRequestStatusAf;
+
+  /* ── BUG STATUS ── */
+  async function loadRequestStatusAf(force) {
+    const msgEl  = document.getElementById('requestStatusMessageAf');
+    const listEl = document.getElementById('requestStatusListAf');
+    if (!msgEl || !listEl) return;
+    msgEl.textContent = 'Loading...'; listEl.innerHTML = '';
+    try {
+      const email = localStorage.getItem('af_student_email') || '';
+      if (!email) { msgEl.textContent = 'Submit a bug report first to track its status.'; return; }
+      const res = await fetch('https://afooyyydhlwngzssgqih.supabase.co/functions/v1/bug-report-status?email=' + encodeURIComponent(email), { headers: { 'apikey':STUDENT_SUPABASE_ANON_KEY, 'Authorization':'Bearer '+STUDENT_SUPABASE_ANON_KEY } });
+      const data = await res.json().catch(() => null);
+      if (!res.ok || !data) throw new Error('Failed to load.');
+      const rows = Array.isArray(data.data) ? data.data : (Array.isArray(data) ? data : []);
+      if (!rows.length) { msgEl.textContent = 'No bug reports found.'; return; }
+      msgEl.textContent = '';
+      listEl.innerHTML = rows.map(r => `<div class="request-status-card-af"><div class="rs-card-head-af"><span class="rs-card-reason-af">${r.category||'Bug'}</span><span class="rs-card-status-af rs-status-${r.status||'open'}">${r.status||'Open'}</span></div><p class="rs-card-desc-af">${r.description||''}</p><span class="rs-card-date-af">${r.created_at ? new Date(r.created_at).toLocaleDateString() : ''}</span></div>`).join('');
+    } catch (err) { if (msgEl) msgEl.textContent = err.message || 'Could not load.'; }
+  }
+  window.openRequestStatusPageAf = openRequestStatusPageAf; window.loadRequestStatusAf = loadRequestStatusAf;
+
+  /* ── LEARNING HEATMAP ── */
+  const LEARNING_ACTIVITY_EDGE_URL = 'https://afooyyydhlwngzssgqih.supabase.co/functions/v1/learning-activity';
+  let _learningMarked = false, _learningTimer = null, _resolvedStudentId = '';
+
+  function _isUuid(v) { return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(String(v||'')); }
+
+  async function _getStudentId() {
+    if (_isUuid(_resolvedStudentId)) return _resolvedStudentId;
+    const keys = ['af_student_uuid','af_student_id','student_id'];
+    for (const k of keys) { const v = localStorage.getItem(k); if (_isUuid(v)) { _resolvedStudentId = v; return v; } }
+    const objs = ['af_logged_student','afStudent','af_student'];
+    for (const k of objs) { try { const p = JSON.parse(localStorage.getItem(k)||'null'); if (p?.id && _isUuid(p.id)) { _resolvedStudentId = p.id; return p.id; } } catch(e){} }
+    throw new Error('Student ID not found. Login first.');
+  }
+
+  function setLearningHeatmapStatus(msg) {
+    const el = document.getElementById('learningHeatmapStatus'); if (el) el.textContent = msg;
+  }
+  function updateHeaderStreakCount(streak) {
+    const n = Math.max(0, Number(streak)||0);
+    const h = document.getElementById('afHeaderStreakCount'); if (h) h.textContent = n;
+    const p = document.getElementById('learningHeatmapStreakCount'); if (p) p.textContent = n;
+    localStorage.setItem('af_streak', String(n));
+  }
+  function renderLearningWeek(week) {
+    const grid = document.getElementById('learningWeekGrid'); if (!grid) return;
+    const labels = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+    const safe = Array.isArray(week) ? week : [];
+    grid.innerHTML = labels.map((label, i) => {
+      const item = safe[i] || {}; const active = item.active || item.today;
+      return `<div class="learning-day-box${active?' active':''}"><span>${label}</span><strong>${active?'✓':'-'}</strong></div>`;
+    }).join('');
+  }
+
+  async function callLearningActivity(action) {
+    const id = await _getStudentId();
+    const res = await fetch(LEARNING_ACTIVITY_EDGE_URL, {
+      method: 'POST',
+      headers: { 'Content-Type':'application/json', 'Authorization':'Bearer '+STUDENT_SUPABASE_ANON_KEY, 'apikey':STUDENT_SUPABASE_ANON_KEY },
+      body: JSON.stringify({ action, studentId: id })
+    });
+    const data = await res.json().catch(() => null);
+    if (!res.ok) throw new Error(data?.error || 'Activity request failed.');
+    return data;
+  }
+
+  async function loadLearningHeatmap() {
+    setLearningHeatmapStatus('Loading activity...');
+    try {
+      const res = await callLearningActivity('summary');
+      updateHeaderStreakCount(res.streak); renderLearningWeek(res.week);
+      setLearningHeatmapStatus(Number(res.streak) > 0 ? 'Current streak: ' + res.streak + ' day(s).' : 'No active streak yet.');
+    } catch (err) {
+      setLearningHeatmapStatus(err.message || 'Could not load activity.');
+    }
+  }
+
+  async function _markLearning() {
+    if (_learningMarked) return;
+    _learningMarked = true;
+    try {
+      const res = await callLearningActivity('mark');
+      updateHeaderStreakCount(res.streak); renderLearningWeek(res.week);
+      setLearningHeatmapStatus('Today marked active.');
+    } catch (err) {
+      _learningMarked = false;
+    }
+  }
+
+  function initLearningHeatmapAf() {
+    if (_learningTimer) clearTimeout(_learningTimer);
+    _learningTimer = setTimeout(_markLearning, 10000);
+    const loggedIn = localStorage.getItem('af_student_logged_in') === 'true';
+    if (loggedIn) loadLearningHeatmap();
+  }
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') { if (!_learningMarked) initLearningHeatmapAf(); } });
+  window.loadLearningHeatmap = loadLearningHeatmap;
+
+    /* ── STREAK ── */
+  function afLoadStreak() {
+    const streak = parseInt(localStorage.getItem('af_streak') || '0', 10);
+    const el = document.getElementById('afHeaderStreakCount'); if (el) el.textContent = streak;
+    const el2 = document.getElementById('learningHeatmapStreakCount'); if (el2) el2.textContent = streak;
+  }
+    
   </script>
 
 </body>
