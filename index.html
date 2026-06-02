@@ -3810,36 +3810,6 @@ body,
   overflow: hidden;
   text-overflow: ellipsis;
 }
-      .learning-heatmap-section { background: var(--bg-base); }
-    .learning-heatmap-page { display: flex; flex-direction: column; gap: 16px; padding: var(--gap-md); }
-    .learning-back-btn { background: none; border: none; font-size: 14px; font-weight: 600; color: var(--af-primary); cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 6px 0; }
-    .learning-heatmap-hero { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
-    .learning-heatmap-kicker { font-size: 11px; font-weight: 700; color: var(--af-primary); text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 4px; }
-    .learning-heatmap-hero h2 { font-family: var(--font-display); font-size: 20px; font-weight: 800; color: var(--text-primary); margin: 0 0 4px; }
-    .learning-heatmap-hero p { font-size: 12px; color: var(--text-muted); margin: 0; line-height: 1.5; }
-    .learning-streak-card { display: flex; flex-direction: column; align-items: center; gap: 2px; background: var(--bg-card); border: 1px solid var(--border-card); border-radius: var(--r-lg); padding: 12px 16px; flex-shrink: 0; box-shadow: var(--shadow-card); }
-    .learning-streak-fire { font-size: 22px; }
-    .learning-streak-card strong { font-family: var(--font-display); font-size: 22px; font-weight: 800; color: var(--text-primary); line-height: 1; }
-    .learning-streak-card small { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; }
-    .learning-week-card { background: var(--bg-card); border: 1px solid var(--border-card); border-radius: var(--r-xl); padding: 18px; box-shadow: var(--shadow-card); }
-    .learning-week-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
-    .learning-week-card-top h3 { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--text-primary); margin: 0 0 3px; }
-    .learning-week-card-top p { font-size: 12px; color: var(--text-muted); margin: 0; }
-    .learning-refresh-btn { background: var(--bg-group); border: 1px solid var(--border-card); border-radius: var(--r-sm); width: 32px; height: 32px; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); transition: opacity 0.15s; }
-    .learning-refresh-btn:active { opacity: 0.6; }
-    .learning-week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
-    .learning-day-box { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 4px; border-radius: var(--r-sm); background: var(--bg-group); }
-    .learning-day-box span { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; }
-    .learning-day-box strong { font-size: 12px; font-weight: 700; color: var(--text-secondary); }
-    .learning-day-box.active { background: linear-gradient(135deg, var(--af-primary), var(--af-accent)); }
-    .learning-day-box.active span, .learning-day-box.active strong { color: white; }
-    .learning-info-card { background: var(--bg-card); border: 1px solid var(--border-card); border-radius: var(--r-xl); padding: 18px; box-shadow: var(--shadow-card); }
-    .learning-info-card h3 { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--text-primary); margin: 0 0 12px; }
-    .learning-info-card ul { display: flex; flex-direction: column; gap: 8px; margin: 0; padding-left: 16px; }
-    .learning-info-card li { font-size: 13px; color: var(--text-secondary); line-height: 1.5; list-style: disc; }
-
-    
-  
   </style>
 </head>
 
@@ -3859,22 +3829,41 @@ body,
   <!-- APP SHELL -->
   <div class="af-shell" id="afShell">
 
-   <!-- TOPBAR -->
+    <!-- TOPBAR -->
     <header class="af-topbar" role="banner">
       <div class="af-topbar-brand">
-        <img src="AF LOGO 1.jpeg" alt="AcademeForge" class="af-brand-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+        <img
+          src="AF LOGO 1.jpeg"
+          alt="AcademeForge"
+          class="af-brand-logo"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+        />
         <div class="af-brand-logo-fallback" style="display:none;" aria-hidden="true">AF</div>
         <div class="af-brand-text">
           <div class="af-brand-name">AcademeForge</div>
           <div class="af-brand-tagline">Learning Beyond the Classroom</div>
         </div>
       </div>
+
       <div class="af-topbar-actions">
-        <button class="af-streak-pill" onclick="afSwitchView('settings')" aria-label="Open learning streak" type="button">
+        <button
+          class="af-streak-pill"
+          onclick="window.location.href='/learning-heatmap/'"
+          aria-label="Open learning streak"
+          type="button"
+        >
           <span class="af-streak-fire" aria-hidden="true">🔥</span>
           <span id="afHeaderStreakCount">0</span>
         </button>
-        <button class="af-notif-btn" onclick="afShowToast('Notifications coming soon!','info','Notifications')" aria-label="Open notifications" type="button">🔔</button>
+
+        <button
+          class="af-notif-btn"
+          onclick="window.location.href='/notifications/'"
+          aria-label="Open notifications"
+          type="button"
+        >
+          🔔
+        </button>
       </div>
     </header>
 
@@ -4506,29 +4495,38 @@ body,
             </div>
 
             <!-- Learning Tools -->
-           <div class="af-accordion-group" role="listitem">
+            <div class="af-accordion-group" role="listitem">
               <button class="af-accordion-trigger" onclick="afToggleAccordion(this)" aria-expanded="false" type="button">
-                <div class="af-accordion-group-icon">📚</div>
+                <div class="af-accordion-group-icon" aria-hidden="true">📚</div>
                 <span class="af-accordion-group-label">Learning Tools</span>
                 <span class="af-accordion-count">3</span>
-                <span class="af-accordion-chevron">⌄</span>
+                <span class="af-accordion-chevron" aria-hidden="true">⌄</span>
               </button>
-              <div class="af-accordion-body">
+              <div class="af-accordion-body" role="region">
                 <div class="af-accordion-divider"></div>
-                <a class="af-accordion-item" href="/YA/NotesAF/">
-                  <div class="af-accordion-item-icon">📝</div>
-                  <div class="af-accordion-item-text"><div class="af-accordion-item-label">Revision Notes</div><div class="af-accordion-item-sub">Chapter-wise notes for class 9–10</div></div>
-                  <span class="af-accordion-item-arrow">›</span>
+                <a class="af-accordion-item" href="/YA/NotesAF/" aria-label="Open Revision Notes">
+                  <div class="af-accordion-item-icon" aria-hidden="true">📝</div>
+                  <div class="af-accordion-item-text">
+                    <div class="af-accordion-item-label">Revision Notes</div>
+                    <div class="af-accordion-item-sub">Chapter-wise notes for class 9–10</div>
+                  </div>
+                  <span class="af-accordion-item-arrow" aria-hidden="true">›</span>
                 </a>
-                <a class="af-accordion-item" href="/YA/SM/">
-                  <div class="af-accordion-item-icon">🧩</div>
-                  <div class="af-accordion-item-text"><div class="af-accordion-item-label">Sudoku Master</div><div class="af-accordion-item-sub">Brain training puzzle game</div></div>
-                  <span class="af-accordion-item-arrow">›</span>
+                <a class="af-accordion-item" href="/YA/SM/" aria-label="Open Sudoku Master">
+                  <div class="af-accordion-item-icon" aria-hidden="true">🧩</div>
+                  <div class="af-accordion-item-text">
+                    <div class="af-accordion-item-label">Sudoku Master</div>
+                    <div class="af-accordion-item-sub">Brain training puzzle game</div>
+                  </div>
+                  <span class="af-accordion-item-arrow" aria-hidden="true">›</span>
                 </a>
-                <a class="af-accordion-item" href="#" onclick="event.preventDefault(); _showLearningHeatmap()">
-                  <div class="af-accordion-item-icon">🔥</div>
-                  <div class="af-accordion-item-text"><div class="af-accordion-item-label">Learning Heatmap</div><div class="af-accordion-item-sub">Track your daily learning streak</div></div>
-                  <span class="af-accordion-item-arrow">›</span>
+                <a class="af-accordion-item" href="#" aria-label="Open Learning Heatmap">
+                  <div class="af-accordion-item-icon" aria-hidden="true">🔥</div>
+                  <div class="af-accordion-item-text">
+                    <div class="af-accordion-item-label">Learning Heatmap</div>
+                    <div class="af-accordion-item-sub">Track your daily learning streak</div>
+                  </div>
+                  <span class="af-accordion-item-arrow" aria-hidden="true">›</span>
                 </a>
               </div>
             </div>
@@ -4719,67 +4717,12 @@ body,
       <button class="af-modal-ok" onclick="afCloseModal()" type="button">Okay, Got It</button>
     </div>
   </div>
-
-      <!-- LEARNING HEATMAP OVERLAY -->
- <div
-  class="af-modal-overlay"
-  id="learningHeatmapOverlay"
-  onclick="
-    document.getElementById('learningHeatmapOverlay').classList.remove('open');
-    document.querySelector('.af-bottom-nav').style.display='';
-  "
->
-    <div class="af-modal-sheet" onclick="event.stopPropagation()" role="dialog" aria-modal="true" style="text-align:left;align-items:stretch;padding:24px;">
-      <div class="af-modal-drag" style="align-self:center;"></div>
-      <div class="learning-heatmap-page" style="padding:0;gap:16px;">
-        <div style="display:flex;align-items:center;justify-content:space-between;">
-          <div><p class="learning-heatmap-kicker">Weekly Online Activity</p><h2 style="font-family:var(--font-display);font-size:20px;font-weight:800;color:var(--text-primary);margin:0 0 4px;">Learning Heatmap</h2></div>
-          <div class="learning-streak-card"><span class="learning-streak-fire">🔥</span><strong id="learningHeatmapStreakCount">0</strong><small>Day Streak</small></div>
-        </div>
-        <div class="learning-week-card">
-          <div class="learning-week-card-top">
-            <div><h3>This Week</h3><p id="learningHeatmapStatus">Checking activity...</p></div>
-            <button type="button" class="learning-refresh-btn" onclick="loadLearningHeatmap()">↻</button>
-          </div>
-          <div class="learning-week-grid" id="learningWeekGrid">
-            <div class="learning-day-box"><span>Mon</span><strong>-</strong></div>
-            <div class="learning-day-box"><span>Tue</span><strong>-</strong></div>
-            <div class="learning-day-box"><span>Wed</span><strong>-</strong></div>
-            <div class="learning-day-box"><span>Thu</span><strong>-</strong></div>
-            <div class="learning-day-box"><span>Fri</span><strong>-</strong></div>
-            <div class="learning-day-box"><span>Sat</span><strong>-</strong></div>
-            <div class="learning-day-box"><span>Sun</span><strong>-</strong></div>
-          </div>
-        </div>
-        <div class="learning-info-card">
-          <h3>How streak works</h3>
-          <ul>
-            <li>Login daily to keep your learning streak active.</li>
-            <li>Daily activity automatically marks your day as active.</li>
-            <li>Continuous daily learning increases your streak count.</li>
-            <li>If a day is missed, the streak starts again from zero.</li>
-          </ul>
-        </div>
-       <button
-  class="af-modal-ok"
-  onclick="
-    document.getElementById('learningHeatmapOverlay').classList.remove('open');
-    document.querySelector('.af-bottom-nav').style.display='';
-  "
-  type="button"
->
-  Close
-</button>
-      </div>
-    </div>
-  </div>
-
+  
 <div id="afPullLoader">
   <div class="af-pull-spinner"></div>
 </div>
   
   <!-- JAVASCRIPT -->
-    
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
@@ -5022,88 +4965,11 @@ function afHandleSwipe(e) {
     /* ─────────────────────────────────────────────────────────────
        SECTION 6: STREAK DISPLAY
     ─────────────────────────────────────────────────────────────── */
-     function afLoadStreak() {
-    const streak = parseInt(localStorage.getItem('af_streak') || '0', 10);
-    const el = document.getElementById('afHeaderStreakCount'); if (el) el.textContent = streak;
-    const el2 = document.getElementById('learningHeatmapStreakCount'); if (el2) el2.textContent = streak;
-  }
-  /* ── LEARNING HEATMAP ── */
-  const LEARNING_ACTIVITY_EDGE_URL = 'https://afooyyydhlwngzssgqih.supabase.co/functions/v1/learning-activity';
-  let _learningMarked = false, _learningTimer = null, _resolvedStudentId = '';
-
-  function _isUuid(v) { return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(String(v||'')); }
-
-  async function _getStudentId() {
-    if (_isUuid(_resolvedStudentId)) return _resolvedStudentId;
-    const keys = ['af_student_uuid','af_student_id','student_id'];
-    for (const k of keys) { const v = localStorage.getItem(k); if (_isUuid(v)) { _resolvedStudentId = v; return v; } }
-    const objs = ['af_logged_student','afStudent','af_student'];
-    for (const k of objs) { try { const p = JSON.parse(localStorage.getItem(k)||'null'); if (p?.id && _isUuid(p.id)) { _resolvedStudentId = p.id; return p.id; } } catch(e){} }
-    throw new Error('Student ID not found. Login first.');
-  }
-
-  function setLearningHeatmapStatus(msg) {
-    const el = document.getElementById('learningHeatmapStatus'); if (el) el.textContent = msg;
-  }
-  function updateHeaderStreakCount(streak) {
-    const n = Math.max(0, Number(streak)||0);
-    const h = document.getElementById('afHeaderStreakCount'); if (h) h.textContent = n;
-    const p = document.getElementById('learningHeatmapStreakCount'); if (p) p.textContent = n;
-    localStorage.setItem('af_streak', String(n));
-  }
-  function renderLearningWeek(week) {
-    const grid = document.getElementById('learningWeekGrid'); if (!grid) return;
-    const labels = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-    const safe = Array.isArray(week) ? week : [];
-    grid.innerHTML = labels.map((label, i) => {
-      const item = safe[i] || {}; const active = item.active || item.today;
-      return `<div class="learning-day-box${active?' active':''}"><span>${label}</span><strong>${active?'✓':'-'}</strong></div>`;
-    }).join('');
-  }
-
-  async function callLearningActivity(action) {
-    const id = await _getStudentId();
-    const res = await fetch(LEARNING_ACTIVITY_EDGE_URL, {
-      method: 'POST',
-      headers: { 'Content-Type':'application/json', 'Authorization':'Bearer '+STUDENT_SUPABASE_ANON_KEY, 'apikey':STUDENT_SUPABASE_ANON_KEY },
-      body: JSON.stringify({ action, studentId: id })
-    });
-    const data = await res.json().catch(() => null);
-    if (!res.ok) throw new Error(data?.error || 'Activity request failed.');
-    return data;
-  }
-
-  async function loadLearningHeatmap() {
-    setLearningHeatmapStatus('Loading activity...');
-    try {
-      const res = await callLearningActivity('summary');
-      updateHeaderStreakCount(res.streak); renderLearningWeek(res.week);
-      setLearningHeatmapStatus(Number(res.streak) > 0 ? 'Current streak: ' + res.streak + ' day(s).' : 'No active streak yet.');
-    } catch (err) {
-      setLearningHeatmapStatus(err.message || 'Could not load activity.');
+    function afLoadStreak() {
+      const streak = parseInt(localStorage.getItem('af_streak') || '0', 10);
+      const el = document.getElementById('afHeaderStreakCount');
+      if (el) el.textContent = streak;
     }
-  }
-
-  async function _markLearning() {
-    if (_learningMarked) return;
-    _learningMarked = true;
-    try {
-      const res = await callLearningActivity('mark');
-      updateHeaderStreakCount(res.streak); renderLearningWeek(res.week);
-      setLearningHeatmapStatus('Today marked active.');
-    } catch (err) {
-      _learningMarked = false;
-    }
-  }
-
-  function initLearningHeatmapAf() {
-    if (_learningTimer) clearTimeout(_learningTimer);
-    _learningTimer = setTimeout(_markLearning, 10000);
-    const loggedIn = localStorage.getItem('af_student_logged_in') === 'true';
-    if (loggedIn) loadLearningHeatmap();
-  }
-  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') { if (!_learningMarked) initLearningHeatmapAf(); } });
-  window.loadLearningHeatmap = loadLearningHeatmap;
 
     /* ─────────────────────────────────────────────────────────────
        SECTION 7: STUDENT AUTH STATE
@@ -5122,39 +4988,6 @@ function afHandleSwipe(e) {
       const langBadge = document.getElementById('currentLangBadge');
       if (langBadge) langBadge.textContent = lang;
     }
-
-    /* legacy showSection — kept for any old references */
-  function showSection(id) { /* no-op: section system replaced by overlay modals */ }
-
-  /* ── SECTION-BASED HELPERS (now open overlays) ── */
- function _showLearningHeatmap() {
-  loadLearningHeatmap();
-
-  const nav = document.querySelector('.af-bottom-nav');
-  if (nav) {
-    nav.style.display = 'none';
-  }
-
-  document
-    .getElementById('learningHeatmapOverlay')
-    .classList.add('open');
-}
-    
-  function openContactUsPage() {
-    document.getElementById('contactUsOverlay').classList.add('open');
-  }
-  function backToSettingsFromContact() {
-    document.getElementById('contactUsOverlay').classList.remove('open');
-  }
-  function openContactRequestStatusPageAf() {
-    loadContactRequestStatusAf(false);
-    document.getElementById('contactStatusOverlay').classList.add('open');
-  }
-  function openRequestStatusPageAf() {
-    loadRequestStatusAf(false);
-    document.getElementById('bugStatusOverlay').classList.add('open');
-  }
-  function openStudentDashboardCardAf() { afSwitchView('student'); }
 
     /* ─────────────────────────────────────────────────────────────
        SECTION 8: LOGOUT
@@ -6848,8 +6681,6 @@ window.addEventListener('storage', function (e) {
 });
 
 })();
-
-    
   </script>
 
 </body>
