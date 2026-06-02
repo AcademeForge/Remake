@@ -3837,7 +3837,42 @@ body,
     .learning-info-card h3 { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--text-primary); margin: 0 0 12px; }
     .learning-info-card ul { display: flex; flex-direction: column; gap: 8px; margin: 0; padding-left: 16px; }
     .learning-info-card li { font-size: 13px; color: var(--text-secondary); line-height: 1.5; list-style: disc; }
-    
+    /* LEARNING HEATMAP FIX */
+
+#learningHeatmapOverlay .af-modal-sheet{
+  padding:24px !important;
+  padding-bottom:32px !important;
+  box-sizing:border-box !important;
+}
+
+#learningHeatmapOverlay .learning-heatmap-page{
+  padding:0 !important;
+  gap:16px !important;
+}
+
+#learningHeatmapOverlay .af-modal-ok{
+  width:100% !important;
+  min-height:52px !important;
+  height:52px !important;
+
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+
+  margin-top:8px !important;
+  margin-bottom:0 !important;
+
+  flex-shrink:0 !important;
+}
+
+@media (max-height:700px){
+
+  #learningHeatmapOverlay .af-modal-sheet{
+    max-height:90vh !important;
+    overflow-y:auto !important;
+  }
+
+}
   </style>
 </head>
 
