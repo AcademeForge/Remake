@@ -4696,19 +4696,34 @@ body,
       <div class="af-view" id="viewSettings" aria-label="Settings">
         <div class="af-settings-page">
 
-          <button
-            class="af-settings-profile glass"
-            onclick="window.location.href='#'"
-            type="button"
-            aria-label="View profile"
-          >
-            <div class="af-settings-avatar" aria-hidden="true">👨‍🎓</div>
-            <div class="af-settings-profile-text">
-              <div class="af-settings-profile-name" id="settingsProfileName">Hi, Student</div>
-              <div class="af-settings-profile-sub">Tap to view your profile →</div>
-            </div>
-            <div class="af-settings-profile-arrow" aria-hidden="true">›</div>
-          </button>
+        <button
+  class="af-settings-profile glass"
+  onclick="afOpenStudentDashboardNew()"
+  type="button"
+  aria-label="View profile"
+>
+  <div class="af-settings-avatar" aria-hidden="true">👨‍🎓</div>
+
+  <div class="af-settings-profile-text">
+    <div
+      class="af-settings-profile-name"
+      id="settingsProfileName"
+    >
+      Hi, Student
+    </div>
+
+    <div class="af-settings-profile-sub">
+      Tap to view your profile →
+    </div>
+  </div>
+
+  <div
+    class="af-settings-profile-arrow"
+    aria-hidden="true"
+  >
+    ›
+  </div>
+</button>
 
           <a
             href="https://academeforge.in"
