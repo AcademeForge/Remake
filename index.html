@@ -3810,6 +3810,301 @@ body,
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+    /* ── AF STUDENT DASHBOARD NEW ─────────────────────────────── */
+ 
+.af-dashboard-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+  padding: var(--gap-md);
+  padding-bottom: calc(var(--nav-h) + 40px + env(safe-area-inset-bottom, 0px));
+}
+ 
+/* TOPBAR */
+.af-dash-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+ 
+.af-dash-back,
+.af-dash-logout-mini {
+  padding: 9px 14px;
+  border-radius: var(--r-md);
+  font-size: 13px;
+  font-weight: 700;
+  border: 1px solid var(--border-card);
+  background: var(--bg-group);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-spring), background var(--dur-fast);
+}
+ 
+.af-dash-back:active,
+.af-dash-logout-mini:active { transform: scale(0.96); }
+ 
+.af-dash-logout-mini {
+  background: rgba(239,68,68,0.08);
+  border-color: rgba(239,68,68,0.20);
+  color: var(--af-danger);
+}
+ 
+.af-dash-topbar-title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text-primary);
+  flex: 1;
+  text-align: center;
+}
+ 
+/* HERO */
+.af-dash-hero {
+  border-radius: var(--r-xl);
+  padding: 22px 20px;
+  display: flex;
+  align-items: center;
+  gap: var(--gap-md);
+  box-shadow: var(--shadow-card);
+}
+ 
+.af-dash-avatar {
+  width: 62px;
+  height: 62px;
+  border-radius: var(--r-lg);
+  background: linear-gradient(135deg, var(--af-primary), var(--af-accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 800;
+  color: white;
+  flex-shrink: 0;
+}
+ 
+.af-dash-hero-text h2 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+ 
+.af-dash-hero-text p {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 3px;
+  font-weight: 600;
+}
+ 
+/* PANELS */
+.af-dash-panel {
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+ 
+.af-dash-panel-head {
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+ 
+.af-dash-panel-head h3 {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+ 
+.af-dash-panel-head p {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+  font-weight: 600;
+}
+ 
+/* DETAIL GRID */
+.af-dash-detail-grid {
+  display: flex;
+  flex-direction: column;
+}
+ 
+.af-dash-detail-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+ 
+.af-dash-detail-row:last-child { border-bottom: none; }
+ 
+.af-dash-detail-row span {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+ 
+.af-dash-detail-row strong {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: right;
+  word-break: break-all;
+}
+ 
+/* BATCH LIST */
+.af-dash-batch-list {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+ 
+.af-dash-batch-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border-radius: var(--r-md);
+  background: var(--bg-group);
+  border: 1px solid var(--border-subtle);
+}
+ 
+.af-dash-batch-icon {
+  font-size: 22px;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-sm);
+  background: linear-gradient(135deg, var(--af-primary), var(--af-accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+ 
+.af-dash-batch-text { flex: 1; min-width: 0; }
+ 
+.af-dash-batch-text strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+ 
+.af-dash-batch-text small {
+  display: block;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+  font-weight: 600;
+}
+ 
+.af-dash-batch-badge {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: var(--r-full);
+  background: rgba(34,197,94,0.12);
+  border: 1px solid rgba(34,197,94,0.25);
+  color: var(--af-success);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+ 
+.af-dash-empty {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 600;
+  padding: 20px 10px;
+}
+ 
+/* LOADER */
+.af-dash-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 32px;
+  text-align: center;
+}
+ 
+.af-dash-loader p {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+ 
+.af-dash-spinner {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 3px solid var(--border-subtle);
+  border-top-color: var(--af-primary);
+  animation: afDashSpin 0.8s linear infinite;
+}
+ 
+@keyframes afDashSpin { to { transform: rotate(360deg); } }
+ 
+/* ERROR */
+.af-dash-error-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 28px;
+  text-align: center;
+  border-radius: var(--r-lg);
+  background: rgba(239,68,68,0.06);
+  border: 1px solid rgba(239,68,68,0.15);
+}
+ 
+.af-dash-error-icon { font-size: 36px; }
+ 
+.af-dash-error-box p {
+  font-size: 13px;
+  color: var(--af-danger);
+  font-weight: 600;
+}
+ 
+.af-dash-retry-btn {
+  padding: 10px 22px;
+  border-radius: var(--r-md);
+  background: linear-gradient(135deg, var(--af-primary), var(--af-primary-dark));
+  color: white;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: var(--shadow-btn);
+  border: none;
+  transition: transform var(--dur-fast) var(--ease-spring);
+}
+ 
+.af-dash-retry-btn:active { transform: scale(0.97); }
+ 
+/* HIDDEN UTIL */
+.af-dash-hidden { display: none !important; }
+ 
+/* SETTINGS PROFILE CARD — clickable glow */
+.af-settings-profile:hover {
+  box-shadow: var(--shadow-elevated);
+}
+ 
+/* HOME PROFILE CARD logged-in state */
+.af-quick-card.af-loggedin-card .af-quick-icon {
+  background: linear-gradient(135deg, var(--af-success), #16a34a);
+}
+    
   </style>
 </head>
 
@@ -3917,17 +4212,17 @@ body,
                 <div class="af-quick-title">Student Login</div>
                 <div class="af-quick-sub">Access your course dashboard.</div>
               </button>
-              <button
-                class="af-quick-card glass"
-                onclick="window.location.href='#'"
-                type="button"
-                aria-label="My Profile"
-                id="homeProfileCard"
-              >
-                <div class="af-quick-icon">👤</div>
-                <div class="af-quick-title" id="homeProfileName">Hi, Student</div>
-                <div class="af-quick-sub" id="homeProfileSub">Login to view profile</div>
-              </button>
+            <button
+  class="af-quick-card glass"
+  onclick="afOpenStudentDashboardNew()"
+  type="button"
+  aria-label="My Profile"
+  id="homeProfileCard"
+>
+  <div class="af-quick-icon" id="homeProfileIcon">👤</div>
+  <div class="af-quick-title" id="homeProfileName">Hi, Student</div>
+  <div class="af-quick-sub" id="homeProfileSub">Login to view profile</div>
+</button>
             </div>
           </div>
 
@@ -4693,7 +4988,87 @@ body,
 
         </div>
       </div><!-- /viewSettings -->
+<!-- VIEW: STUDENT DASHBOARD -->
+<div class="af-view" id="viewDashboard" aria-label="Student Dashboard">
+  <div class="af-dashboard-page" id="afDashPage">
+ 
+    <!-- TOPBAR -->
+    <div class="af-dash-topbar">
+      <button class="af-dash-back" type="button" onclick="afDashGoBack()">
+        ← Back
+      </button>
+      <span class="af-dash-topbar-title">My Profile</span>
+      <button class="af-dash-logout-mini" type="button" onclick="afLogout()">
+        Logout
+      </button>
+    </div>
+ 
+    <!-- HERO CARD -->
+    <div class="af-dash-hero glass">
+      <div class="af-dash-avatar" id="afDashAvatar">S</div>
+      <div class="af-dash-hero-text">
+        <h2 id="afDashHeroName">Student</h2>
+        <p id="afDashHeroSub">AcademeForge Learner</p>
+      </div>
+    </div>
+ 
+    <!-- DETAILS PANEL -->
+    <div class="af-dash-panel glass">
+      <div class="af-dash-panel-head">
+        <h3>Your Details</h3>
+        <p>Name, email and phone number</p>
+      </div>
+      <div class="af-dash-detail-grid">
+        <div class="af-dash-detail-row">
+          <span>Name</span>
+          <strong id="afDashInfoName">-</strong>
+        </div>
+        <div class="af-dash-detail-row">
+          <span>Email</span>
+          <strong id="afDashInfoEmail">-</strong>
+        </div>
+        <div class="af-dash-detail-row">
+          <span>Phone</span>
+          <strong id="afDashInfoMobile">-</strong>
+        </div>
+        <div class="af-dash-detail-row">
+          <span>Student ID</span>
+          <strong id="afDashInfoStudentId">-</strong>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- ENROLLED BATCHES PANEL -->
+    <div class="af-dash-panel glass">
+      <div class="af-dash-panel-head">
+        <h3>Enrolled Batches</h3>
+        <p>Your active courses and programs</p>
+      </div>
+      <div id="afDashBatchList" class="af-dash-batch-list">
+        <p class="af-dash-empty">Loading enrolled batches...</p>
+      </div>
+    </div>
+ 
+    <!-- LOADING STATE -->
+    <div id="afDashLoader" class="af-dash-loader af-dash-hidden">
+      <div class="af-dash-spinner"></div>
+      <p>Fetching your profile...</p>
+    </div>
+ 
+    <!-- ERROR STATE -->
+    <div id="afDashError" class="af-dash-error-box af-dash-hidden">
+      <div class="af-dash-error-icon">⚠️</div>
+      <p id="afDashErrorText">Could not load profile.</p>
+      <button type="button" onclick="afLoadDashboard()" class="af-dash-retry-btn">
+        Retry
+      </button>
+    </div>
+ 
+  </div>
+</div>
+ 
 
+      
     </div><!-- /af-page -->
 
     <!-- BOTTOM NAVIGATION -->
@@ -6681,6 +7056,311 @@ window.addEventListener('storage', function (e) {
 });
 
 })();
+
+    /* ── AF STUDENT DASHBOARD NEW — JS ───────────────────────── */
+ 
+/* Track where user came from before dashboard */
+var _afDashPrevView = 'home';
+ 
+/* ── OPEN DASHBOARD ── */
+function afOpenStudentDashboardNew() {
+  var name  = localStorage.getItem('af_student_name')  || '';
+  var phone = localStorage.getItem('af_student_phone') ||
+              localStorage.getItem('af_student_mobile') || '';
+ 
+  if (!name && !phone) {
+    /* Not logged in — send to student login */
+    afSwitchView('student');
+    afShowToast('Please login first to view your profile.', 'warning', 'Login Required');
+    return;
+  }
+ 
+  /* Remember where we came from */
+  _afDashPrevView = afCurrentView || 'home';
+ 
+  /* Register dashboard view in the router if not already */
+  if (!AF_VIEWS['dashboard']) {
+    AF_VIEWS['dashboard'] = { view: 'viewDashboard', nav: null };
+  }
+ 
+  afSwitchView('dashboard');
+  afLoadDashboard();
+}
+ 
+/* ── GO BACK ── */
+function afDashGoBack() {
+  afSwitchView(_afDashPrevView || 'home');
+}
+ 
+/* ── LOAD DASHBOARD DATA ── */
+async function afLoadDashboard() {
+  var name      = localStorage.getItem('af_student_name')     || 'Student';
+  var email     = localStorage.getItem('af_student_email')    || '-';
+  var mobile    = localStorage.getItem('af_student_mobile')   ||
+                  localStorage.getItem('af_student_phone')    || '-';
+  var studentId = localStorage.getItem('af_student_id')       || '-';
+  var uuid      = localStorage.getItem('af_student_uuid')     || '';
+ 
+  /* Render from localStorage instantly */
+  afDashRenderBasic({ name: name, email: email, mobile: mobile, student_id: studentId });
+ 
+  /* Show loader while fetching from backend */
+  afDashShowLoader(true);
+  afDashShowError(false);
+ 
+  try {
+    var backend = (typeof studentDb !== 'undefined') ? studentDb : null;
+ 
+    if (!backend || (!uuid && !email && !mobile)) {
+      /* No backend or no identity — just show localStorage data */
+      afDashShowLoader(false);
+      afDashRenderBatches([]);
+      return;
+    }
+ 
+    /* ── Fetch student record ── */
+    var studentQuery = backend.from('students_af').select('*');
+ 
+    if (uuid) {
+      studentQuery = studentQuery.eq('id', uuid);
+    } else if (email && email !== '-') {
+      studentQuery = studentQuery.eq('email', email);
+    } else if (mobile && mobile !== '-') {
+      studentQuery = studentQuery.eq('mobile', mobile);
+    }
+ 
+    var studentResult = await studentQuery.maybeSingle();
+ 
+    if (studentResult.data) {
+      var s = studentResult.data;
+      afDashRenderBasic({
+        name:       s.name       || name,
+        email:      s.email      || email,
+        mobile:     s.mobile     || mobile,
+        student_id: s.student_id || studentId
+      });
+ 
+      /* Update localStorage with fresh data */
+      if (s.name)  localStorage.setItem('af_student_name',  s.name);
+      if (s.email) localStorage.setItem('af_student_email', s.email);
+      if (s.mobile)localStorage.setItem('af_student_mobile',s.mobile);
+    }
+ 
+    /* ── Fetch enrolled batches ── */
+    await afDashFetchAndRenderBatches(uuid || email || mobile);
+ 
+  } catch (err) {
+    console.error('afLoadDashboard error:', err);
+    afDashShowError(true, err.message || 'Could not load profile.');
+  } finally {
+    afDashShowLoader(false);
+  }
+}
+ 
+/* ── FETCH BATCHES ── */
+async function afDashFetchAndRenderBatches(studentIdentifier) {
+  try {
+    var backend = (typeof studentDb !== 'undefined') ? studentDb : null;
+    if (!backend || !studentIdentifier) { afDashRenderBatches([]); return; }
+ 
+    /* Try edge function first (same as batch section) */
+    var uuid = localStorage.getItem('af_student_uuid') || '';
+    if (uuid) {
+      try {
+        var res = await backend.functions.invoke('batch-enrolled-af', { body: { student_id: uuid } });
+        if (res.data && res.data.ok && Array.isArray(res.data.course_ids)) {
+          /* Map course IDs to batch names using afBatches array */
+          var enrolledBatches = [];
+          if (typeof afBatches !== 'undefined') {
+            enrolledBatches = afBatches.filter(function(b) {
+              return res.data.course_ids.indexOf(b.courseId) !== -1;
+            });
+          }
+          afDashRenderBatches(enrolledBatches);
+          return;
+        }
+      } catch(e) { /* fallback below */ }
+    }
+ 
+    /* Fallback: direct DB query */
+    var batchResult = await backend
+      .from('student_course_access_af')
+      .select('course_id, course_slug, batch_title, created_at')
+      .eq('student_uuid', uuid || studentIdentifier);
+ 
+    if (!batchResult.error && Array.isArray(batchResult.data)) {
+      afDashRenderBatches(batchResult.data);
+    } else {
+      afDashRenderBatches([]);
+    }
+  } catch (err) {
+    console.error('afDashFetchAndRenderBatches error:', err);
+    afDashRenderBatches([]);
+  }
+}
+ 
+/* ── RENDER BASIC INFO ── */
+function afDashRenderBasic(student) {
+  var name      = student.name       || 'Student';
+  var email     = student.email      || '-';
+  var mobile    = student.mobile     || '-';
+  var studentId = student.student_id || '-';
+ 
+  /* Avatar initials */
+  var initials = name.trim().split(/\s+/).slice(0, 2)
+    .map(function(w) { return w.charAt(0).toUpperCase(); }).join('');
+  var avatarEl = document.getElementById('afDashAvatar');
+  if (avatarEl) avatarEl.textContent = initials || 'S';
+ 
+  /* Hero */
+  var heroName = document.getElementById('afDashHeroName');
+  if (heroName) heroName.textContent = name;
+ 
+  var heroSub = document.getElementById('afDashHeroSub');
+  if (heroSub) heroSub.textContent = 'AcademeForge Learner';
+ 
+  /* Detail rows */
+  var infoName = document.getElementById('afDashInfoName');
+  if (infoName) infoName.textContent = name;
+ 
+  var infoEmail = document.getElementById('afDashInfoEmail');
+  if (infoEmail) infoEmail.textContent = email;
+ 
+  var infoMobile = document.getElementById('afDashInfoMobile');
+  if (infoMobile) infoMobile.textContent = mobile;
+ 
+  var infoId = document.getElementById('afDashInfoStudentId');
+  if (infoId) infoId.textContent = studentId;
+ 
+  /* Sync home + settings cards */
+  afDashSyncCards(name);
+}
+ 
+/* ── RENDER BATCHES ── */
+function afDashRenderBatches(batches) {
+  var box = document.getElementById('afDashBatchList');
+  if (!box) return;
+ 
+  if (!batches || !batches.length) {
+    box.innerHTML = '<p class="af-dash-empty">No enrolled batches found.<br>Explore the Batches section to enroll.</p>';
+    return;
+  }
+ 
+  var icons = ['📚','🎥','🎨','💻','💡','🚀','🧩','📝'];
+ 
+  box.innerHTML = batches.map(function(b, i) {
+    var title  = b.title || b.batch_title || b.course_slug || 'Batch';
+    var slug   = b.courseSlug || b.course_slug || '';
+    var icon   = icons[i % icons.length];
+    var date   = b.created_at ? new Date(b.created_at).toLocaleDateString('en-IN', { month:'short', year:'numeric' }) : 'Active';
+ 
+    return '<div class="af-dash-batch-item">'
+      + '<div class="af-dash-batch-icon">' + icon + '</div>'
+      + '<div class="af-dash-batch-text">'
+      + '<strong>' + afDashEsc(title) + '</strong>'
+      + '<small>' + afDashEsc(slug || 'AcademeForge Course') + '</small>'
+      + '</div>'
+      + '<span class="af-dash-batch-badge">✓ ' + date + '</span>'
+      + '</div>';
+  }).join('');
+}
+ 
+/* ── SYNC HOME + SETTINGS CARDS ── */
+function afDashSyncCards(name) {
+  name = name || localStorage.getItem('af_student_name') || '';
+  var phone = localStorage.getItem('af_student_mobile') ||
+              localStorage.getItem('af_student_phone') || '';
+  var isLoggedIn = !!(name && phone);
+  var firstName = name.split(' ')[0] || 'Student';
+ 
+  /* Home card */
+  var homeProfileName = document.getElementById('homeProfileName');
+  var homeProfileSub  = document.getElementById('homeProfileSub');
+  var homeCard        = document.getElementById('homeProfileCard');
+ 
+  if (homeProfileName) homeProfileName.textContent = isLoggedIn ? 'Hi, ' + firstName : 'Hi, Student';
+  if (homeProfileSub)  homeProfileSub.textContent  = isLoggedIn ? 'Tap to view profile →' : 'Login to view profile';
+  if (homeCard) {
+    if (isLoggedIn) homeCard.classList.add('af-loggedin-card');
+    else homeCard.classList.remove('af-loggedin-card');
+  }
+ 
+  /* Settings card */
+  var settingsProfileName = document.getElementById('settingsProfileName');
+  if (settingsProfileName) settingsProfileName.textContent = isLoggedIn ? 'Hi, ' + name : 'Hi, Student';
+}
+ 
+/* ── LOADER / ERROR HELPERS ── */
+function afDashShowLoader(show) {
+  var el = document.getElementById('afDashLoader');
+  if (!el) return;
+  if (show) el.classList.remove('af-dash-hidden');
+  else el.classList.add('af-dash-hidden');
+}
+ 
+function afDashShowError(show, msg) {
+  var el    = document.getElementById('afDashError');
+  var textEl= document.getElementById('afDashErrorText');
+  if (!el) return;
+  if (show) {
+    el.classList.remove('af-dash-hidden');
+    if (textEl && msg) textEl.textContent = msg;
+  } else {
+    el.classList.add('af-dash-hidden');
+  }
+}
+ 
+function afDashEsc(t) {
+  return String(t || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+ 
+/* ── AUTO SYNC ON PAGE LOAD ── */
+document.addEventListener('DOMContentLoaded', function() {
+  /* Sync cards on load from localStorage */
+  afDashSyncCards('');
+ 
+  /* Register dashboard view (in case nav fires before init) */
+  if (typeof AF_VIEWS !== 'undefined' && !AF_VIEWS['dashboard']) {
+    AF_VIEWS['dashboard'] = { view: 'viewDashboard', nav: null };
+  }
+});
+ 
+/* ── PATCH: afSwitchView to handle 'dashboard' without a nav button ── */
+var _afOriginalSwitchView = window.afSwitchView;
+window.afSwitchView = function(viewKey) {
+  /* Register dashboard view dynamically */
+  if (viewKey === 'dashboard' && typeof AF_VIEWS !== 'undefined' && !AF_VIEWS['dashboard']) {
+    AF_VIEWS['dashboard'] = { view: 'viewDashboard', nav: null };
+  }
+  if (typeof _afOriginalSwitchView === 'function') {
+    _afOriginalSwitchView(viewKey);
+  }
+};
+ 
+/* ── PATCH: afLoadStudentState to sync cards ── */
+var _afOrigLoadStudentState = window.afLoadStudentState;
+window.afLoadStudentState = function() {
+  if (typeof _afOrigLoadStudentState === 'function') _afOrigLoadStudentState();
+  afDashSyncCards('');
+};
+ 
+/* ── PATCH: saveStudentSessionaf to sync cards after login ── */
+var _afOrigSaveSession = window.saveStudentSessionaf;
+window.saveStudentSessionaf = function(student, sessionToken, deviceId) {
+  if (typeof _afOrigSaveSession === 'function') _afOrigSaveSession(student, sessionToken, deviceId);
+  if (student && student.name) afDashSyncCards(student.name);
+};
+ 
+/* ── PATCH: afLogout to clear cards ── */
+var _afOrigLogout = window.afLogout;
+window.afLogout = function() {
+  if (typeof _afOrigLogout === 'function') _afOrigLogout();
+  afDashSyncCards('');
+  /* Go home if on dashboard */
+  if (typeof afCurrentView !== 'undefined' && afCurrentView === 'dashboard') {
+    if (typeof afSwitchView === 'function') afSwitchView('home');
+  }
+};
   </script>
 
 </body>
