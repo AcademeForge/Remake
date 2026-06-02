@@ -601,15 +601,6 @@ body.dark .bottom-nav { background:rgba(26,23,20,.95); }
     <div class="daily-streak" id="dailyStreakIconNx">🔥</div>
   </div>
 
-  <div class="section-title">Your Stats</div>
-  <div class="stats-grid">
-    <div class="stat-card"><div class="stat-value" id="qsLevelNx">1</div><div class="stat-label">Level</div></div>
-    <div class="stat-card"><div class="stat-value" id="qsXpNx">0</div><div class="stat-label">Total XP</div></div>
-    <div class="stat-card"><div class="stat-value" id="qsWinsNx">0</div><div class="stat-label">Wins</div></div>
-    <div class="stat-card"><div class="stat-value" id="qsPlayedNx">0</div><div class="stat-label">Played</div></div>
-    <div class="stat-card"><div class="stat-value" id="qsBestNx">--</div><div class="stat-label">Best Time</div></div>
-    <div class="stat-card"><div class="stat-value" id="qsRankNx">#--</div><div class="stat-label">Global Rank</div></div>
-  </div>
 
   <div style="margin-top:16px;padding:18px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);text-align:center">
     <div style="font-size:2rem;margin-bottom:8px">🎮</div>
@@ -802,29 +793,6 @@ body.dark .bottom-nav { background:rgba(26,23,20,.95); }
     </div>
   </div>
 
-  <div class="section-title">Account &amp; Settings</div>
-  <div class="settings-list">
-    <div class="settings-row">
-      <div><div class="settings-label">Edit Profile</div><div class="settings-sub">Change username or avatar</div></div>
-      <button class="icon-btn" onclick="openEditProfileNx()">✏️</button>
-    </div>
-    <div class="settings-row">
-      <div><div class="settings-label">Dark Mode</div></div>
-      <button id="darkToggleNx" class="toggle" onclick="toggleThemeNx()"></button>
-    </div>
-    <div class="settings-row">
-      <div><div class="settings-label">Sound Effects</div></div>
-      <button id="soundToggleNx" class="toggle" onclick="toggleSoundNx()"></button>
-    </div>
-    <div class="settings-row">
-      <div><div class="settings-label">Manual Refresh</div><div class="settings-sub">Pull latest data from Nxdb</div></div>
-      <button class="icon-btn" onclick="refreshSudokuNxdb()">🔄</button>
-    </div>
-    <div class="settings-row">
-      <div><div class="settings-label">Reset Progress</div><div class="settings-sub">Clear all local game data</div></div>
-      <button class="icon-btn" onclick="confirmResetProgressNx()">🗑️</button>
-    </div>
-  </div>
 </section>
 
 <!-- ══════════════════ LEADERBOARD ══════════════════ -->
@@ -858,6 +826,31 @@ body.dark .bottom-nav { background:rgba(26,23,20,.95); }
 
 <!-- ══════════════════ MORE / XP TABLE ══════════════════ -->
 <section id="settingsScreen" class="screen">
+
+    <div class="section-title">Account &amp; Settings</div>
+  <div class="settings-list">
+    <div class="settings-row">
+      <div><div class="settings-label">Edit Profile</div><div class="settings-sub">Change username or avatar</div></div>
+      <button class="icon-btn" onclick="openEditProfileNx()">✏️</button>
+    </div>
+    <div class="settings-row">
+      <div><div class="settings-label">Dark Mode</div></div>
+      <button id="darkToggleNx" class="toggle" onclick="toggleThemeNx()"></button>
+    </div>
+    <div class="settings-row">
+      <div><div class="settings-label">Sound Effects</div></div>
+      <button id="soundToggleNx" class="toggle" onclick="toggleSoundNx()"></button>
+    </div>
+    <div class="settings-row">
+      <div><div class="settings-label">Manual Refresh</div><div class="settings-sub">Pull latest data from Nxdb</div></div>
+      <button class="icon-btn" onclick="refreshSudokuNxdb()">🔄</button>
+    </div>
+    <div class="settings-row">
+      <div><div class="settings-label">Reset Progress</div><div class="settings-sub">Clear all local game data</div></div>
+      <button class="icon-btn" onclick="confirmResetProgressNx()">🗑️</button>
+    </div>
+  </div>
+   
   <h3 class="section-title">XP System</h3>
   <div class="settings-list">
     <div class="settings-row"><div class="settings-label">4×4 Easy</div><span style="font-family:var(--font-mono);font-size:.8rem;color:var(--primary)">+25 XP</span></div>
