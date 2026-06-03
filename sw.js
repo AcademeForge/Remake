@@ -1,5 +1,7 @@
 const CACHE_NAME = "academeforge-v4";
 
+const CACHE_NAME = "academeforge-v4";
+
 const PRECACHE = [
   "./",
   "./index.html",
@@ -10,8 +12,16 @@ const PRECACHE = [
   "./backup%201/index.html",
   "./core/index.html",
   "./flo/index.html",
+
   "./YA/SM/",
-"./YA/SM/index.html",
+  "./YA/SM/index.html",
+
+  "./YA/BETA%202.0/About/",
+  "./YA/BETA%202.0/About/index.html",
+
+  "./YA/NotesAF/",
+  "./YA/NotesAF/index.html",
+
   "./sudoku-master/index.html",
 
   "./AF%20LOGO%201.jpeg",
@@ -27,7 +37,6 @@ const PRECACHE = [
   "./Course%204.jpeg",
   "./Course%205.jpeg"
 ];
-
 /* =========================
    INSTALL
 ========================= */
