@@ -3,6 +3,7 @@ const CACHE_NAME = "academeforge-v6";
 const PRECACHE = [
   "./",
   "./index.html",
+  "./offline.html",
   "./Y.html",
   "./manifest.json",
 
