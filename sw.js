@@ -1,4 +1,4 @@
-const CACHE_NAME = "academeforge-v5";
+const CACHE_NAME = "academeforge-v6";
 
 const PRECACHE = [
   "./",
