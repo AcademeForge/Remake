@@ -5617,104 +5617,27 @@ body{
               </div>
             </div>
 
-          <!-- Other Settings -->
-<div class="af-accordion-group" role="listitem">
-  <button
-    class="af-accordion-trigger"
-    onclick="afToggleAccordion(this)"
-    aria-expanded="false"
-    type="button">
-
-    <div class="af-accordion-group-icon" aria-hidden="true">⚙️</div>
-
-    <span class="af-accordion-group-label">
-      Other Settings
-    </span>
-
-    <span class="af-accordion-count">
-      Tools
-    </span>
-
-    <span class="af-accordion-chevron" aria-hidden="true">
-      ⌄
-    </span>
-  </button>
-
-  <div class="af-accordion-body" role="region">
-
-    <div class="af-accordion-divider"></div>
-
-    <!-- INSTALL APP -->
-
-    <a
-      id="installAppBtn"
-      class="af-accordion-item"
-      href="#"
-      onclick="installAcademeForge(); return false;"
-      style="display:none;"
-      aria-label="Install AcademeForge">
-
-      <div
-        class="af-accordion-item-icon"
-        aria-hidden="true">
-        📲
-      </div>
-
-      <div class="af-accordion-item-text">
-
-        <div class="af-accordion-item-label">
-          Install App
-        </div>
-
-        <div class="af-accordion-item-sub">
-          Add AcademeForge to your home screen
-        </div>
-
-      </div>
-
-      <span
-        class="af-accordion-item-arrow"
-        aria-hidden="true">
-        ›
-      </span>
-
-    </a>
-
-    <!-- LANGUAGE -->
-
-    <a
-      class="af-accordion-item"
-      href="#"
-      aria-label="Change App Language">
-
-      <div
-        class="af-accordion-item-icon"
-        aria-hidden="true">
-        🌐
-      </div>
-
-      <div class="af-accordion-item-text">
-
-        <div class="af-accordion-item-label">
-          Change Language
-        </div>
-
-        <div class="af-accordion-item-sub">
-          English, Hindi, Bhojpuri &amp; more
-        </div>
-
-      </div>
-
-      <span
-        class="af-accordion-item-arrow"
-        aria-hidden="true">
-        ›
-      </span>
-
-    </a>
-
-  </div>
-</div>
+            <!-- Language -->
+            <div class="af-accordion-group" role="listitem">
+              <button class="af-accordion-trigger" onclick="afToggleAccordion(this)" aria-expanded="false" type="button">
+                <div class="af-accordion-group-icon" aria-hidden="true">🌐</div>
+                <span class="af-accordion-group-label">Language</span>
+                <span class="af-accordion-count" id="currentLangBadge">English</span>
+                <span class="af-accordion-chevron" aria-hidden="true">⌄</span>
+              </button>
+              <div class="af-accordion-body" role="region">
+                <div class="af-accordion-divider"></div>
+                <a class="af-accordion-item" href="#" aria-label="Change App Language">
+                  <div class="af-accordion-item-icon" aria-hidden="true">🌐</div>
+                  <div class="af-accordion-item-text">
+                    <div class="af-accordion-item-label">Change Language</div>
+                    <div class="af-accordion-item-sub">English, Hindi, Bhojpuri &amp; more</div>
+                  </div>
+                  <span class="af-accordion-item-arrow" aria-hidden="true">›</span>
+                </a>
+              </div>
+            </div>
+            
           </div><!-- /af-accordion-groups -->
 
           <!-- FIX: Changed onclick from afSettingsLogout() to afLogout() — no undefined function -->
