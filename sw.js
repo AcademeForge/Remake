@@ -1,4 +1,4 @@
-const CACHE_NAME = "academeforge-v8";
+const CACHE_NAME = "academeforge-v9";
 
 const PRECACHE = [
   "./",
@@ -12,7 +12,7 @@ const PRECACHE = [
   "./core/index.html",
 
   "./sudoku-master/index.html",
-
+  "./AF%20logo%203.png",
   "./AF%20LOGO%201.jpeg",
   "./AF%20LOGO%202.jpeg",
 
