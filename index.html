@@ -4752,6 +4752,160 @@ body{
     html.af-preload .af-view{
   display:none !important;
 }
+
+  /* ════════════════════════════════════
+   INSTALL APP MODAL
+════════════════════════════════════ */
+
+#afInstallOverlay{
+  position:fixed;
+  inset:0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:24px;
+
+  background:rgba(0,0,0,.55);
+
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+
+  opacity:0;
+  visibility:hidden;
+
+  transition:
+    opacity .25s ease,
+    visibility .25s ease;
+
+  z-index:99999;
+}
+
+#afInstallOverlay.open{
+  opacity:1;
+  visibility:visible;
+}
+
+#afInstallOverlay .af-modal-sheet{
+
+  width:min(100%,360px);
+
+  padding:24px;
+
+  border-radius:28px;
+
+  text-align:center;
+
+  background:var(--af-surface);
+
+  border:1px solid var(--af-border);
+
+  box-shadow:
+    0 24px 80px rgba(0,0,0,.28);
+}
+
+.af-install-modal-icon{
+
+  width:72px;
+  height:72px;
+
+  margin:0 auto 16px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:22px;
+
+  font-size:34px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(79,70,229,.18),
+      rgba(6,182,212,.10)
+    );
+}
+
+.af-install-modal-title{
+  margin:0;
+
+  font-size:24px;
+  font-weight:900;
+
+  color:var(--af-text);
+}
+
+.af-install-modal-sub{
+  margin:12px 0 0;
+
+  font-size:14px;
+  line-height:1.6;
+
+  color:var(--af-text-muted);
+}
+
+.af-install-modal-actions{
+  display:flex;
+  gap:10px;
+
+  margin-top:24px;
+}
+
+.af-install-later-btn,
+.af-install-now-btn{
+
+  flex:1;
+
+  height:48px;
+
+  border:none;
+  outline:none;
+
+  cursor:pointer;
+
+  border-radius:16px;
+
+  font-size:14px;
+  font-weight:800;
+}
+
+.af-install-later-btn{
+
+  background:
+    rgba(127,127,127,.12);
+
+  color:
+    var(--af-text);
+}
+
+.af-install-now-btn{
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--af-primary),
+      var(--af-accent)
+    );
+
+  color:#fff;
+}
+
+.af-install-later-btn:active,
+.af-install-now-btn:active{
+  transform:scale(.98);
+}
+
+/* Hide on Mobile */
+
+@media (max-width:1023px){
+
+  #afInstallOverlay{
+    display:none !important;
+  }
+
+}
     
   </style>
 </head>
@@ -5954,6 +6108,44 @@ body{
       <button class="af-modal-ok" onclick="afCloseModal()" type="button">Okay, Got It</button>
     </div>
   </div>
+
+  <!-- INSTALL APP MODAL -->
+
+<div id="afInstallOverlay">
+
+  <div class="af-modal-sheet">
+
+    <div class="af-install-modal-icon">
+      🚀
+    </div>
+
+    <h3 class="af-install-modal-title">
+      Install AcademeForge
+    </h3>
+
+    <p class="af-install-modal-sub">
+      Get faster loading, offline access and a better app experience.
+    </p>
+
+    <div class="af-install-modal-actions">
+
+      <button
+        class="af-install-later-btn"
+        onclick="afCloseInstallModal()">
+        Later
+      </button>
+
+      <button
+        class="af-install-now-btn"
+        onclick="installAcademeForge()">
+        Install Now
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
   
 <div id="afPullLoader">
   <div class="af-pull-spinner"></div>
@@ -8460,24 +8652,70 @@ if ("serviceWorker" in navigator) {
   }
 }
 
-     /* ════════════════════════════════════
-MANIFEST jason
+   /* ════════════════════════════════════
+   INSTALL APP MODAL
 ════════════════════════════════════ */
 
-    let afInstallPrompt = null;
+let afInstallPrompt = null;
 
-window.addEventListener("beforeinstallprompt", (e) => {
-  e.preventDefault();
+window.addEventListener(
+  "beforeinstallprompt",
+  (e) => {
 
-  afInstallPrompt = e;
+    e.preventDefault();
 
-  const btn =
-    document.getElementById("installAppBtn");
+    const isDesktop =
+      window.innerWidth >= 1024 &&
+      !/Android|iPhone|iPad|iPod/i.test(
+        navigator.userAgent
+      );
 
-  if (btn) {
-    btn.style.display = "block";
+    if (!isDesktop) return;
+
+    if (
+      localStorage.getItem(
+        "af_install_prompt_shown"
+      )
+    ) {
+      return;
+    }
+
+    afInstallPrompt = e;
+
+    setTimeout(() => {
+      afShowInstallModal();
+    }, 2500);
   }
-});
+);
+
+function afShowInstallModal() {
+
+  const modal =
+    document.getElementById(
+      "afInstallOverlay"
+    );
+
+  if (!modal) return;
+
+  modal.classList.add("open");
+}
+
+function afCloseInstallModal() {
+
+  const modal =
+    document.getElementById(
+      "afInstallOverlay"
+    );
+
+  if (!modal) return;
+
+  modal.classList.remove("open");
+
+  localStorage.setItem(
+    "af_install_prompt_shown",
+    "1"
+  );
+}
 
 async function installAcademeForge() {
 
@@ -8489,14 +8727,8 @@ async function installAcademeForge() {
 
   afInstallPrompt = null;
 
-  const btn =
-    document.getElementById("installAppBtn");
-
-  if (btn) {
-    btn.style.display = "none";
-  }
+  afCloseInstallModal();
 }
-
   </script>
 
 </body>
