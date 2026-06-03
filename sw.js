@@ -9,16 +9,6 @@ const PRECACHE = [
   "./account/index.html",
   "./backup%201/index.html",
   "./core/index.html",
-  "./flo/index.html",
-
-  "./YA/SM/",
-  "./YA/SM/index.html",
-
-  "./YA/BETA%202.0/About/",
-  "./YA/BETA%202.0/About/index.html",
-
-  "./YA/NotesAF/",
-  "./YA/NotesAF/index.html",
 
   "./sudoku-master/index.html",
 
