@@ -5852,11 +5852,11 @@ function afHideSplash() {
       afCurrentView = viewKey;
       const page = document.getElementById('afPage');
       if (page) page.scrollTop = 0;
-      localStorage.setItem('af_last_tab', viewKey);
+     sessionStorage.setItem('af_last_tab', viewKey);
     }
 
     function afRestoreLastTab() {
-      const lastTab = localStorage.getItem('af_last_tab') || 'home';
+      const lastTab = sessionStorage.getItem('af_last_tab') || 'home';
       if (AF_VIEWS[lastTab]) afSwitchView(lastTab);
     }
 
