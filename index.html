@@ -4610,15 +4610,7 @@ body,
     border-color .16s linear !important;
 }
 
-/* Kill expensive transition-all */
-*{
-  transition-property:
-    background-color,
-    color,
-    border-color,
-    opacity,
-    transform !important;
-}
+
 
 /* Reduce GPU load */
 .glass,
@@ -4693,13 +4685,7 @@ body{
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* GPU acceleration */
-.af-view,
-.af-page,
-.af-shell{
-  transform: translateZ(0);
-  will-change: transform;
-}
+
 
 /* Faster dark mode paint */
 [data-theme="dark"]{
