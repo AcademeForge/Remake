@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
-  <script>
+
+<script>
 (function () {
 
   document.documentElement.classList.add("af-preload");
-  
+
   if (localStorage.getItem("af_dark_mode") === "1") {
     document.documentElement.setAttribute("data-theme", "dark");
   } else {
@@ -16,27 +16,77 @@
   if (sessionStorage.getItem("af_splash_shown")) {
     document.documentElement.classList.add("no-splash");
   }
+
 })();
 </script>
 
-<meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#4f46e5" />
-  <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <title>AcademeForge</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<meta charset="UTF-8">
 
-  <style>
-    /* ─── CSS CUSTOM PROPERTIES ─────────────────────────────────── */
-    :root {
-      --af-primary:        #4f46e5;
-      --af-primary-dark:   #3730a3;
-      --af-primary-light:  #818cf8;
-      --af-accent:         #06b6d4;
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>AcademeForge</title>
+
+<meta
+  name="description"
+  content="AcademeForge - Learning Beyond The Classroom">
+
+<meta
+  name="theme-color"
+  content="#4f46e5">
+
+<meta
+  name="mobile-web-app-capable"
+  content="yes">
+
+<meta
+  name="apple-mobile-web-app-capable"
+  content="yes">
+
+<meta
+  name="apple-mobile-web-app-status-bar-style"
+  content="black-translucent">
+
+<meta
+  name="apple-mobile-web-app-title"
+  content="AcademeForge">
+
+<link
+  rel="manifest"
+  href="./manifest.json">
+
+<link
+  rel="icon"
+  type="image/png"
+  href="./AF%20logo%203.png">
+
+<link
+  rel="apple-touch-icon"
+  href="./AF%20logo%203.png">
+
+<link
+  rel="preconnect"
+  href="https://fonts.googleapis.com">
+
+<link
+  rel="preconnect"
+  href="https://fonts.gstatic.com"
+  crossorigin>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Sora:wght@400;500;600;700;800&display=swap"
+  rel="stylesheet">
+
+<style>
+
+/* ─── CSS CUSTOM PROPERTIES ─────────────────────────────────── */
+
+:root{
+  --af-primary:#4f46e5;
+  --af-primary-dark:#3730a3;
+  --af-primary-light:#818cf8;
+  --af-accent:#06b6d4;
       --af-accent2:        #f59e0b;
       --af-danger:         #ef4444;
       --af-success:        #22c55e;
@@ -5567,27 +5617,104 @@ body{
               </div>
             </div>
 
-            <!-- Language -->
-            <div class="af-accordion-group" role="listitem">
-              <button class="af-accordion-trigger" onclick="afToggleAccordion(this)" aria-expanded="false" type="button">
-                <div class="af-accordion-group-icon" aria-hidden="true">🌐</div>
-                <span class="af-accordion-group-label">Language</span>
-                <span class="af-accordion-count" id="currentLangBadge">English</span>
-                <span class="af-accordion-chevron" aria-hidden="true">⌄</span>
-              </button>
-              <div class="af-accordion-body" role="region">
-                <div class="af-accordion-divider"></div>
-                <a class="af-accordion-item" href="#" aria-label="Change App Language">
-                  <div class="af-accordion-item-icon" aria-hidden="true">🌐</div>
-                  <div class="af-accordion-item-text">
-                    <div class="af-accordion-item-label">Change Language</div>
-                    <div class="af-accordion-item-sub">English, Hindi, Bhojpuri &amp; more</div>
-                  </div>
-                  <span class="af-accordion-item-arrow" aria-hidden="true">›</span>
-                </a>
-              </div>
-            </div>
+          <!-- Other Settings -->
+<div class="af-accordion-group" role="listitem">
+  <button
+    class="af-accordion-trigger"
+    onclick="afToggleAccordion(this)"
+    aria-expanded="false"
+    type="button">
 
+    <div class="af-accordion-group-icon" aria-hidden="true">⚙️</div>
+
+    <span class="af-accordion-group-label">
+      Other Settings
+    </span>
+
+    <span class="af-accordion-count">
+      Tools
+    </span>
+
+    <span class="af-accordion-chevron" aria-hidden="true">
+      ⌄
+    </span>
+  </button>
+
+  <div class="af-accordion-body" role="region">
+
+    <div class="af-accordion-divider"></div>
+
+    <!-- INSTALL APP -->
+
+    <a
+      id="installAppBtn"
+      class="af-accordion-item"
+      href="#"
+      onclick="installAcademeForge(); return false;"
+      style="display:none;"
+      aria-label="Install AcademeForge">
+
+      <div
+        class="af-accordion-item-icon"
+        aria-hidden="true">
+        📲
+      </div>
+
+      <div class="af-accordion-item-text">
+
+        <div class="af-accordion-item-label">
+          Install App
+        </div>
+
+        <div class="af-accordion-item-sub">
+          Add AcademeForge to your home screen
+        </div>
+
+      </div>
+
+      <span
+        class="af-accordion-item-arrow"
+        aria-hidden="true">
+        ›
+      </span>
+
+    </a>
+
+    <!-- LANGUAGE -->
+
+    <a
+      class="af-accordion-item"
+      href="#"
+      aria-label="Change App Language">
+
+      <div
+        class="af-accordion-item-icon"
+        aria-hidden="true">
+        🌐
+      </div>
+
+      <div class="af-accordion-item-text">
+
+        <div class="af-accordion-item-label">
+          Change Language
+        </div>
+
+        <div class="af-accordion-item-sub">
+          English, Hindi, Bhojpuri &amp; more
+        </div>
+
+      </div>
+
+      <span
+        class="af-accordion-item-arrow"
+        aria-hidden="true">
+        ›
+      </span>
+
+    </a>
+
+  </div>
+</div>
           </div><!-- /af-accordion-groups -->
 
           <!-- FIX: Changed onclick from afSettingsLogout() to afLogout() — no undefined function -->
@@ -8407,6 +8534,43 @@ if ("serviceWorker" in navigator) {
     window.location.href = url;
   } catch (err) {
     window.location.href = "./offline.html";
+  }
+}
+
+     /* ════════════════════════════════════
+MANIFEST jason
+════════════════════════════════════ */
+
+    let afInstallPrompt = null;
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+
+  afInstallPrompt = e;
+
+  const btn =
+    document.getElementById("installAppBtn");
+
+  if (btn) {
+    btn.style.display = "block";
+  }
+});
+
+async function installAcademeForge() {
+
+  if (!afInstallPrompt) return;
+
+  afInstallPrompt.prompt();
+
+  await afInstallPrompt.userChoice;
+
+  afInstallPrompt = null;
+
+  const btn =
+    document.getElementById("installAppBtn");
+
+  if (btn) {
+    btn.style.display = "none";
   }
 }
 
